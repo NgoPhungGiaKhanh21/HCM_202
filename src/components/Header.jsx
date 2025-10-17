@@ -14,18 +14,17 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md w-full">
-      {/* ⚠️ Đổi px-6 -> px-0 để không bị thụt 2 bên */}
-      <div className="w-full px-0 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2 pl-6">
+      <div className="relative w-full px-0 py-3 flex items-center justify-center">
+        {/* Logo bên trái */}
+        <div className="absolute left-6 flex items-center gap-2">
           <img src={logo} alt="logo" className="h-15 w-22" />
           <h1 className="text-lg font-bold text-blue-600">
             Chương 6: CNH - HĐH & AI
           </h1>
         </div>
 
-        {/* Menu desktop */}
-        <nav className="hidden md:flex items-center gap-6 pr-6">
+        {/* Menu desktop giữa */}
+        <nav className="hidden md:flex items-center gap-6">
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -40,9 +39,9 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Menu icon mobile */}
+        {/* Icon mobile bên phải */}
         <button
-          className="md:hidden text-gray-700 hover:text-blue-600 transition-colors pr-4"
+          className="absolute right-4 md:hidden text-gray-700 hover:text-blue-600 transition-colors"
           onClick={() => setOpen(true)}
         >
           <Menu size={24} />
