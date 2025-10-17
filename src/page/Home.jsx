@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import ChatBoxAI from "../components/ChatBoxAI";
 import {
   Sparkles,
   TrendingUp,
@@ -191,6 +192,7 @@ export default function App() {
           </p>
         </section>
       </main>
+      <ChatBoxAI />
     </div>
   );
 }
