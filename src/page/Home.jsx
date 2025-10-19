@@ -8,6 +8,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import poster from "../assets/posterMLN.png";
+import TakeQuiz from "./TakeQuiz";
 
 export default function App() {
   return (
@@ -190,6 +191,8 @@ export default function App() {
             triển trong kỷ nguyên số?
           </p>
         </section>
+
+        <TakeQuiz />
       </main>
     </div>
   );

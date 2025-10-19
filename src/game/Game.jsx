@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Sparkles, Heart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Sparkles, Heart, ArrowLeft  } from "lucide-react";
 
 const whispers = [
   "Cậu không cần phải mạnh mẽ mọi lúc đâu, chỉ cần thật với lòng mình thôi.",
@@ -25,6 +26,12 @@ function Game() {
   const [floatingFireflies, setFloatingFireflies] = useState([]);
   const canvasRef = useRef(null);
   const particleIdRef = useRef(0);
+
+  const navigate = useNavigate();
+
+  const handleRollback = () => {
+    navigate("/"); // quay lại trang trước
+  };
 
   useEffect(() => {
     const starArray = Array.from({ length: 50 }, () => ({
@@ -183,10 +190,16 @@ function Game() {
 
   return (
     <div className="min-h-screen w-full overflow-hidden relative">
+      <button
+        onClick={handleRollback}
+        className="absolute top-6 left-6 z-30 text-white/60 hover:text-white transition-colors duration-300"
+        aria-label="Quay lại"
+      >
+        <ArrowLeft className="w-7 h-7" />
+      </button>
       <div
         className={`absolute inset-0 bg-gradient-to-br ${getBackgroundGradient()} transition-all duration-[2500ms]`}
       />
-
       {stars.map((star, idx) => (
         <div
           key={idx}
