@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 import { ToastContainer } from "react-toastify";
+import ScrollToTop from "../utils/ScrollToTop";
 
 function RootLayout() {
   return (
@@ -14,6 +15,7 @@ function RootLayout() {
               hideProgressBar
             />
           </div>
+          <ScrollToTop/>
           <Outlet />
         </div>
       </div>

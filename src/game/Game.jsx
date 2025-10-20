@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { useState, useEffect, useRef } from "react";
 import { Sparkles, Heart, ArrowLeft, Bug } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const whispers = [
@@ -36,6 +37,16 @@ function Game() {
   const canvasRef = useRef(null);
   const particleIdRef = useRef(0);
   const audioRef = useRef(null); // 🔊 Thêm ref để điều khiển nhạc
+  const navigate = useNavigate();
+
+  const handleRollback = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0; // tua về đầu
+      audioRef.current = null; // ngắt tham chiếu
+    }
+    navigate("/"); // quay lại trang trước
+  };
 
   useEffect(() => {
     const starArray = Array.from({ length: 50 }, () => ({
@@ -219,7 +230,8 @@ function Game() {
   return (
     <div className="min-h-screen w-full overflow-hidden relative">
       <button
-        onClick={() => toast.error("Hoc tiepp di nhaa!")}
+        // onClick={() => toast.error("Hoc tiepp di nhaa!")}
+        onClick={handleRollback}
         className="absolute top-6 left-6 z-30 text-white/60 hover:text-white transition-colors duration-300"
         aria-label="Quay lại"
       >
