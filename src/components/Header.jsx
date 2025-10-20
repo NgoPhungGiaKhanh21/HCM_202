@@ -1,21 +1,31 @@
 import { useState } from "react";
-import { Brain, Home, Info, Podcast, Gamepad2, Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Home, Info, Podcast, Gamepad2, Menu, X } from "lucide-react";
 import logo from "../assets/logo.png";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
+  // 📌 Hàm scroll đến phần TakeQuiz
+  const scrollToQuiz = () => {
+    const quizSection = document.getElementById("takequiz");
+    if (quizSection) {
+      quizSection.scrollIntoView({ behavior: "smooth" });
+    }
+    setOpen(false);
+  };
+
   const menuItems = [
-    { key: "home", label: "Trang chủ", icon: Home },
-    { key: "khainiem", label: "Khái niệm", icon: Info },
-    { key: "podcast", label: "Podcast", icon: Podcast },
-    { key: "game", label: "Game", icon: Gamepad2 },
+    { key: "home", label: "Trang chủ", icon: Home, path: "/" },
+    // 👇 mục Khái niệm không còn path nữa
+    { key: "quiz", label: "Quiz ôn tập", icon: Info, action: scrollToQuiz },
+    { key: "podcast", label: "Podcast", icon: Podcast, path: "/podcast" },
+    { key: "game", label: "Game", icon: Gamepad2, path: "/game" },
   ];
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md w-full">
       <div className="relative w-full px-0 py-3 flex items-center justify-center">
-        {/* Logo bên trái */}
         <div className="absolute left-6 flex items-center gap-2">
           <img src={logo} alt="logo" className="h-15 w-22" />
           <h1 className="text-lg font-bold text-blue-600">
@@ -23,13 +33,23 @@ export default function Header() {
           </h1>
         </div>
 
-        {/* Menu desktop giữa */}
+        {/* Menu desktop */}
         <nav className="hidden md:flex items-center gap-6">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            return (
+            return item.path ? (
+              <Link
+                key={item.key}
+                to={item.path}
+                className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors font-medium"
+              >
+                <Icon size={18} />
+                <span>{item.label}</span>
+              </Link>
+            ) : (
               <button
                 key={item.key}
+                onClick={item.action}
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors font-medium"
               >
                 <Icon size={18} />
@@ -39,7 +59,7 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Icon mobile bên phải */}
+        {/* Icon menu mobile */}
         <button
           className="absolute right-4 md:hidden text-gray-700 hover:text-blue-600 transition-colors"
           onClick={() => setOpen(true)}
@@ -68,11 +88,21 @@ export default function Header() {
             <nav className="flex flex-col p-4">
               {menuItems.map((item) => {
                 const Icon = item.icon;
-                return (
+                return item.path ? (
+                  <Link
+                    key={item.key}
+                    to={item.path}
+                    onClick={() => setOpen(false)}
+                    className="flex items-center gap-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded transition-colors"
+                  >
+                    <Icon size={18} />
+                    <span className="font-medium">{item.label}</span>
+                  </Link>
+                ) : (
                   <button
                     key={item.key}
-                    className="flex items-center gap-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded transition-colors"
-                    onClick={() => setOpen(false)}
+                    onClick={item.action}
+                    className="flex items-center gap-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded transition-colors text-left"
                   >
                     <Icon size={18} />
                     <span className="font-medium">{item.label}</span>
