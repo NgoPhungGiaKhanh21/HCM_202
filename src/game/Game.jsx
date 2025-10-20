@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Sparkles, Heart } from "lucide-react";
 
 const whispers = [
-  "Cậu không cần phải mạnh mẽ mọi lúc đâu, chỉ cần thật với lòng mình thôi.",
+  "1. Khái niệm CMCN: Là những bước nhảy vọt về trình độ của lực lượng lao động được thực hiện trên cơ sở phát minh vĩ đại về kỹ thuật và công nghệ.",
   "Dù hôm nay mệt, nhưng cậu vẫn đang tiến về phía sáng đấy.",
   "Trái tim cậu đã đi qua nhiều bão giông rồi, giờ là lúc được nghỉ ngơi.",
   "Cậu không hề nhỏ bé đâu, chỉ là thế giới này quá rộng thôi.",
@@ -11,7 +11,7 @@ const whispers = [
   "Cậu đã đi xa hơn mình nghĩ rất nhiều rồi.",
   "Không sao cả nếu hôm nay cậu chỉ muốn yên lặng và thở.",
   "Cậu là một phần dịu dàng của thế giới này, đừng quên điều đó.",
-  "Ngay cả bóng đêm cũng cần những vì sao — và cậu chính là một trong số đó.",
+  "Ngay cả bóng đêm cũng cần n  hững vì sao — và cậu chính là một trong số đó.",
 ];
 
 function Game() {
@@ -25,7 +25,9 @@ function Game() {
   const [floatingFireflies, setFloatingFireflies] = useState([]);
   const canvasRef = useRef(null);
   const particleIdRef = useRef(0);
+  const audioRef = useRef(null); // 🔊 Thêm ref để điều khiển nhạc
 
+  // 🌟 Sao nền
   useEffect(() => {
     const starArray = Array.from({ length: 50 }, () => ({
       x: Math.random() * 100,
@@ -36,6 +38,7 @@ function Game() {
     setStars(starArray);
   }, []);
 
+  // 🐝 Animation đom đóm
   useEffect(() => {
     if (fireflies.length === 0) return;
 
@@ -89,12 +92,24 @@ function Game() {
     return () => cancelAnimationFrame(frame);
   }, [fireflies.length]);
 
+  // 🌲 Khi rừng sáng — phát nhạc & tạo cảnh
   useEffect(() => {
     if (fireflies.length >= 10 && !isForestBright) {
       setIsForestBright(true);
-      setCurrentWhisper("Cậu đã thắp sáng cả khu rừng rồi! 🌲✨");
+      setCurrentWhisper(
+        "Cậu đã thắp sáng cả khu rừng rồi! Chúc mừng cậu thành 1 phần trong Đóm Family 🌲✨"
+      );
       setShowWhisper(true);
 
+      // 🔊 Phát nhạc
+      if (!audioRef.current) {
+        audioRef.current = new Audio("/audio/snaptt.me-44234062.mp3");
+        audioRef.current.volume = 0.6;
+        audioRef.current.loop = true;
+      }
+      audioRef.current.play().catch(() => {});
+
+      // 🌳 Sinh cây
       const treeArray = Array.from({ length: 15 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
@@ -123,6 +138,7 @@ function Game() {
     }
   }, [fireflies.length, isForestBright]);
 
+  // 🩵 Click thả đom đóm
   const handleCanvasClick = (e) => {
     if (fireflies.length >= 10) return;
 
@@ -131,7 +147,7 @@ function Game() {
     const y = ((e.clientY - rect.top) / rect.height) * 100;
 
     const angle = Math.random() * Math.PI * 2;
-    const speed = 0.05 + Math.random() * 0.03;
+    const speed = 0.015 + Math.random() * 0.01;
 
     const newFirefly = {
       id: Date.now(),
@@ -157,9 +173,10 @@ function Game() {
     const whisper = whispers[Math.floor(Math.random() * whispers.length)];
     setCurrentWhisper(whisper);
     setShowWhisper(true);
-    setTimeout(() => setShowWhisper(false), 4000);
+    setTimeout(() => setShowWhisper(false), 100000);
   };
 
+  // 🌌 Reset rừng
   const resetForest = () => {
     setFireflies([]);
     setIsForestBright(false);
@@ -168,6 +185,11 @@ function Game() {
     setClickParticles([]);
     setFloatingFireflies([]);
     setTrees([]);
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
   };
 
   const getBackgroundGradient = () => {
@@ -181,12 +203,14 @@ function Game() {
       : "from-blue-950 via-blue-900 to-slate-800";
   };
 
+  // 🌈 UI
   return (
     <div className="min-h-screen w-full overflow-hidden relative">
       <div
         className={`absolute inset-0 bg-gradient-to-br ${getBackgroundGradient()} transition-all duration-[2500ms]`}
       />
 
+      {/* 🌟 Sao */}
       {stars.map((star, idx) => (
         <div
           key={idx}
@@ -203,10 +227,10 @@ function Game() {
         />
       ))}
 
+      {/* 🌲 Cây + đom đóm bay */}
       {isForestBright && (
         <>
           <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-green-900/40 to-transparent pointer-events-none transition-opacity duration-2000" />
-
           {trees.map((tree) => (
             <div
               key={tree.id}
@@ -227,7 +251,6 @@ function Game() {
               </div>
             </div>
           ))}
-
           {floatingFireflies.map((f) => (
             <div
               key={f.id}
@@ -250,6 +273,7 @@ function Game() {
         </>
       )}
 
+      {/* 💡 Đom đóm + particle */}
       <div
         ref={canvasRef}
         onClick={handleCanvasClick}
@@ -265,7 +289,6 @@ function Game() {
               left: `${f.x}%`,
               top: `${f.y}%`,
               transform: "translate(-50%, -50%)",
-              transition: "all 0.15s ease-out",
             }}
           >
             <div
@@ -278,16 +301,12 @@ function Game() {
                   opacity: f.brightness * 0.7,
                   boxShadow: `0 0 ${f.size * 2.5}px ${
                     f.size * 1.2
-                  }px rgba(250, 204, 21, ${f.brightness * 0.5})`,
-                  transition: "all 0.4s ease-out",
+                  }px rgba(250,204,21,${f.brightness * 0.5})`,
                 }}
               />
               <div
                 className="absolute inset-0 rounded-full bg-yellow-100"
-                style={{
-                  opacity: f.brightness,
-                  transition: "all 0.4s ease-out",
-                }}
+                style={{ opacity: f.brightness }}
               />
             </div>
           </div>
@@ -311,28 +330,7 @@ function Game() {
         ))}
       </div>
 
-      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-4">
-        <div className="bg-black/30 backdrop-blur-md rounded-full px-6 py-3 border border-white/20">
-          <div className="flex items-center gap-3">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <div
-                key={i}
-                className={`w-3 h-3 rounded-full transition-all duration-500 ${
-                  i < fireflies.length
-                    ? "bg-yellow-400 shadow-lg shadow-yellow-400/50 scale-110"
-                    : "bg-white/20"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-        <p className="text-white/70 text-sm font-light">
-          {fireflies.length < 10
-            ? "Chạm vào màn hình để thắp sáng đom đóm"
-            : "Khu rừng đã sáng rực rỡ!"}
-        </p>
-      </div>
-
+      {/* ❤️ Whisper */}
       <div
         className={`absolute top-1/3 left-1/2 transform -translate-x-1/2 transition-all duration-1000 max-w-xl px-6 z-10 ${
           showWhisper ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -349,6 +347,7 @@ function Game() {
         </div>
       </div>
 
+      {/* 🌸 Reset */}
       {isForestBright && (
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-[fadeIn_1s_ease-out]">
           <button
@@ -360,6 +359,7 @@ function Game() {
         </div>
       )}
 
+      {/* 🌙 Màn mở đầu */}
       {!isForestBright && fireflies.length === 0 && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="text-center space-y-6 px-6">
@@ -380,22 +380,10 @@ function Game() {
           to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         @keyframes floatFirefly {
-          0%, 100% {
-            transform: translate(0, 0);
-            opacity: 0.7;
-          }
-          25% {
-            transform: translate(15px, -20px);
-            opacity: 1;
-          }
-          50% {
-            transform: translate(30px, -10px);
-            opacity: 0.8;
-          }
-          75% {
-            transform: translate(15px, 5px);
-            opacity: 0.9;
-          }
+          0%, 100% { transform: translate(0, 0); opacity: 0.7; }
+          25% { transform: translate(15px, -20px); opacity: 1; }
+          50% { transform: translate(30px, -10px); opacity: 0.8; }
+          75% { transform: translate(15px, 5px); opacity: 0.9; }
         }
       `}</style>
     </div>
