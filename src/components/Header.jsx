@@ -15,8 +15,16 @@ export default function Header() {
     setOpen(false);
   };
 
+  const scrollToHome = () => {
+    const homeSection = document.getElementById("home");
+    if (homeSection) {
+      homeSection.scrollIntoView({ behavior: "smooth" });
+    }
+    setOpen(false);
+  };
+
   const menuItems = [
-    { key: "home", label: "Trang chủ", icon: Home, path: "/" },
+    { key: "home", label: "Trang chủ", icon: Home, action: scrollToHome ,path:''},
     // 👇 mục Khái niệm không còn path nữa
     { key: "quiz", label: "Quiz ôn tập", icon: Info, action: scrollToQuiz },
     { key: "podcast", label: "Podcast", icon: Podcast, path: "/podcast" },

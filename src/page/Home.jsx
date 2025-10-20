@@ -21,7 +21,7 @@ export default function App() {
       <Header />
 
       <main className="max-w-7xl mx-auto px-6 py-12">
-        <section className="text-center mb-16 pt-8">
+        <section id="home" className="text-center mb-16 pt-8">
           <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full mb-6 border border-blue-200">
             <Sparkles size={20} />
             <span className="text-sm font-medium">
