@@ -2,17 +2,31 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Home, Info, Podcast, Gamepad2, Menu, X } from "lucide-react";
 import logo from "../assets/logo.png";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   // 📌 Hàm scroll đến phần TakeQuiz
   const scrollToQuiz = () => {
-    const quizSection = document.getElementById("takequiz");
-    if (quizSection) {
-      quizSection.scrollIntoView({ behavior: "smooth" });
+    const scrollAction = () => {
+      const quizSection = document.getElementById("takequiz");
+      if (quizSection) {
+        quizSection.scrollIntoView({ behavior: "smooth" });
+      }
+      setOpen(false);
+    };
+
+    if (location.pathname !== "/") {
+      // Nếu không ở trang chủ → quay lại home rồi mới scroll
+      navigate("/", { replace: true });
+      setTimeout(scrollAction, 400);
+    } else {
+      scrollAction();
     }
-    setOpen(false);
   };
 
   const scrollToHome = () => {
@@ -23,11 +37,29 @@ export default function Header() {
     setOpen(false);
   };
 
+  const handleHomeClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const homeSection = document.getElementById("home");
+        if (homeSection) {
+          homeSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 400);
+    } else {
+      scrollToHome();
+    }
+  };
+
   const menuItems = [
-    { key: "home", label: "Trang chủ", icon: Home, action: scrollToHome ,path:''},
-    // 👇 mục Khái niệm không còn path nữa
+    {
+      key: "home",
+      label: "Trang chủ",
+      icon: Home,
+      action: handleHomeClick,
+    },
     { key: "quiz", label: "Quiz ôn tập", icon: Info, action: scrollToQuiz },
-    { key: "podcast", label: "Podcast", icon: Podcast, path: "/podcast" },
+    { key: "podcast", label: "Poster", icon: Podcast, path: "/podcast" },
     { key: "game", label: "Game", icon: Gamepad2, path: "/game" },
   ];
 

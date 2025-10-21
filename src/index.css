@@ -1,1 +1,577 @@
 @import "tailwindcss";
+
+/* Scroll Animation Classes */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation delays */
+.delay-100 {
+  transition-delay: 100ms;
+}
+.delay-200 {
+  transition-delay: 200ms;
+}
+.delay-300 {
+  transition-delay: 300ms;
+}
+.delay-400 {
+  transition-delay: 400ms;
+}
+.delay-500 {
+  transition-delay: 500ms;
+}
+
+/* Custom animation types */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-down {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-down.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-left.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-right.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scale-in.animate-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Carousel Animations */
+.ant-carousel .slick-dots {
+  bottom: 20px !important;
+}
+
+.ant-carousel .slick-dots li button {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-radius: 50% !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  background: #3b82f6 !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Poster hover effects */
+.poster-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.poster-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(147, 51, 234, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.poster-container:hover .poster-overlay {
+  opacity: 1;
+}
+
+/* Slow fade animation for carousel */
+.slow-fade-enter {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+.slow-fade-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1000ms ease-in-out, transform 1000ms ease-in-out;
+}
+
+.slow-fade-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slow-fade-exit-active {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 800ms ease-in-out, transform 800ms ease-in-out;
+}
+
+/* Enhanced poster animations */
+.poster-container img {
+  will-change: transform, filter;
+}
+
+.poster-container:hover img {
+  filter: brightness(1.1) contrast(1.15) saturate(1.1);
+}
+
+/* Smooth carousel transitions */
+.ant-carousel .slick-slide {
+  transition: opacity 0.8s ease-in-out !important;
+}
+
+.ant-carousel .slick-slide.slick-active {
+  opacity: 1;
+}
+
+.ant-carousel .slick-slide:not(.slick-active) {
+  opacity: 0.7;
+}
+
+/* Floating animation for poster elements */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.poster-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981);
+  background-size: 400% 400%;
+  animation: gradient-shift 3s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Timeline specific animations */
+.timeline-item {
+  will-change: transform, opacity;
+}
+
+.timeline-image {
+  will-change: transform, filter;
+}
+
+.timeline-card {
+  will-change: transform, box-shadow;
+}
+
+.timeline-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Timeline dot animation */
+@keyframes timeline-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.timeline-dot {
+  animation: timeline-pulse 2s infinite;
+}
+
+/* Timeline line animation */
+@keyframes draw-line {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+.timeline-line {
+  animation: draw-line 2s ease-out;
+}
+
+/* Enhanced hover effects for timeline */
+.timeline-image:hover {
+  filter: brightness(1.1) contrast(1.15) saturate(1.1);
+  transform: scale(1.05) rotate(1deg);
+}
+
+/* Timeline content stagger animation */
+.timeline-content-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.timeline-content-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Timeline number badge animation */
+@keyframes number-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+  }
+}
+
+.timeline-number {
+  animation: number-glow 3s ease-in-out infinite;
+}
+
+/* Historical/Vintage Background Styles */
+.vintage-background {
+  background: radial-gradient(
+      circle at 20% 50%,
+      rgba(139, 69, 19, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(160, 82, 45, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      rgba(101, 67, 33, 0.1) 0%,
+      transparent 50%
+    ),
+    linear-gradient(135deg, #f5f5dc 0%, #faf0e6 50%, #f5f5dc 100%);
+  position: relative;
+}
+
+.vintage-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.1' d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.vintage-background::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(218, 165, 32, 0.05) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Enhanced Timeline Line */
+.timeline-line-enhanced {
+  background: linear-gradient(
+    180deg,
+    #8b4513 0%,
+    #a0522d 25%,
+    #cd853f 50%,
+    #daa520 75%,
+    #8b4513 100%
+  );
+  position: relative;
+  box-shadow: 0 0 10px rgba(139, 69, 19, 0.3),
+    inset 0 0 10px rgba(218, 165, 32, 0.2);
+}
+
+.timeline-line-enhanced::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, #daa520 0%, #cd853f 50%, #8b4513 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(218, 165, 32, 0.4);
+}
+
+.timeline-line-enhanced::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #ffd700 0%, #daa520 50%, #8b4513 100%);
+  border-radius: 1px;
+  box-shadow: inset 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+/* Vintage Poster Frame */
+.vintage-poster {
+  border: 8px solid;
+  border-image: linear-gradient(45deg, #8b4513, #daa520, #cd853f, #a0522d) 1;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(139, 69, 19, 0.3),
+    inset 0 0 20px rgba(218, 165, 32, 0.1);
+  position: relative;
+}
+
+.vintage-poster::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, #8b4513, #daa520, #cd853f, #a0522d);
+  border-radius: 19px;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.vintage-poster::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 10% 20%,
+      rgba(218, 165, 32, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(139, 69, 19, 0.1) 0%,
+      transparent 50%
+    );
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+/* Historical Timeline Cards */
+.historical-card {
+  background: linear-gradient(135deg, #f5f5dc 0%, #faf0e6 100%);
+  border: 2px solid #d4af37;
+  box-shadow: 0 8px 32px rgba(139, 69, 19, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.historical-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.1'%3E%3Cpath d='M0 0h20v20H0z'/%3E%3C/g%3E%3C/svg%3E");
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Vintage Text Styles */
+.vintage-text {
+  color: #8b4513;
+  text-shadow: 1px 1px 2px rgba(218, 165, 32, 0.3);
+}
+
+.vintage-title {
+  background: linear-gradient(45deg, #8b4513, #cd853f, #daa520);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.3);
+}
+
+/* Modern Home Page Styles */
+.modern-background {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+}
+
+.modern-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(120, 119, 198, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(120, 119, 198, 0.2) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.modern-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.modern-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.modern-carousel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.modern-text {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modern-title {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced modern animations */
+@keyframes modern-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.8);
+  }
+}
+
+.modern-glow {
+  animation: modern-glow 3s ease-in-out infinite;
+}
+
+/* Modern glassmorphism effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Modern gradient borders */
+.modern-border {
+  position: relative;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2px;
+  border-radius: 12px;
+}
+
+.modern-border::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: white;
+  border-radius: 10px;
+  z-index: -1;
+}

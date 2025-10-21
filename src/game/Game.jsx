@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Sparkles, Heart, ArrowLeft, Bug } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const whispers = [
   "1. Khái niệm CMCN: Là những bước nhảy vọt về trình độ của lực lượng lao động được thực hiện trên cơ sở phát minh vĩ đại về kỹ thuật và công nghệ.",
