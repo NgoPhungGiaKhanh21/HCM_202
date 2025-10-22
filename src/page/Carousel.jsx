@@ -63,15 +63,6 @@ function Carousel() {
   return (
     <div className="min-h-screen bg-gradient-to-br  flex items-center justify-center p-4">
       <div className="max-w-6xl w-full">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
-            Công nghiệp hóa - Hiện đại hóa
-          </h1>
-          <p className="text-xl text-red-200 font-medium">
-            Trong tư tưởng Mác-Lênin về phát triển kinh tế
-          </p>
-        </div>
-
         <div className="relative group">
           <div className="overflow-hidden rounded-3xl shadow-2xl">
             <div

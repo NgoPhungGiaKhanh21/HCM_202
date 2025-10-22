@@ -8,37 +8,31 @@ const intents = [
     patterns: ["cách mạng công nghiệp", "cmcn", "cách mạng"],
     response:
       "Có 4 cuộc cách mạng công nghiệp: lần thứ nhất (thế kỷ XVIII-XIX), lần thứ hai (thế kỷ XIX-XX), lần thứ ba (thập niên 60-cuối thế kỷ XX) và lần thứ tư (từ năm 2011).",
-    keywords: [
-      "Vai trò cách mạng công nghiệp",
-      "Mô hình công nghiệp hóa",
-      "Chuyển đổi số",
-    ],
   },
   {
     patterns: ["công nghiệp hóa", "cnh", "công nghiệp"],
     response:
       "Công nghiệp hóa là quá trình chuyển đổi căn bản từ sử dụng sức lao động thủ công sang sử dụng công nghệ, phương tiện hiện đại, nhằm tạo ra năng suất lao động xã hội cao.",
-    keywords: [
-      "Hiện đại hóa là gì?",
-      "Cách mạng công nghiệp",
-      "Mô hình công nghiệp hóa",
-    ],
   },
   {
     patterns: ["hiện đại hóa", "hdh", "hiện đại"],
     response:
       "Hiện đại hóa là nâng cao trình độ khoa học kỹ thuật, cải tiến phương thức quản lý, và nâng cao chất lượng cuộc sống toàn xã hội.",
-    keywords: [
-      "Công nghiệp hóa là gì?",
-      "Cách mạng công nghiệp",
-      "Chuyển đổi số",
-    ],
   },
   {
     patterns: ["hội nhập kinh tế quốc tế", "hội nhập", "kinh tế quốc tế"],
     response:
       "Hội nhập kinh tế quốc tế của một quốc gia là quá trình quốc gia đó thực hiện gắn kết nền kinh tế của mình với nền kinh tế thế giới dựa trên sự chia sẻ lợi ích đồng thời tuân thủ các chuẩn mực quốc tế chung.",
-    keywords: ["Tác động tích cực", "Tác động tiêu cực", "Việt Nam"],
+  },
+  {
+    patterns: ["tính tất yếu của hội nhập kinh tế quốc tế"],
+    response:
+      "Xu thế khách quan trong bối cảnh toàn cầu hóa kinh tế - Phương thức phát triển phổ biến của các nước, nhất là các nước đang và kém phát triển trong điều kiện hiện nay.",
+  },
+  {
+    patterns: ["tác động của hội nhập kinh tế"],
+    response:
+      "Tích cực: mở rộng thị trường, tiếp thu khoa học - Tạo cơ hội nâng cao chất lượng nguồn nhân lực - Thúc đẩy hội nhập kinh tế. Tiêu cực: Cạnh tranh giữa nhiều doanh nghiệp - Gia tăng sự phụ thuộc vào nền kinh tế - Phân phối không công bằng.",
   },
   {
     patterns: ["vai trò cách mạng công nghiệp", "vai trò cmcn"],
@@ -90,6 +84,10 @@ const intents = [
     response:
       "Website cung cấp hệ thống tri thức về công nghiệp hóa, hiện đại hóa ở Việt Nam trong bối cảnh thích ứng với cuộc cách mạng công nghiệp lần thứ tư.",
   },
+  {
+    patterns: ["hello"],
+    response: "hello nè.",
+  },
 ];
 
 const levenshtein = (a, b) => {
@@ -114,7 +112,7 @@ const levenshtein = (a, b) => {
   return matrix[a.length][b.length];
 };
 
-// Danh sách từ khóa liên quan đến chủ đềa
+// Danh sách từ khóa liên quan đến chủ đề
 const topicKeywords = [
   "công nghiệp",
   "cnh",
@@ -153,6 +151,25 @@ const topicKeywords = [
   "mô hình",
   "vai trò",
   "nội dung",
+  "tính tất yếu",
+  "tác động hội nhập kinh tế quốc tế",
+];
+
+// Danh sách gợi ý mặc định cho mọi câu trả lời
+const defaultKeywords = [
+  "Công nghiệp hóa là gì?",
+  "Hiện đại hóa là gì?",
+  "Cách mạng công nghiệp",
+  "Hội nhập kinh tế quốc tế",
+  "Tác động tích cực",
+  "Tác động tiêu cực",
+  "Mác-Lênin là gì?",
+  "Kinh tế chính trị",
+  "Lực lượng sản xuất",
+  "Việt Nam",
+  "Chuyển đổi số",
+  "Tính tất yếu của hội nhập kinh tế quốc tế",
+  "Tác động của hội nhập kinh tế",
 ];
 
 // Kiểm tra xem câu hỏi có liên quan đến chủ đề không
@@ -168,7 +185,7 @@ const getIntentResponse = (input) => {
   if (!isTopicRelated(text)) {
     return {
       text: "❌ Xin lỗi, tôi chỉ có thể trả lời các câu hỏi liên quan đến:\n• Công nghiệp hóa, hiện đại hóa\n• Cách mạng công nghiệp\n• Hội nhập kinh tế quốc tế\n• Kinh tế chính trị Mác-Lênin\n• Chuyển đổi số\n\nVui lòng hỏi về các chủ đề trên nhé! 😊",
-      keywords: [],
+      keywords: defaultKeywords, // Luôn hiển thị gợi ý mặc định
     };
   }
 
@@ -184,7 +201,7 @@ const getIntentResponse = (input) => {
       if (text === normalizedPattern) {
         return {
           text: intent.response,
-          keywords: intent.keywords || [],
+          keywords: defaultKeywords, // Luôn hiển thị gợi ý mặc định
         };
       }
 
@@ -217,7 +234,7 @@ const getIntentResponse = (input) => {
         if (filteredExtraWords.length === 0 || filteredExtraWords.length <= 2) {
           return {
             text: intent.response,
-            keywords: intent.keywords || [],
+            keywords: defaultKeywords, // Luôn hiển thị gợi ý mặc định
           };
         }
 
@@ -232,7 +249,7 @@ const getIntentResponse = (input) => {
 
         return {
           text: `🔍 (Hiểu ý bạn hỏi về: "${pattern}")\n${intent.response}`,
-          keywords: intent.keywords || [],
+          keywords: defaultKeywords, // Luôn hiển thị gợi ý mặc định
         };
       }
 
@@ -240,7 +257,7 @@ const getIntentResponse = (input) => {
       if (normalizedPattern.includes(text)) {
         return {
           text: `🔍 (Hiểu ý bạn hỏi về: "${pattern}")\n${intent.response}`,
-          keywords: intent.keywords || [],
+          keywords: defaultKeywords, // Luôn hiển thị gợi ý mặc định
         };
       }
 
@@ -285,13 +302,13 @@ const getIntentResponse = (input) => {
   if (bestMatch && bestScore <= 0.35) {
     return {
       text: `🤔 (Có phải bạn muốn hỏi "${bestPattern}"?)\n${bestMatch.response}`,
-      keywords: bestMatch.keywords || [],
+      keywords: defaultKeywords, // Luôn hiển thị gợi ý mặc định
     };
   }
 
   return {
     text: "🤔 Tôi hiểu bạn đang hỏi về chủ đề liên quan, nhưng câu hỏi cụ thể hơn được không? Ví dụ:\n• 'Công nghiệp hóa là gì?'\n• 'Cách mạng công nghiệp lần thứ 4'\n• 'Tác động tích cực của hội nhập kinh tế'\n• 'Mác-Lênin là gì?'",
-    keywords: [],
+    keywords: defaultKeywords, // Luôn hiển thị gợi ý mặc định
   };
 };
 
@@ -301,19 +318,7 @@ export default function ChatBoxAI() {
     {
       sender: "bot",
       text: "Xin chào! 🤖 Tôi có thể giúp bạn tìm hiểu về các chủ đề sau:",
-      keywords: [
-        "Công nghiệp hóa là gì?",
-        "Hiện đại hóa là gì?",
-        "Cách mạng công nghiệp",
-        "Hội nhập kinh tế quốc tế",
-        "Tác động tích cực",
-        "Tác động tiêu cực",
-        "Mác-Lênin là gì?",
-        "Kinh tế chính trị",
-        "Lực lượng sản xuất",
-        "Việt Nam",
-        "Chuyển đổi số",
-      ],
+      keywords: defaultKeywords, // Sử dụng gợi ý mặc định
     },
   ]);
   const [input, setInput] = useState("");
