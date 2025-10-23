@@ -23,16 +23,6 @@ export default function App() {
 
       <main className="max-w-7xl mx-auto px-6 py-12">
         <section id="home" className="text-center mb-16 pt-8">
-          <AnimatedSection animationType="fadeInDown" delay={0}>
-            <div className="inline-flex items-center gap-2 glass-effect text-white px-4 py-2 rounded-full mb-6">
-              <Sparkles size={20} />
-              <span className="text-sm font-medium">
-                Chương 6: Công nghiệp hóa, Hiện đại hóa & Hội nhập kinh tế quốc
-                tế
-              </span>
-            </div>
-          </AnimatedSection>
-
           <AnimatedSection animationType="fadeInUp" delay={200}>
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight text-balance">
               Công nghiệp hóa, Hiện đại hóa <br />
@@ -47,6 +37,9 @@ export default function App() {
               tế quốc tế trong sự phát triển bền vững
             </p>
           </AnimatedSection>
+          <p className="text-xl text-red-200 font-medium">
+            Trong tư tưởng Mác-Lênin về phát triển kinh tế
+          </p>
 
           <AnimatedSection animationType="scaleIn" delay={800} duration={1200}>
             <div className="max-w-7xl mx-auto">
