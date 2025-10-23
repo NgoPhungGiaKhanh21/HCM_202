@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { useState, useEffect, useRef } from "react";
 import { Sparkles, Heart, ArrowLeft, Bug } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
 
 const whispers = [
@@ -37,7 +37,6 @@ function Game() {
   const canvasRef = useRef(null);
   const particleIdRef = useRef(0);
   const audioRef = useRef(null); // 🔊 Thêm ref để điều khiển nhạc
-  const navigate = useNavigate();
 
   const handleRollback = () => {
     if (audioRef.current) {
@@ -45,7 +44,8 @@ function Game() {
       audioRef.current.currentTime = 0; // tua về đầu
       audioRef.current = null; // ngắt tham chiếu
     }
-    navigate("/"); // quay lại trang trước
+    // navigate("/"); // quay lại trang trước
+    toast.error("Học tiếp đi nha!");
   };
 
   useEffect(() => {

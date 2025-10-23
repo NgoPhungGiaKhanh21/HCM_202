@@ -4,56 +4,124 @@ import { useState } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
 
 const intents = [
+  // Cách mạng Công nghiệp
   {
-    patterns: ["cách mạng công nghiệp", "cmcn", "cách mạng"],
+    patterns: ["cách mạng công nghiệp", "cmcn", "cách mạng", "định nghĩa cmcn"],
     response:
-      "Có 4 cuộc cách mạng công nghiệp: lần thứ nhất (thế kỷ XVIII-XIX), lần thứ hai (thế kỷ XIX-XX), lần thứ ba (thập niên 60-cuối thế kỷ XX) và lần thứ tư (từ năm 2011).",
+      "CMCN là những bước phát triển nhảy vọt về trình độ của tư liệu lao động trên cơ sở những phát minh đột phá về kỹ thuật và công nghệ trong quá trình phát triển của nhân loại, kéo theo sự thay đổi căn bản về trình độ phân công lao động xã hội và tạo bước phát triển năng suất lao động cao hơn hẳn.",
   },
   {
-    patterns: ["công nghiệp hóa", "cnh", "công nghiệp"],
+    patterns: ["cmcn lần thứ nhất", "cách mạng công nghiệp 1.0", "cmcn 1"],
     response:
-      "Công nghiệp hóa là quá trình chuyển đổi căn bản từ sử dụng sức lao động thủ công sang sử dụng công nghệ, phương tiện hiện đại, nhằm tạo ra năng suất lao động xã hội cao.",
+      "CMCN lần thứ nhất (giữa thế kỷ XVIII – giữa XIX): Bắt đầu ở Anh, diễn ra trước hết ở lĩnh vực dệt vải. Chuyển từ lao động thủ công sang lao động sử dụng máy móc, thực hiện cơ giới hóa sản xuất bằng việc sử dụng năng lượng nước và hơi nước. Các phát minh quan trọng: thoi bay, xe kéo sợi, máy dệt Edmund, máy hơi nước, lò luyện gang, tàu hỏa, tàu thủy.",
   },
   {
-    patterns: ["hiện đại hóa", "hdh", "hiện đại"],
+    patterns: ["cmcn lần thứ hai", "cách mạng công nghiệp 2.0", "cmcn 2"],
+    response:
+      "CMCN lần thứ hai (nửa cuối thế kỷ XIX – đầu XX): Chuyển nền sản xuất cơ khí sang nền sản xuất điện – cơ khí và sang giai đoạn tự động hóa cục bộ trong sản xuất. Các phát minh quan trọng: điện, xăng dầu, động cơ đốt trong, công nghệ luyện thép Bessemer, ô tô, điện thoại, sản xuất theo dây chuyền.",
+  },
+  {
+    patterns: ["cmcn lần thứ ba", "cách mạng công nghiệp 3.0", "cmcn 3"],
+    response:
+      "CMCN lần thứ ba (từ 1960s - cuối XX): Sự xuất hiện của ngành công nghệ thông tin, tự động hóa sản xuất. Các phát minh quan trọng: hệ thống mạng, máy tính cá nhân, thiết bị điện tử sử dụng công nghệ số và robot công nghiệp.",
+  },
+  {
+    patterns: ["cmcn lần thứ tư", "cách mạng công nghiệp 4.0", "cmcn 4"],
+    response:
+      "CMCN lần thứ tư (2011 - nay): Sự xuất hiện của các công nghệ có tính đột phá như trí tuệ nhân tạo, IoT, Big data và in 3D. Làm mờ ranh giới giữa vật lý – số hóa – sinh học.",
+  },
+  {
+    patterns: [
+      "vai trò cách mạng công nghiệp",
+      "vai trò cmcn",
+      "tác động cmcn",
+    ],
+    response:
+      "Vai trò của CMCN đối với phát triển:\n• Thúc đẩy sự phát triển của lực lượng sản xuất: hiện đại hóa máy móc, nâng cao chất lượng lao động và chuyển dịch cơ cấu kinh tế theo hướng hiệu quả, hội nhập.\n• Thúc đẩy hoàn thiện quan hệ sản xuất: xuất hiện nhiều hình thức sở hữu và quản lý mới.\n• Thúc đẩy đổi mới phương thức quản trị phát triển: hình thành chính phủ điện tử, doanh nghiệp số hóa.",
+  },
+
+  // Công nghiệp hóa - Hiện đại hóa
+  {
+    patterns: ["công nghiệp hóa", "cnh", "định nghĩa công nghiệp hóa"],
+    response:
+      "Công nghiệp hóa là quá trình chuyển đổi nền sản xuất xã hội dựa trên lao động thủ công là chính sang nền sản xuất xã hội chủ yếu dựa trên lao động bằng máy móc nhằm tạo ra năng suất lao động xã hội cao.",
+  },
+  {
+    patterns: ["hiện đại hóa", "hdh", "định nghĩa hiện đại hóa"],
     response:
       "Hiện đại hóa là nâng cao trình độ khoa học kỹ thuật, cải tiến phương thức quản lý, và nâng cao chất lượng cuộc sống toàn xã hội.",
   },
   {
-    patterns: ["hội nhập kinh tế quốc tế", "hội nhập", "kinh tế quốc tế"],
+    patterns: ["mô hình công nghiệp hóa", "mô hình cnh", "các mô hình cnh"],
     response:
-      "Hội nhập kinh tế quốc tế của một quốc gia là quá trình quốc gia đó thực hiện gắn kết nền kinh tế của mình với nền kinh tế thế giới dựa trên sự chia sẻ lợi ích đồng thời tuân thủ các chuẩn mực quốc tế chung.",
+      "Các mô hình CNH tiêu biểu:\n\n1. Mô hình CNH các nước tư bản cổ điển:\n• Đi từ Công nghiệp nhẹ (dệt) → Công nghiệp nặng\n• Chủ thể: Hoàn toàn là Tư nhân\n• Nguồn vốn: Tích lũy thông qua bóc lột lao động làm thuê và xâm chiếm thuộc địa\n• Thời gian: Kéo dài khoảng 60 – 80 năm\n\n2. Mô hình CNH kiểu Liên Xô (cũ):\n• Chiến lược: Ưu tiên tuyệt đối Công nghiệp nặng\n• Cơ chế: Điều hành bằng Kế hoạch hóa tập trung\n• Hệ quả: Dẫn đến khủng hoảng và sụp đổ\n\n3. Mô hình CNH của Nhật Bản và các nước công nghiệp mới (NICs):\n• Chiến lược: CNH theo chiều sâu, tập trung đẩy mạnh xuất khẩu\n• Chủ thể: Nhà nước tạo môi trường thuận lợi\n• Thời gian: Hoàn thành trong khoảng 20-30 năm",
   },
   {
-    patterns: ["tính tất yếu của hội nhập kinh tế quốc tế"],
+    patterns: [
+      "đặc điểm cnh hđh việt nam",
+      "cnh hđh việt nam",
+      "đặc điểm việt nam",
+    ],
     response:
-      "Xu thế khách quan trong bối cảnh toàn cầu hóa kinh tế - Phương thức phát triển phổ biến của các nước, nhất là các nước đang và kém phát triển trong điều kiện hiện nay.",
+      "Đặc điểm CNH - HĐH ở Việt Nam:\n• Theo định hướng XHCN 'Dân giàu, nước mạnh, dân chủ, công bằng, văn minh'\n• Gắn với phát triển kinh tế tri thức\n• Trong điều kiện kinh tế thị trường định hướng xã hội chủ nghĩa\n• Bối cảnh toàn cầu hóa kinh tế, VN đang tích cực, chủ động hội nhập\n\nNội dung cốt lõi:\n• Tạo lập những điều kiện để có thể thực hiện chuyển đổi từ nền sản xuất – xã hội lạc hậu sang nền sản xuất – xã hội tiến bộ\n• Thực hiện các nhiệm vụ để chuyển đổi nền sản xuất – xã hội lạc hậu sang nền sản xuất – xã hội hiện đại",
+  },
+
+  // Hội nhập Kinh tế Quốc tế
+  {
+    patterns: [
+      "hội nhập kinh tế quốc tế",
+      "hội nhập",
+      "kinh tế quốc tế",
+      "định nghĩa hội nhập",
+    ],
+    response:
+      "Hội nhập kinh tế quốc tế là quá trình các nước tiến hành các hoạt động tăng cường việc gắn kết giữa các nền kinh tế của các quốc gia với nhau dựa trên sự chia sẻ nguồn lực và lợi ích trên cơ sở tuân thủ các luật chơi chung trong khuôn khổ các định chế hoặc các tổ chức quốc tế.",
   },
   {
-    patterns: ["tác động của hội nhập kinh tế"],
+    patterns: [
+      "tính tất yếu của hội nhập kinh tế quốc tế",
+      "tính tất yếu hội nhập",
+      "sự cần thiết hội nhập",
+    ],
     response:
-      "Tích cực: mở rộng thị trường, tiếp thu khoa học - Tạo cơ hội nâng cao chất lượng nguồn nhân lực - Thúc đẩy hội nhập kinh tế. Tiêu cực: Cạnh tranh giữa nhiều doanh nghiệp - Gia tăng sự phụ thuộc vào nền kinh tế - Phân phối không công bằng.",
+      "Tính tất yếu khách quan của hội nhập kinh tế quốc tế:\n• Thứ nhất, do xu thế khách quan trong bối cảnh toàn cầu hóa kinh tế\n• Thứ hai, hội nhập kinh tế quốc tế là phương thức phát triển phổ biến của các nước, nhất là các nước đang và kém phát triển trong điều kiện hiện nay\n\nNội dung hội nhập kinh tế quốc tế:\n• Chuẩn bị đầy đủ các điều kiện để thực hiện hội nhập thành công\n• Thực hiện đa dạng các hình thức, các mức độ hội nhập kinh tế quốc tế",
   },
   {
-    patterns: ["vai trò cách mạng công nghiệp", "vai trò cmcn"],
+    patterns: ["tác động tích cực", "tích cực", "lợi ích", "cơ hội hội nhập"],
     response:
-      "Thúc đẩy sự phát triển lực lượng sản xuất - Thúc đẩy hoàn thiện quan hệ sản xuất - Thúc đẩy đổi mới phương thức quản trị phát triển",
+      "Tác động tích cực của hội nhập kinh tế quốc tế:\n• Tạo điều kiện mở rộng thị trường, tiếp thu khoa học – công nghệ vốn, chuyển dịch cơ cấu kinh tế trong nước\n• Tạo cơ hội để nâng cao chất lượng nguồn nhân lực\n• Tạo điều kiện thúc đẩy hội nhập của các lĩnh vực văn hóa, chính trị, củng cố an ninh – quốc phòng\n• Mở rộng thị trường và thúc đẩy đầu tư\n• Thúc đẩy chuyển dịch cơ cấu kinh tế và hiện đại hóa\n• Nâng cao chất lượng nguồn nhân lực và vị thế quốc tế",
   },
   {
-    patterns: ["mô hình công nghiệp hóa", "mô hình cnh"],
+    patterns: [
+      "tác động tiêu cực",
+      "tiêu cực",
+      "thách thức",
+      "khó khăn",
+      "rủi ro hội nhập",
+    ],
     response:
-      "Cổ điển - Liên Xô (cũ) - Nhật Bản và các nước công nghiệp mới (NICs)",
+      "Tác động tiêu cực của hội nhập kinh tế quốc tế:\n• Tăng cạnh tranh làm nhiều doanh nghiệp và ngành kinh tế gặp khó khăn trong quá trình phát triển\n• Gia tăng sự phụ thuộc của nền kinh tế quốc gia vào thị trường bên ngoài\n• Dẫn đến phân phối không công bằng, làm tăng khoảng cách giàu nghèo\n• Đối mặt với nguy cơ chuyển dịch cơ cấu, dễ trở thành bãi rác công nghiệp và công nghiệp thấp\n• Cạnh tranh gay gắt và nguy cơ phá sản\n• Nguy cơ phụ thuộc và tụt hậu\n• Thách thức về kinh tế vĩ mô và an ninh xã hội",
   },
   {
-    patterns: ["tác động tích cực", "tích cực", "lợi ích"],
+    patterns: [
+      "phương hướng nâng cao hội nhập",
+      "giải pháp hội nhập",
+      "nâng cao hiệu quả hội nhập",
+    ],
     response:
-      "Tạo điều kiện mở rộng thị trường, tiếp thu khoa học công nghệ - Tạo cơ hội để nâng cao nguồn nhân lực - Tạo điều kiện thúc đẩy hội nhập các lĩnh vực văn hóa, chính trị và củng cố an ninh quốc phòng.",
+      "Phương hướng nâng cao HNKTQT trong phát triển của Việt Nam:\n\n1. Nhận thức sâu sắc về thời cơ và thách thức do hội nhập kinh tế quốc tế mang lại\n2. Xây dựng chiến lược và lộ trình hội nhập kinh tế phù hợp\n3. Tích cực, chủ động tham gia vào các liên kết kinh tế quốc tế và thực hiện đầy đủ các cam kết\n4. Hoàn thiện thể chế kinh tế và pháp luật\n5. Nâng cao năng lực cạnh tranh quốc tế của nền kinh tế\n6. Xây dựng nền kinh tế độc lập, tự chủ của Việt Nam",
   },
   {
-    patterns: ["tác động tiêu cực", "tiêu cực", "thách thức", "khó khăn"],
+    patterns: [
+      "hội nhập cơ hội hay thách thức",
+      "cơ hội thách thức",
+      "so sánh cơ hội thách thức",
+    ],
     response:
-      "Cạnh tranh gay gắt - sự phụ thuộc nền kinh tế quốc gia vào thị trường - Phân phối không công bằng lợi ích và rủi ro - Các nước phát triển phải đối mặt với nguy cơ chuyển dịch cơ cấu kinh tế - Tạo ra thách thức lớn cho nhà nước - Tình trạng khủng bố buôn lậu tăng cao.",
+      "Hội nhập kinh tế quốc tế: cơ hội hay thách thức lớn hơn?\n\nTrong bối cảnh Việt Nam đang phát triển và là nước đi sau, HNKTQT mang lại cơ hội lớn để rút ngắn khoảng cách về trình độ phát triển so với các nước khác. Tuy nhiên, để tận dụng được cơ hội này, Việt Nam phải đối mặt với thách thức rất gay gắt là nâng cao năng lực cạnh tranh quốc tế và hoàn thiện thể chế kinh tế.\n\nNếu Việt Nam thực hiện HNKTQT một cách chủ động, có chọn lọc, với chiến lược phù hợp và kiểm soát được các rủi ro, thì cơ hội phát triển sẽ vượt trội hơn thách thức, đưa đất nước tiến lên. Ngược lại, nếu không nâng cao năng lực nội tại và bị động, các thách thức sẽ trở nên lớn hơn, dẫn đến nguy cơ tụt hậu và mất ổn định.",
   },
+
+  // Mác-Lênin và Kinh tế chính trị
   {
     patterns: ["mác lênin", "mác", "lênin", "chủ nghĩa mác", "triết học mác"],
     response:
@@ -69,24 +137,26 @@ const intents = [
     response:
       "Lực lượng sản xuất là tổng thể các yếu tố vật chất kỹ thuật của quá trình sản xuất. Quan hệ sản xuất là những quan hệ kinh tế giữa người với người trong quá trình sản xuất.",
   },
+
+  // Chuyển đổi số và Công nghệ
   {
     patterns: ["chuyển đổi số", "số hóa", "công nghệ thông tin"],
     response:
       "Chuyển đổi số là quá trình ứng dụng công nghệ số vào tất cả các khía cạnh của xã hội, thay đổi cách thức hoạt động của các tổ chức và cá nhân.",
   },
+
+  // Việt Nam
   {
     patterns: ["việt nam", "vn", "nước ta"],
     response:
       "Việt Nam đang thực hiện công nghiệp hóa, hiện đại hóa theo định hướng xã hội chủ nghĩa với mục tiêu 'dân giàu, nước mạnh, dân chủ, công bằng, văn minh'.",
   },
+
+  // Chào hỏi
   {
-    patterns: ["tri thức", "kiến thức", "học tập"],
+    patterns: ["hello", "xin chào", "chào", "hi"],
     response:
-      "Website cung cấp hệ thống tri thức về công nghiệp hóa, hiện đại hóa ở Việt Nam trong bối cảnh thích ứng với cuộc cách mạng công nghiệp lần thứ tư.",
-  },
-  {
-    patterns: ["hello"],
-    response: "hello nè.",
+      "Xin chào! 🤖 Tôi có thể giúp bạn tìm hiểu về các chủ đề liên quan đến Công nghiệp hóa, Hiện đại hóa và Hội nhập kinh tế quốc tế. Bạn muốn hỏi gì?",
   },
 ];
 
