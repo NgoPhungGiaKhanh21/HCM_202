@@ -5,6 +5,7 @@ import Game from "../game/Game";
 import Podcast from "../page/Podcast";
 import Notebook from "../components/Notebook";
 import BookSection from "../components/Book/BookSection";
+import TimeLine from "../page/Timeline";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "podcast", element: <Podcast /> },
       { path: "notebook", element: <Notebook /> },
       { path: "book", element: <BookSection /> },
+      { path: "timeline", element: <TimeLine /> },
     ],
   },
 ]);

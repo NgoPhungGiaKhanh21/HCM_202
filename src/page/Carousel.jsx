@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import img1 from "../../image/carousel1.png";
 
 function Carousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -7,7 +8,7 @@ function Carousel() {
 
   const slides = [
     {
-      image: "https://images.pexels.com/photos/257700/pexels-photo-257700.jpeg",
+      image: img1,
       title: "Công nghiệp hóa - Nền tảng phát triển",
       description:
         "Xây dựng cơ sở vật chất kỹ thuật hiện đại, phát triển công nghiệp nặng và công nghiệp chế biến làm nền tảng cho sự phát triển kinh tế.",

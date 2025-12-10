@@ -1,584 +1,378 @@
+import React from "react";
 import Header from "../components/Header";
-import ChatBoxAI from "../components/ChatBoxAI";
-import AnimatedSection from "../components/AnimatedSection";
-import {
-  Sparkles,
-  TrendingUp,
-  Globe,
-  Factory,
-  CheckCircle,
-  AlertCircle,
-} from "lucide-react";
-import poster1 from "../assets/pic1.jpg";
-import poster2 from "../assets/bg1.jpg";
-import poster3 from "../assets/bg2.jpg";
-import poster4 from "../assets/bg3.jpg";
-import TakeQuiz from "../page/TakeQuiz";
+
+import { useState } from "react";
 import Carousel from "./Carousel";
+import poster1 from "../../image/carousel1.png";
+import poster2 from "../../image/carousel1.png";
+import poster3 from "../../image/carousel1.png";
+import poster4 from "../../image/carousel1.png";
+import {
+  ArrowRightIcon,
+  FlagIcon,
+  BuildingLibraryIcon,
+  ShieldCheckIcon,
+  SparklesIcon,
+  MapPinIcon,
+  FlagIcon as FlagIconTwo,
+  FireIcon,
+  StarIcon,
+} from "@heroicons/react/24/solid";
 
-export default function App() {
+const timelineEvents = [
+  {
+    year: "1975",
+    title: "Thống nhất đất nước",
+    description:
+      "Ngày 30/4/1975, Đại thắng mùa Xuân. Việt Nam độc lập, thống nhất, bước vào kỷ nguyên mới",
+    details: [
+      "Quân Giải phóng chiếm Sài Gòn ngày 30/4/1975",
+      "Tập đoàn Pôn Pốt thi hành chính sách diệt chủng ở Campuchia",
+      "Hội nghị Ban Chấp hành TW Đảng khoá III (tháng 8/1975) chủ trương quá độ lên XHCN",
+      "Ủy ban Thường vụ Quốc hội họp phiên đặc biệt (27/10/1975) về thống nhất",
+      "Hội nghị Hiệp thương chính trị (15-21/11/1975) giữa miền Bắc và miền Nam tại Sài Gòn",
+    ],
+    icon: MapPinIcon,
+  },
+  {
+    year: "1976",
+    title: "Xây dựng Đảng và Nhà nước mới",
+    description: "Cuộc Tổng tuyển cử, đổi tên nước, Đại hội IV của Đảng",
+    details: [
+      "Cuộc Tổng tuyển cử bầu Quốc hội (25/4/1976) với tỉ lệ cử tri 98,77%",
+      "Kỳ họp thứ nhất Quốc hội thống nhất (24/6-3/7/1976): đặt tên nước Cộng hòa XHCN Việt Nam",
+      "Đổi tên Sài Gòn thành Thành phố Hồ Chí Minh",
+      "Đặt Hà Nội làm Thủ đô của nước Việt Nam thống nhất",
+      "Đại hội IV Đảng (14-20/12/1976): quyết định đổi tên thành Đảng Cộng sản Việt Nam",
+    ],
+    icon: FlagIconTwo,
+  },
+  {
+    year: "1977-1979",
+    title: "Chiến tranh biên giới, Bảo vệ Tổ quốc",
+    description:
+      "Xung đột với Trung Quốc và Campuchia, giải phóng Campuchia khỏi chế độ Pol Pot",
+    details: [
+      "Năm 1978: Trung Quốc tuyên bố rút chuyên gia, cắt viện trợ, lấn chiếm biên giới",
+      "Cuối 12/1978: Chính quyền Pôn Pốt tấn công xâm lược trên biên giới Tây Nam",
+      "7/1/1979: Quân Việt Nam phối hợp giải phóng Phnôm Pênh, đánh đổ chế độ Pol Pot",
+      "17/2/1979: Trung Quốc huy động hơn 60 vạn quân tấn công biên giới phía Bắc",
+      "18/2/1979: Việt Nam - Campuchia ký Hiệp ước hòa bình, hữu nghị và hợp tác",
+    ],
+    icon: FireIcon,
+  },
+  {
+    year: "1980-1981",
+    title: "Đổi mới kinh tế, Phục hồi phát triển",
+    description: "Cải cách kinh tế, phục hồi sản xuất, hoàn thiện Hiến pháp",
+    details: [
+      "8/1979: Hội nghị TW 6 - bước đột phá đầu tiên đổi mới kinh tế, cho 'sản xuất bung ra'",
+      "10/1979: Quyết định về tận dụng đất đai nông nghiệp, xóa bỏ các trạm kiểm soát",
+      "9/1980: Ban Chấp hành TW chỉ đạo thảo luận Dự thảo Hiến pháp mới",
+      "1/1981: Ban Bí thư ban hành Chỉ thị 100-CT/TW về khoán sản phẩm",
+      "1/1981: Chính phủ ban hành Quyết định 25-CP, 26-CP về quyền chủ động sản xuất kinh doanh",
+    ],
+    icon: StarIcon,
+  },
+];
+
+const contentSections = [
+  {
+    icon: BuildingLibraryIcon,
+    title: "Công nghiệp hóa",
+    description:
+      "Phát triển cơ sở hạ tầng, xây dựng các khu công nghiệp, phát triển năng lượng",
+    color: "bg-blue-50",
+    accentColor: "text-blue-600",
+    borderColor: "border-blue-300",
+  },
+  {
+    icon: FlagIcon,
+    title: "Trang trại Tập thể",
+    description: "Cải tạo nông nghiệp theo hình thức xã hội chủ nghĩa",
+    color: "bg-green-50",
+    accentColor: "text-green-600",
+    borderColor: "border-green-300",
+  },
+  {
+    icon: ShieldCheckIcon,
+    title: "Quốc phòng - An ninh",
+    description: "Xây dựng sức mạnh quân sự, bảo vệ biên giới lãnh thổ",
+    color: "bg-red-50",
+    accentColor: "text-red-600",
+    borderColor: "border-red-300",
+  },
+  {
+    icon: SparklesIcon,
+    title: "Giáo dục - Văn hóa",
+    description: "Phát triển giáo dục, khoa học công nghệ cho nhân dân",
+    color: "bg-purple-50",
+    accentColor: "text-purple-600",
+    borderColor: "border-purple-300",
+  },
+];
+
+export default function Home() {
+  const [activeTimeline, setActiveTimeline] = useState(0);
+
   return (
-    <div className="min-h-screen modern-background">
-      <Header />
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50 to-white">
+      {/* Hero Section */}
+      <div className="sticky top-0 z-50">
+        <Header />
+      </div>
+      <section
+        className="relative w-full min-h-[700px] md:min-h-[800px] flex items-center justify-center overflow-hidden"
+        style={{
+          backgroundImage:
+            "url(/placeholder.svg?height=800&width=1600&query=Vietnam%20history%20dark%20red%20revolutionary)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Dark red overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-red-900/80 via-red-800/75 to-red-900/80" />
 
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <section id="home" className="text-center mb-16 pt-8">
-          <AnimatedSection animationType="fadeInUp" delay={200}>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight text-balance">
-              Công nghiệp hóa, Hiện đại hóa <br />
-              <span className="">và Hội nhập kinh tế quốc tế</span> của Việt Nam
+        {/* Content container */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-8 animate-pulse">
+              <span className="px-6 py-3 border-2 border-yellow-500 text-yellow-400 rounded-full text-base font-bold tracking-wider">
+                1975 - 1981
+              </span>
+            </div>
+
+            <h1 className="text-6xl md:text-7xl font-black text-white mb-6 leading-tight">
+              Xây dựng Chủ nghĩa Xã hội
             </h1>
-          </AnimatedSection>
 
-          <AnimatedSection animationType="fadeInUp" delay={400}>
-            <p className="text-xl modern-text max-w-3xl mx-auto leading-relaxed mb-10">
-              Khám phá quá trình chuyển đổi nền kinh tế Việt Nam từ nền sản xuất
-              lạc hậu sang nền sản xuất hiện đại, và vai trò của hội nhập kinh
-              tế quốc tế trong sự phát triển bền vững
+            <h2 className="text-5xl md:text-6xl font-black text-yellow-400 mb-8 leading-tight">
+              Bảo vệ Tổ quốc
+            </h2>
+
+            {/* <p className="text-lg md:text-xl text-gray-100 mb-6 max-w-3xl mx-auto leading-relaxed">
+              Từ Páo Bộ đến Quảng trường Ba Đình — Kết thúc 30 năm bốn ba nước
+              ngoài, trực tiếp lãnh đạo cách mạng, đưa dân tộc tới kỳ nguyên độc
+              lập tự do
             </p>
-          </AnimatedSection>
-          <p className="text-xl text-red-200 font-medium">
-            Trong tư tưởng Mác-Lênin về phát triển kinh tế
-          </p>
 
-          <AnimatedSection animationType="scaleIn" delay={800} duration={1200}>
-            <div className="max-w-7xl mx-auto">
-              <Carousel
-                autoplay
-                autoplaySpeed={5000}
-                dotPosition="bottom"
-                className="rounded-3xl overflow-hidden shadow-2xl poster-container modern-carousel"
-                effect="fade"
-              >
-                {[poster1, poster2, poster3, poster4].map((img, index) => (
-                  <div key={index}>
-                    <AnimatedSection
-                      animationType="fadeIn"
-                      delay={index * 300}
-                      duration={1000}
-                    >
-                      <div className="relative group poster-container">
-                        <img
-                          src={img || "/placeholder.svg"}
-                          alt={`Poster ${index + 1}`}
-                          className="w-full h-[600px] md:h-[800px] object-cover transition-all duration-1000 ease-out group-hover:scale-105 group-hover:brightness-110"
-                          style={{
-                            filter: "brightness(0.9) contrast(1.1)",
-                            transition: "all 1.2s cubic-bezier(0.4, 0, 0.2, 1)",
-                          }}
-                        />
-                        <div className="poster-overlay"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-                        <div className="absolute bottom-8 left-8 text-white opacity-0 group-hover:opacity-100 transition-all duration-700 transform translate-y-6 group-hover:translate-y-0 poster-float">
-                          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20 shadow-xl">
-                            <h4 className="text-2xl font-bold mb-2 drop-shadow-lg gradient-text">
-                              Hình ảnh {index + 1}
-                            </h4>
-                            <p className="text-sm text-gray-200 drop-shadow-md leading-relaxed">
-                              Minh họa cho quá trình công nghiệp hóa và hiện đại
-                              hóa Việt Nam
-                            </p>
-                            <div className="mt-3 flex items-center gap-2">
-                              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                              <span className="text-xs text-blue-300 font-medium">
-                                Đang hiển thị
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
-                          <div className="bg-white/20 backdrop-blur-sm rounded-full p-2 border border-white/30 shadow-lg">
-                            <div className="w-3 h-3 bg-white rounded-full animate-ping"></div>
-                          </div>
-                        </div>
-                        <div className="absolute top-6 left-6 opacity-0 group-hover:opacity-100 transition-all duration-600 transform -translate-y-2 group-hover:translate-y-0">
-                          <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
-                            <span className="text-white text-xs font-medium">
-                              📸 Poster {index + 1}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </AnimatedSection>
+            <p className="text-base md:text-lg text-yellow-300 mb-12 max-w-2xl mx-auto">
+              Định cao là thành công của Cách mạng Tháng Tám năm 1945, khai sinh
+              ra nước Việt Nam Dân chủ Cộng hòa
+            </p> */}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+            {timelineEvents.map((event, index) => {
+              const Icon = event.icon;
+              return (
+                <button
+                  key={index}
+                  onClick={() => setActiveTimeline(index)}
+                  className={`p-6 rounded-lg border-2 transition-all duration-300 cursor-pointer transform hover:scale-105 ${
+                    activeTimeline === index
+                      ? "border-yellow-500 bg-red-700/60 text-white shadow-2xl"
+                      : "border-red-700/50 bg-red-900/50 text-gray-100 hover:border-yellow-400/50"
+                  }`}
+                >
+                  <div className="flex justify-center mb-4">
+                    <Icon
+                      className={`h-8 w-8 ${
+                        activeTimeline === index
+                          ? "text-yellow-400"
+                          : "text-yellow-300"
+                      }`}
+                    />
                   </div>
+                  <div className="text-2xl font-black mb-2">{event.year}</div>
+                  <div className="font-bold text-sm mb-2">{event.title}</div>
+                  <div className="text-xs opacity-80 leading-relaxed">
+                    {event.description}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400" />
+      </section>
+
+      {/* Main Content Section */}
+      <section className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+        <div className="bg-white rounded-2xl shadow-2xl border-2 border-slate-200 p-8 md:p-12 mb-16">
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+            Các Cột Mốc Lịch Sử Chi Tiết
+          </h2>
+
+          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8 border-l-4 border-red-600">
+            <div className="flex items-start gap-4 mb-6">
+              <div className="text-4xl font-black text-red-600">
+                {timelineEvents[activeTimeline].year}
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  {timelineEvents[activeTimeline].title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed">
+                  {timelineEvents[activeTimeline].description}
+                </p>
+              </div>
+            </div>
+
+            {/* Detailed timeline events */}
+            <div className="border-t-2 border-slate-200 pt-6 mt-6">
+              <h4 className="text-lg font-bold text-slate-900 mb-4">
+                Sự kiện chính trong giai đoạn:
+              </h4>
+              <ul className="space-y-3">
+                {timelineEvents[activeTimeline].details.map((detail, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start gap-3 text-slate-700"
+                  >
+                    <span className="text-red-600 font-bold mt-1">•</span>
+                    <span className="leading-relaxed">{detail}</span>
+                  </li>
                 ))}
-              </Carousel>
+              </ul>
             </div>
-          </AnimatedSection>
+          </div>
+        </div>
 
-          {/* Hội nhập Kinh tế Quốc tế Poster */}
-          <AnimatedSection
-            animationType="fadeInUp"
-            delay={1000}
-            duration={1000}
-          >
-            <div className="mt-16 max-w-4xl mx-auto">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl modern-card group cursor-pointer">
-                <img
-                  src={poster3}
-                  alt="Việt Nam trong mạng lưới hội nhập toàn cầu"
-                  className="w-full h-auto object-contain transition-all duration-500 group-hover:scale-105"
-                />
-
-                {/* Overlay chỉ hiện khi hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                {/* Text chỉ hiện khi hover */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                      <span className="text-blue-300 text-sm font-semibold tracking-wider uppercase">
-                        Hội nhập toàn cầu
-                      </span>
+        {/* Carousel Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+            Hình Ảnh Lịch Sử
+          </h2>
+          <div className="rounded-2xl overflow-hidden shadow-2xl">
+            <Carousel
+              autoplay
+              autoplaySpeed={5000}
+              dotPosition="bottom"
+              effect="fade"
+            >
+              {[poster1, poster2, poster3, poster4].map((img, index) => (
+                <div key={index} className="relative group bg-black">
+                  <img
+                    src={
+                      img ||
+                      "/placeholder.svg?height=600&width=1200&query=Vietnam%20history"
+                    }
+                    alt={`Poster ${index + 1}`}
+                    className="w-full h-96 md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="text-2xl font-bold mb-2">
+                      Năm {1975 + index}
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                      Việt Nam trong mạng lưới hội nhập toàn cầu
-                    </h3>
-                    <p className="text-gray-200 leading-relaxed">
-                      Việt Nam đang tích cực tham gia vào các tổ chức kinh tế
-                      quốc tế, mở rộng quan hệ thương mại và đầu tư với các nước
-                      trên thế giới, tạo ra những cơ hội phát triển mới cho nền
-                      kinh tế.
+                    <p className="text-sm opacity-90">
+                      Giai đoạn xây dựng chủ nghĩa xã hội
                     </p>
-                    <div className="mt-4 flex items-center gap-2">
-                      <div className="h-1 w-12 bg-blue-500 rounded-full"></div>
-                      <span className="text-blue-300 text-sm font-medium">
-                        Hội nhập Kinh tế Quốc tế
-                      </span>
-                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </section>
+              ))}
+            </Carousel>
+          </div>
+        </div>
 
-        <section className="grid md:grid-cols-3 gap-6 mb-16">
-          <AnimatedSection animationType="fadeInLeft" delay={0}>
-            <div className="modern-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 group">
-              <div className="bg-gradient-to-br from-blue-100 to-blue-50 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Factory className="text-blue-600" size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">
-                Công nghiệp hóa
-              </h3>
-              <p className="modern-text leading-relaxed">
-                Quá trình chuyển đổi căn bản từ sử dụng sức lao động thủ công
-                sang sử dụng công nghệ, phương tiện hiện đại, nhằm tạo ra năng
-                suất lao động xã hội cao
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection animationType="fadeInUp" delay={200}>
-            <div className="modern-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 group">
-              <div className="bg-gradient-to-br from-green-100 to-green-50 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <TrendingUp className="text-green-600" size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">
-                Hiện đại hóa
-              </h3>
-              <p className="modern-text leading-relaxed">
-                Nâng cao trình độ khoa học kỹ thuật, cải tiến phương thức quản
-                lý, và nâng cao chất lượng cuộc sống toàn xã hội
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection animationType="fadeInRight" delay={400}>
-            <div className="modern-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 group">
-              <div className="bg-gradient-to-br from-purple-100 to-purple-50 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Globe className="text-purple-600" size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">
-                Hội nhập kinh tế quốc tế
-              </h3>
-              <p className="modern-text leading-relaxed">
-                Quá trình gắn kết nền kinh tế Việt Nam với nền kinh tế thế giới,
-                mở rộng thị trường và hợp tác quốc tế
-              </p>
-            </div>
-          </AnimatedSection>
-        </section>
-
-        <AnimatedSection animationType="fadeInUp" delay={0}>
-          <section className="bg-white rounded-xl shadow-lg p-10 border border-gray-100 mb-16">
-            <AnimatedSection animationType="fadeInDown" delay={200}>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-                Các cuộc Cách mạng Công nghiệp
-              </h2>
-            </AnimatedSection>
-            <div className="grid md:grid-cols-2 gap-6">
-              <AnimatedSection animationType="fadeInLeft" delay={400}>
-                <div className="border-l-4 border-blue-600 pl-6 py-2">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    Lần thứ I (Thế kỷ XVIII-XIX)
+        {/* Content Sections Grid */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">
+            Các Lĩnh Vực Phát Triển
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {contentSections.map((section, index) => {
+              const Icon = section.icon;
+              return (
+                <div
+                  key={index}
+                  className={`${section.color} rounded-xl p-8 border-2 ${section.borderColor} hover:shadow-lg transition-all duration-300 group cursor-pointer`}
+                >
+                  <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                    <Icon className={`h-12 w-12 ${section.accentColor}`} />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">
+                    {section.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Khởi phát ở Anh, chuyển từ lao động thủ công sang sử dụng
-                    máy móc, cơ giới hóa sản xuất bằng năng lượng nước và hơi
-                    nước
+                  <p className="text-slate-700 text-sm leading-relaxed">
+                    {section.description}
                   </p>
+                  <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-slate-600 group-hover:text-slate-900 transition-colors">
+                    Tìm hiểu thêm
+                    <ArrowRightIcon className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-              </AnimatedSection>
-              <AnimatedSection animationType="fadeInRight" delay={600}>
-                <div className="border-l-4 border-green-600 pl-6 py-2">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    Lần thứ II (Thế kỷ XIX-XX)
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Chuyển nền sản xuất cơ khí sang nền sản xuất điện-cơ khí và
-                    tự động hóa cục bộ trong sản xuất
-                  </p>
-                </div>
-              </AnimatedSection>
-              <AnimatedSection animationType="fadeInLeft" delay={800}>
-                <div className="border-l-4 border-orange-600 pl-6 py-2">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    Lần thứ III (Thập niên 60-cuối thế kỷ XX)
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Xuất hiện công nghệ thông tin, tự động hóa sản xuất, và sự
-                    phát triển của máy tính
-                  </p>
-                </div>
-              </AnimatedSection>
-              <AnimatedSection animationType="fadeInRight" delay={1000}>
-                <div className="border-l-4 border-purple-600 pl-6 py-2">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    Lần thứ IV (Từ năm 2011)
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Xuất hiện các công nghệ đột phá: trí tuệ nhân tạo, big data,
-                    in 3D, và Internet of Things
-                  </p>
-                </div>
-              </AnimatedSection>
-            </div>
-          </section>
-        </AnimatedSection>
+              );
+            })}
+          </div>
+        </div>
 
-        <AnimatedSection animationType="scaleIn" delay={0}>
-          <section className="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 rounded-2xl shadow-2xl p-10 mb-16 text-white">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-1">
-                <AnimatedSection animationType="fadeInRight" delay={200}>
-                  <h2 className="text-3xl font-bold mb-4">
-                    Công nghiệp hóa, Hiện đại hóa ở Việt Nam
-                  </h2>
-                </AnimatedSection>
-                <AnimatedSection animationType="fadeInUp" delay={400}>
-                  <p className="text-blue-100 text-lg leading-relaxed mb-6">
-                    Công nghiệp hóa ở Việt Nam được thực hiện theo định hướng xã
-                    hội chủ nghĩa với mục tiêu "dân giàu, nước mạnh, dân chủ,
-                    công bằng, văn minh"
-                  </p>
-                </AnimatedSection>
-                <AnimatedSection animationType="fadeInLeft" delay={600}>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <div className="bg-white/20 rounded-full p-1 mt-1 flex-shrink-0">
-                        <CheckCircle size={16} />
-                      </div>
-                      <span>
-                        Tạo lập điều kiện chuyển đổi từ nền sản xuất lạc hậu
-                        sang hiện đại
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-white/20 rounded-full p-1 mt-1 flex-shrink-0">
-                        <CheckCircle size={16} />
-                      </div>
-                      <span>Ứng dụng thành tựu khoa học công nghệ mới</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-white/20 rounded-full p-1 mt-1 flex-shrink-0">
-                        <CheckCircle size={16} />
-                      </div>
-                      <span>
-                        Chuyển đổi cơ cấu kinh tế theo hướng hiện đại và hợp lý
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-white/20 rounded-full p-1 mt-1 flex-shrink-0">
-                        <CheckCircle size={16} />
-                      </div>
-                      <span>Thích ứng với cách mạng công nghiệp 4.0</span>
-                    </li>
-                  </ul>
-                </AnimatedSection>
-              </div>
-              <AnimatedSection animationType="fadeInLeft" delay={800}>
-                <div className="flex-shrink-0">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                    <Factory className="text-white mb-4" size={64} />
-                    <div className="text-center">
-                      <div className="text-4xl font-bold mb-2">Mục tiêu</div>
-                      <div className="text-blue-100">Phát triển bền vững</div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </section>
-        </AnimatedSection>
+        {/* Key Achievements Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div className="bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl p-8 md:p-12 text-white shadow-xl">
+            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
+              <BuildingLibraryIcon className="h-8 w-8" />
+              Xây Dựng Kinh Tế
+            </h3>
+            <ul className="space-y-4 text-base">
+              <li className="flex items-start gap-3">
+                <span className="text-2xl mt-0">✓</span>
+                <span>Công nghiệp hóa bước đầu toàn quốc</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-2xl mt-0">✓</span>
+                <span>Nông nghiệp hóa theo hình thức xã hội chủ nghĩa</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-2xl mt-0">✓</span>
+                <span>Phát triển cơ sở hạ tầng và giao thông</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-2xl mt-0">✓</span>
+                <span>Cải tạo xã hội chủ nghĩa ở miền Nam</span>
+              </li>
+            </ul>
+          </div>
 
-        <AnimatedSection animationType="fadeInUp" delay={0}>
-          <section className="mb-16">
-            <AnimatedSection animationType="fadeInDown" delay={200}>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-                Hội nhập Kinh tế Quốc tế
-              </h2>
-            </AnimatedSection>
-            <div className="grid md:grid-cols-2 gap-8">
-              <AnimatedSection animationType="fadeInLeft" delay={400}>
-                <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-shadow">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="bg-green-100 p-2 rounded-lg">
-                      <CheckCircle className="text-green-600" size={28} />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">
-                      Tác động Tích cực
-                    </h3>
-                  </div>
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-600 font-bold text-lg flex-shrink-0">
-                        ✓
-                      </span>
-                      <span>
-                        Mở rộng thị trường và tiếp thu khoa học công nghệ
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-600 font-bold text-lg flex-shrink-0">
-                        ✓
-                      </span>
-                      <span>Thu hút vốn đầu tư nước ngoài</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-600 font-bold text-lg flex-shrink-0">
-                        ✓
-                      </span>
-                      <span>Thúc đẩy công nghiệp hóa và tăng tích lũy</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-600 font-bold text-lg flex-shrink-0">
-                        ✓
-                      </span>
-                      <span>Tạo nhiều cơ hội việc làm mới</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-600 font-bold text-lg flex-shrink-0">
-                        ✓
-                      </span>
-                      <span>Nâng cao chất lượng nguồn nhân lực</span>
-                    </li>
-                  </ul>
-                </div>
-              </AnimatedSection>
+          <div className="bg-gradient-to-br from-red-600 to-red-500 rounded-2xl p-8 md:p-12 text-white shadow-xl">
+            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
+              <ShieldCheckIcon className="h-8 w-8" />
+              Bảo Vệ Tổ Quốc
+            </h3>
+            <ul className="space-y-4 text-base">
+              <li className="flex items-start gap-3">
+                <span className="text-2xl mt-0">✓</span>
+                <span>Chiến tranh biên giới Tây Nam 1977-1979</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-2xl mt-0">✓</span>
+                <span>Chiến tranh biên giới phía Bắc 1979</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-2xl mt-0">✓</span>
+                <span>Bảo vệ chủ quyền lãnh thổ quốc gia</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-2xl mt-0">✓</span>
+                <span>Tăng cường lực lượng vũ trang nhân dân</span>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-              <AnimatedSection animationType="fadeInRight" delay={600}>
-                <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-shadow">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="bg-orange-100 p-2 rounded-lg">
-                      <AlertCircle className="text-orange-600" size={28} />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">
-                      Tác động Tiêu cực
-                    </h3>
-                  </div>
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-start gap-3">
-                      <span className="text-orange-600 font-bold text-lg flex-shrink-0">
-                        !
-                      </span>
-                      <span>Gia tăng cạnh tranh gay gắt</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-orange-600 font-bold text-lg flex-shrink-0">
-                        !
-                      </span>
-                      <span>
-                        Phụ thuộc nền kinh tế vào thị trường bên ngoài
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-orange-600 font-bold text-lg flex-shrink-0">
-                        !
-                      </span>
-                      <span>Phân phối không công bằng lợi ích</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-orange-600 font-bold text-lg flex-shrink-0">
-                        !
-                      </span>
-                      <span>Nguy cơ chuyển dịch cơ cấu kinh tế tự nhiên</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-orange-600 font-bold text-lg flex-shrink-0">
-                        !
-                      </span>
-                      <span>Thách thức đối với chủ quyền quốc gia</span>
-                    </li>
-                  </ul>
-                </div>
-              </AnimatedSection>
-            </div>
-          </section>
-        </AnimatedSection>
-
-        <AnimatedSection animationType="fadeInUp" delay={0}>
-          <section className="bg-white rounded-xl shadow-lg p-10 border border-gray-100 mb-16">
-            <AnimatedSection animationType="fadeInDown" delay={200}>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-                Phương hướng Nâng cao Hiệu quả Hội nhập
-              </h2>
-            </AnimatedSection>
-            <div className="grid md:grid-cols-2 gap-6">
-              <AnimatedSection animationType="fadeInLeft" delay={400}>
-                <div className="flex gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold text-lg">
-                      1
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      Nhận thức sâu sắc về thời cơ và thách thức
-                    </h3>
-                    <p className="text-gray-600">
-                      Hội nhập kinh tế là xu thế khách quan của thời đại, cần
-                      thấy rõ cả mặt tích cực và tiêu cực
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-              <AnimatedSection animationType="fadeInRight" delay={600}>
-                <div className="flex gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold text-lg">
-                      2
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      Xây dựng chiến lược hội nhập phù hợp
-                    </h3>
-                    <p className="text-gray-600">
-                      Lộ trình hội nhập phải được cân nhắc với trình độ phát
-                      triển của đất nước
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-              <AnimatedSection animationType="fadeInLeft" delay={800}>
-                <div className="flex gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold text-lg">
-                      3
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      Tham gia tích cực vào các liên kết kinh tế quốc tế
-                    </h3>
-                    <p className="text-gray-600">
-                      Thực hiện đầy đủ các cam kết để nâng cao uy tín và vai trò
-                      của Việt Nam
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-              <AnimatedSection animationType="fadeInRight" delay={1000}>
-                <div className="flex gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold text-lg">
-                      4
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      Hoàn thiện thể chế kinh tế và pháp luật
-                    </h3>
-                    <p className="text-gray-600">
-                      Rà soát và hoàn thiện hệ thống pháp luật liên quan đến hội
-                      nhập kinh tế
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-              <AnimatedSection animationType="fadeInLeft" delay={1200}>
-                <div className="flex gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold text-lg">
-                      5
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      Nâng cao năng lực cạnh tranh quốc tế
-                    </h3>
-                    <p className="text-gray-600">
-                      Tăng cường hỗ trợ doanh nghiệp để vượt qua thách thức thời
-                      kỳ hội nhập
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-              <AnimatedSection animationType="fadeInRight" delay={1400}>
-                <div className="flex gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold text-lg">
-                      6
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      Xây dựng nền kinh tế độc lập, tự chủ
-                    </h3>
-                    <p className="text-gray-600">
-                      Không bị lệ thuộc vào nước khác, bảo vệ chủ quyền quốc gia
-                      và lợi ích dân tộc
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </section>
-        </AnimatedSection>
-
-        <AnimatedSection animationType="scaleIn" delay={0}>
-          <section className="text-center bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-lg p-10 border border-blue-200 mb-16">
-            <AnimatedSection animationType="fadeInDown" delay={200}>
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                Câu hỏi đặt ra
-              </h3>
-            </AnimatedSection>
-            <AnimatedSection animationType="fadeInUp" delay={400}>
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                Liệu Việt Nam có thể tận dụng tối đa những cơ hội từ hội nhập
-                kinh tế quốc tế để thực hiện thành công công nghiệp hóa, hiện
-                đại hóa,
-                <span className="font-bold text-blue-600">
-                  {" "}
-                  vươn lên ngang tầm với các quốc gia phát triển
-                </span>{" "}
-                trong kỷ nguyên số?
-              </p>
-            </AnimatedSection>
-          </section>
-        </AnimatedSection>
-
-        {/* Quiz Section */}
-        <AnimatedSection animationType="fadeInUp" delay={0}>
-          <section id="takequiz">
-            <TakeQuiz />
-          </section>
-        </AnimatedSection>
-      </main>
-      <ChatBoxAI />
+        {/* Quote Section */}
+        <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white shadow-2xl border-l-4 border-amber-500">
+          <p className="text-2xl md:text-3xl font-bold mb-6 italic leading-relaxed">
+            "Trong bất kỳ hoàn cảnh nào, chúng ta cũng kiên quyết giữ vững độc
+            lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Tổ quốc"
+          </p>
+          <p className="text-amber-300 font-semibold">
+            — Trích Lịch sử Đảng Cộng sản Việt Nam
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
