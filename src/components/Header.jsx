@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Home, Info, Podcast, Gamepad2, Menu, X } from "lucide-react";
+import {
+  Home,
+  Info,
+  Podcast,
+  Gamepad2,
+  Menu,
+  X,
+  BookOpen,
+  Book,
+} from "lucide-react";
 import logo from "../assets/logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -59,8 +68,15 @@ export default function Header() {
       action: handleHomeClick,
     },
     { key: "quiz", label: "Quiz ôn tập", icon: Info, action: scrollToQuiz },
+    {
+      key: "notebook",
+      label: "3D Notebook",
+      icon: BookOpen,
+      path: "/notebook",
+    },
     { key: "podcast", label: "Poster", icon: Podcast, path: "/podcast" },
     { key: "game", label: "Game", icon: Gamepad2, path: "/game" },
+    { key: "Book 3D", label: "3D", icon: Book, path: "/book" },
   ];
 
   return (

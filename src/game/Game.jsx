@@ -3,25 +3,36 @@ import { useState, useEffect, useRef } from "react";
 import { Sparkles, Heart, ArrowLeft, Bug } from "lucide-react";
 import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
-
 const whispers = [
-  "1. Khái niệm CMCN: Là những bước nhảy vọt về trình độ của lực lượng lao động được thực hiện trên cơ sở phát minh vĩ đại về kỹ thuật và công nghệ.",
+  "1. Giai đoạn 1975-1981: Thời kỳ Đảng Cộng sản Việt Nam lãnh đạo cả nước quá độ lên chủ nghĩa xã hội, đặc trưng bởi thống nhất đất nước, xây dựng CNXH và bảo vệ Tổ quốc.",
 
-  "2. Sơ lược về các cuộc CMCN:\n\nCMCN lần thứ nhất (1.0): Bắt đầu ở Anh với sự ra đời của máy hơi nước, ngành dệt, luyện kim, và giao thông đường sắt. → Đánh dấu sự ra đời của nền sản xuất cơ khí.\n\nCMCN lần thứ hai (2.0): Ứng dụng điện năng, động cơ đốt trong, và dây chuyền sản xuất hàng loạt. → Tạo bước nhảy vọt về năng suất và mở rộng công nghiệp sang nhiều quốc gia.\n\nCMCN lần thứ ba (3.0): Tự động hóa, máy tính, công nghệ thông tin và Internet. → Đưa thế giới vào kỷ nguyên kinh tế tri thức.\n\nCMCN lần thứ tư (4.0) (hiện nay): AI, IoT, Big Data, robot, công nghệ sinh học, và in 3D. → Làm mờ ranh giới giữa vật lý – số hóa – sinh học.",
+  "2. Hội nghị TW 24 (8/1975): Chủ trương hoàn thành thống nhất nước nhà, đưa cả nước tiến nhanh, tiến mạnh, tiến vững chắc lên CNXH. Miền Bắc tiếp tục xây dựng CNXH, miền Nam đồng thời cải tạo và xây dựng CNXH.",
 
-  "3. Vai trò của CMCN đối với phát triển:\n• Thúc đẩy sự phát triển của lực lượng sản xuất\n• Thúc đẩy hoàn thiện quan hệ sản xuất\n• Thúc đẩy đổi mới phương thức quản trị phát triển",
+  "3. Thống nhất đất nước (1975-1976):\n• 25/4/1976: Tổng tuyển cử với 98,77% cử tri\n• 24/6-3/7/1976: Quốc hội quyết định:\n  - Tên nước: Cộng hòa Xã hội chủ nghĩa Việt Nam\n  - Thủ đô: Hà Nội\n  - Đổi Sài Gòn → TP Hồ Chí Minh",
 
-  "4. Định nghĩa công nghiệp hóa: CNH, HĐH là quá trình đổi mới toàn diện các lĩnh vực sản xuất, kinh doanh, dịch vụ và quản lý kinh tế - xã hội, chuyển từ việc dựa vào lao động thủ công sang sử dụng công nghệ tiên tiến, máy móc hiện đại và phương pháp quản lý hiệu quả nhằm đạt được năng suất cao hơn và thúc đẩy sự phát triển bền vững.",
+  "4. Đại hội IV (12/1976):\n• Đổi tên: Đảng Lao động VN → Đảng Cộng sản VN\n• Đặc điểm: Tiến thẳng lên CNXH từ nền kinh tế sản xuất nhỏ, bỏ qua giai đoạn TBCN\n• Tiến hành đồng thời 3 cuộc cách mạng: quan hệ SX, khoa học-kỹ thuật (then chốt), tư tưởng-văn hóa",
 
-  "5. Các mô hình CNH tiêu biểu:\n• Mô hình CNH các nước tư bản cổ điển\n• Mô hình CNH kiểu Liên Xô (cũ)\n• Mô hình CNH của Nhật Bản và các nước công nghiệp mới (NICs)",
+  "5. Ba cuộc cách mạng đồng thời:\n1️⃣ Cách mạng quan hệ sản xuất\n2️⃣ Cách mạng khoa học-kỹ thuật (then chốt)\n3️⃣ Cách mạng tư tưởng-văn hóa",
 
-  "6. Khái niệm về Hội nhập kinh tế quốc tế: Hội nhập kinh tế quốc tế là quá trình một quốc gia tham gia, gắn kết nền kinh tế của mình với nền kinh tế thế giới. Việc này được thực hiện trên cơ sở lợi ích đồng thời tuân thủ các chuẩn mực chung quốc tế.",
+  "6. Kế hoạch 5 năm (1976-1980): Hai mục tiêu cơ bản:\n• Bảo đảm nhu cầu đời sống nhân dân\n• Tích lũy xây dựng cơ sở vật chất-kỹ thuật CNXH",
 
-  "7. Chiến lược Hội nhập phải Chủ động và Tích cực: Việt Nam phải tích cực, chủ động tham gia vào các liên kết kinh tế quốc tế, thực hiện đầy đủ các cam kết đã ký với các tổ chức khu vực và quốc tế (như WTO, ASEAN, APEC, và các FTA). Việc này bao gồm cả việc xây dựng chiến lược và lộ trình hội nhập phù hợp với điều kiện của mình.",
+  "7. Khó khăn kinh tế (1976-1979):\n• Chủ trương nóng vội, chủ quan duy ý chí\n• Ưu tiên công nghiệp nặng vượt khả năng\n• Hậu quả: Lưu thông rối ren, giá tăng vọt, nhập khẩu gấp 4-5 lần xuất khẩu, đời sống khó khăn",
 
-  "8. Xây dựng Nền kinh tế Độc lập, Tự chủ: Hội nhập kinh tế quốc tế phải được thực hiện đồng thời với việc xây dựng nền kinh tế độc lập, tự chủ của Việt Nam. Điều này nhằm đảm bảo phát triển bền vững, không chịu sự chi phối hoặc bất cứ điều kiện nào về đường lối, chính sách của các tổ chức kinh tế nước ngoài.",
+  "8. Hội nghị TW 6 (8/1979): Bước đột phá đầu tiên - Khắc phục khuyết điểm quản lý kinh tế để 'sản xuất bung ra'. Bắt đầu điều chỉnh nhận thức về phát triển kinh tế.",
 
-  "9. Rủi ro về bất bình đẳng xã hội và môi trường (Tác động Tiêu cực/Thách thức): Hội nhập có thể dẫn đến phân phối lợi ích và rủi ro không công bằng giữa các nước và các nhóm trong xã hội, gây ra nguy cơ gia tăng khoảng cách giàu nghèo và làm cạn kiệt tài nguyên, ô nhiễm môi trường.",
+  "9. Chỉ thị 100-CT/TW (1/1981) - 'Khoán 100':\n• Khoán sản phẩm đến nhóm và người lao động trong HTX nông nghiệp\n• Kết quả: Sản lượng lương thực tăng từ 13,4 triệu tấn (1976-1980) lên 17 triệu tấn (1981-1985)\n• Là bước đột phá trong cải cách kinh tế",
+
+  "10. Quyết định 25-CP (1/1981): Mở rộng quyền chủ động sản xuất kinh doanh và tự chủ tài chính cho xí nghiệp quốc doanh → Tạo động lực sản xuất công nghiệp",
+
+  "11. Chiến tranh biên giới Tây Nam (1975-1979):\n• Nguyên nhân: Tập đoàn Pol Pot diệt chủng và tấn công biên giới VN từ 4/1975\n• Cuối 12/1978: Pol Pot tiến công quy mô lớn\n• 7/1/1979: Quân tình nguyện VN giải phóng Phnom Penh, lật đổ chế độ diệt chủng",
+
+  "12. Chiến tranh biên giới phía Bắc (1979):\n• 1978: Quan hệ VN-Trung Quốc xấu đi, TQ rút chuyên gia và cắt viện trợ\n• 17/2/1979: TQ huy động >60 vạn quân tấn công biên giới phía Bắc\n• 5/3/1979: TQ tuyên bố rút quân\n• Cuộc chiến bảo vệ biên giới kéo dài nhiều năm sau",
+
+  "13. Đấu tranh chống FULRO: Quân dân thắng lợi làm thất bại âm mưu phá hoại của lực lượng phản động FULRO vũ trang ở Tây Nguyên và lực lượng lưu vong, bảo vệ vững chắc thành quả cách mạng.",
+
+  "14. Ý nghĩa giai đoạn 1975-1981:\n✅ Hoàn thành thống nhất đất nước\n✅ Xác lập đường lối xây dựng CNXH\n✅ Bảo vệ vững chắc chủ quyền biên giới\n✅ Bắt đầu điều chỉnh chính sách kinh tế (Khoán 100, QĐ 25)",
+
+  "15. Bài học kinh nghiệm:\n📌 Không chủ quan duy ý chí, đặt mục tiêu vượt khả năng\n📌 Phải điều chỉnh kịp thời khi chính sách không phù hợp\n📌 Khoán 100 chứng minh: Tôn trọng lợi ích người dân → sản xuất phát triển\n📌 Bảo vệ đất nước là nhiệm vụ thường xuyên",
 ];
 
 function Game() {
