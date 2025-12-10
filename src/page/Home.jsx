@@ -81,15 +81,15 @@ const contentSections = [
     icon: BuildingLibraryIcon,
     title: "Công nghiệp hóa",
     description:
-      "Phát triển cơ sở hạ tầng, xây dựng các khu công nghiệp, phát triển năng lượng",
+      "Xây dựng cơ sở hạ tầng, khu công nghiệp và năng lượng cho giai đoạn mới",
     color: "bg-blue-50",
     accentColor: "text-blue-600",
     borderColor: "border-blue-300",
   },
   {
     icon: FlagIcon,
-    title: "Trang trại Tập thể",
-    description: "Cải tạo nông nghiệp theo hình thức xã hội chủ nghĩa",
+    title: "Hợp tác hóa nông nghiệp",
+    description: "Cải tạo nông nghiệp, nâng năng suất và bảo đảm lương thực",
     color: "bg-green-50",
     accentColor: "text-green-600",
     borderColor: "border-green-300",
@@ -109,6 +109,41 @@ const contentSections = [
     color: "bg-purple-50",
     accentColor: "text-purple-600",
     borderColor: "border-purple-300",
+  },
+];
+
+const keyHighlights = [
+  {
+    title: "Thống nhất 1975-1976",
+    points: [
+      "Hội nghị TƯ 24 (8/1975) chủ trương hoàn thành thống nhất, đưa cả nước tiến lên CNXH",
+      "Hiệp thương chính trị Bắc - Nam (11/1975) thống nhất tổng tuyển cử chung trên toàn quốc",
+      "Tổng tuyển cử 25/4/1976 với 98,77% cử tri tham gia",
+    ],
+  },
+  {
+    title: "Đại hội IV (12/1976)",
+    points: [
+      "Đổi tên Đảng Lao động Việt Nam thành Đảng Cộng sản Việt Nam",
+      "Đường lối ba cuộc cách mạng: quan hệ sản xuất, khoa học-kỹ thuật then chốt, tư tưởng-văn hóa",
+      "Kế hoạch 5 năm 1976-1980: bảo đảm đời sống và tích lũy cơ sở vật chất",
+    ],
+  },
+  {
+    title: "Đột phá kinh tế 1979-1981",
+    points: [
+      "Hội nghị TƯ 6 (8/1979) chủ trương 'sản xuất bung ra'",
+      "Chỉ thị 100-CT/TW (1/1981) khoán sản phẩm, sản lượng lương thực tăng rõ",
+      "Quyết định 25-CP (1/1981) mở rộng quyền tự chủ cho xí nghiệp quốc doanh",
+    ],
+  },
+  {
+    title: "Bảo vệ Tổ quốc",
+    points: [
+      "Biên giới Tây Nam: đánh bại Pol Pot, giải phóng Phnom Penh 7/1/1979",
+      "Biên giới phía Bắc: đẩy lùi cuộc tấn công 17/2/1979, Trung Quốc rút 5/3",
+      "Giữ vững an ninh nội địa, làm thất bại FULRO và các lực lượng vũ trang lưu vong",
+    ],
   },
 ];
 
@@ -150,16 +185,16 @@ export default function Home() {
               Bảo vệ Tổ quốc
             </h2>
 
-            {/* <p className="text-lg md:text-xl text-gray-100 mb-6 max-w-3xl mx-auto leading-relaxed">
-              Từ Páo Bộ đến Quảng trường Ba Đình — Kết thúc 30 năm bốn ba nước
-              ngoài, trực tiếp lãnh đạo cách mạng, đưa dân tộc tới kỳ nguyên độc
-              lập tự do
+            <p className="text-lg md:text-xl text-gray-100 mb-6 max-w-3xl mx-auto leading-relaxed">
+              Giai đoạn quá độ lên CNXH: hoàn thành thống nhất nhà nước, triển
+              khai đường lối Đại hội IV và kiên quyết bảo vệ biên giới trong bối
+              cảnh hậu chiến nhiều khó khăn.
             </p>
 
-            <p className="text-base md:text-lg text-yellow-300 mb-12 max-w-2xl mx-auto">
-              Định cao là thành công của Cách mạng Tháng Tám năm 1945, khai sinh
-              ra nước Việt Nam Dân chủ Cộng hòa
-            </p> */}
+            <p className="text-base md:text-lg text-yellow-200/90 mb-12 max-w-2xl mx-auto">
+              Tinh thần: đoàn kết, xây dựng, đổi mới tư duy kinh tế và giữ vững
+              chủ quyền lãnh thổ.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
@@ -237,6 +272,43 @@ export default function Home() {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+
+        {/* Key Highlights Section */}
+        <div className="bg-white rounded-2xl shadow-2xl border-2 border-amber-200 p-8 md:p-12 mb-16">
+          <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+              Ý chính giai đoạn 1975 - 1981
+            </h3>
+            <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-sm font-semibold">
+              Quá độ lên CNXH & bảo vệ Tổ quốc
+            </span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {keyHighlights.map((item, idx) => (
+              <div
+                key={idx}
+                className="rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50 to-white p-6 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-black">
+                    {idx + 1}
+                  </div>
+                  <h4 className="text-lg font-bold text-slate-900">
+                    {item.title}
+                  </h4>
+                </div>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  {item.points.map((point, pIdx) => (
+                    <li key={pIdx} className="flex items-start gap-2">
+                      <span className="text-amber-600 mt-0.5">•</span>
+                      <span className="leading-relaxed">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 

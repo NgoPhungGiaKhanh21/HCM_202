@@ -6,6 +6,8 @@ import Podcast from "../page/Podcast";
 import Notebook from "../components/Notebook";
 import BookSection from "../components/Book/BookSection";
 import TimeLine from "../page/Timeline";
+import TakeQuiz from "../page/TakeQuiz";
+import Introduction from "../page/Introduction";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,8 @@ const router = createBrowserRouter([
       { path: "notebook", element: <Notebook /> },
       { path: "book", element: <BookSection /> },
       { path: "timeline", element: <TimeLine /> },
+      { path: "quiz", element: <TakeQuiz /> },
+      { path: "introduction", element: <Introduction /> },
     ],
   },
 ]);

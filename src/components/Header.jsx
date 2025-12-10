@@ -39,9 +39,10 @@ export default function Header() {
           <ul className="flex gap-6 list-none m-0 p-0 font-semibold">
             {[
               ["/", "Trang chủ"],
-              ["/gioi-thieu", "Giới thiệu"],
+              ["/introduction", "Giới thiệu"],
               ["/timeline", "Mốc thời gian"],
               ["/game", "Game"],
+              ["/quiz", "Quiz"],
               ["/phu-luc-ai", "Phụ lục AI"],
             ].map(([to, label]) => (
               <li key={to}>
