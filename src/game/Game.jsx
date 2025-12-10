@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 import { useState, useEffect, useRef } from "react";
 import { Sparkles, Heart, ArrowLeft, Bug } from "lucide-react";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import Header from "../components/Header";
 // import { toast } from "react-toastify";
 const whispers = [
   "1. Giai đoạn 1975-1981: Thời kỳ Đảng Cộng sản Việt Nam lãnh đạo cả nước quá độ lên chủ nghĩa xã hội, đặc trưng bởi thống nhất đất nước, xây dựng CNXH và bảo vệ Tổ quốc.",
@@ -36,6 +37,7 @@ const whispers = [
 ];
 
 function Game() {
+  const navigate = useNavigate();
   const [fireflies, setFireflies] = useState([]);
   const [currentWhisper, setCurrentWhisper] = useState("");
   const [showWhisper, setShowWhisper] = useState(false);
@@ -44,20 +46,9 @@ function Game() {
   const [stars, setStars] = useState([]);
   const [trees, setTrees] = useState([]);
   const [floatingFireflies, setFloatingFireflies] = useState([]);
-  const [whisperIndex, setWhisperIndex] = useState(0); // 📝 Theo dõi thứ tự whisper
   const canvasRef = useRef(null);
   const particleIdRef = useRef(0);
-  const audioRef = useRef(null); // 🔊 Thêm ref để điều khiển nhạc
-
-  const handleRollback = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0; // tua về đầu
-      audioRef.current = null; // ngắt tham chiếu
-    }
-    // navigate("/"); // quay lại trang trước
-    toast.error("Học tiếp đi nha!");
-  };
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const starArray = Array.from({ length: 50 }, () => ({
@@ -69,7 +60,6 @@ function Game() {
     setStars(starArray);
   }, []);
 
-  // 🐝 Animation đom đóm
   useEffect(() => {
     if (fireflies.length === 0) return;
 
@@ -81,24 +71,27 @@ function Game() {
           let vx = f.vx;
           let vy = f.vy;
 
-          if (x < 5) vx = Math.abs(vx) * 0.7;
-          if (x > 95) vx = -Math.abs(vx) * 0.7;
-          if (y < 5) vy = Math.abs(vy) * 0.7;
-          if (y > 95) vy = -Math.abs(vy) * 0.7;
+          // Phản hồi mép nhẹ nhàng hơn
+          if (x < 5) vx = Math.abs(vx) * 0.6;
+          if (x > 95) vx = -Math.abs(vx) * 0.6;
+          if (y < 5) vy = Math.abs(vy) * 0.6;
+          if (y > 95) vy = -Math.abs(vy) * 0.6;
 
-          if (Math.random() < 0.02) {
-            vx += (Math.random() - 0.5) * 0.02;
-            vy += (Math.random() - 0.5) * 0.02;
+          // Dao động nhỏ, mượt hơn
+          if (Math.random() < 0.015) {
+            vx += (Math.random() - 0.5) * 0.01;
+            vy += (Math.random() - 0.5) * 0.01;
           }
 
           const speed = Math.sqrt(vx * vx + vy * vy);
-          if (speed > 0.12) {
-            vx *= 0.96;
-            vy *= 0.96;
+          if (speed > 0.08) {
+            vx *= 0.97;
+            vy *= 0.97;
           }
 
-          vx *= 0.995;
-          vy *= 0.995;
+          // Tăng damping để chuyển động êm
+          vx *= 0.998;
+          vy *= 0.998;
 
           return {
             ...f,
@@ -123,24 +116,33 @@ function Game() {
     return () => cancelAnimationFrame(frame);
   }, [fireflies.length]);
 
-  // 🌲 Khi rừng sáng — phát nhạc & tạo cảnh
   useEffect(() => {
     if (fireflies.length >= 10 && !isForestBright) {
       setIsForestBright(true);
       setCurrentWhisper(
-        "Cậu đã thắp sáng cả khu rừng rồi! Chúc mừng cậu thành 1 phần trong Đóm Family 🌲✨"
+        "“Dân ta phải biết sử ta; cho tường gốc tích nước nhà Việt Nam.”\n— Hồ Chí Minh 🇻🇳"
       );
       setShowWhisper(true);
 
-      // 🔊 Phát nhạc
       if (!audioRef.current) {
-        audioRef.current = new Audio("/audio/sa1.mp3");
-        audioRef.current.volume = 0.6;
+        audioRef.current = new Audio("/audio/audio3.mp3");
+        audioRef.current.volume = 0;
         audioRef.current.loop = true;
       }
       audioRef.current.play().catch(() => {});
 
-      // 🌳 Sinh cây
+      const targetVolume = 0.6;
+      const step = 0.05;
+      const interval = setInterval(() => {
+        if (!audioRef.current) {
+          clearInterval(interval);
+          return;
+        }
+        const next = Math.min(targetVolume, audioRef.current.volume + step);
+        audioRef.current.volume = next;
+        if (next >= targetVolume) clearInterval(interval);
+      }, 150);
+
       const treeArray = Array.from({ length: 15 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
@@ -169,7 +171,6 @@ function Game() {
     }
   }, [fireflies.length, isForestBright]);
 
-  // 🩵 Click thả đom đóm
   const handleCanvasClick = (e) => {
     if (fireflies.length >= 10) return;
 
@@ -178,7 +179,8 @@ function Game() {
     const y = ((e.clientY - rect.top) / rect.height) * 100;
 
     const angle = Math.random() * Math.PI * 2;
-    const speed = 0.005 + Math.random() * 0.003;
+    // Tốc độ thấp hơn để chuyển động nhẹ nhàng
+    const speed = 0.002 + Math.random() * 0.0015;
 
     const newFirefly = {
       id: Date.now(),
@@ -201,15 +203,13 @@ function Game() {
     }));
     setClickParticles((prev) => [...prev, ...particles]);
 
-    // 📝 Hiển thị whisper theo thứ tự
-    const whisper = whispers[whisperIndex % whispers.length];
+    const randomIndex = Math.floor(Math.random() * whispers.length);
+    const whisper = whispers[randomIndex];
     setCurrentWhisper(whisper);
     setShowWhisper(true);
-    setWhisperIndex((prev) => prev + 1); // Tăng index cho lần click tiếp theo
     setTimeout(() => setShowWhisper(false), 100000);
   };
 
-  // 🌌 Reset rừng
   const resetForest = () => {
     setFireflies([]);
     setIsForestBright(false);
@@ -218,12 +218,17 @@ function Game() {
     setClickParticles([]);
     setFloatingFireflies([]);
     setTrees([]);
-    setWhisperIndex(0); // 🔄 Reset về whisper đầu tiên
 
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
+  };
+
+  const handleBackHome = () => {
+    // Tắt nhạc và hiệu ứng trước khi rời trang
+    resetForest();
+    navigate("/");
   };
 
   const getBackgroundGradient = () => {
@@ -237,186 +242,229 @@ function Game() {
       : "from-blue-950 via-blue-900 to-slate-800";
   };
 
-  // 🌈 UI
   return (
-    <div className="min-h-screen w-full overflow-hidden relative">
-      <button
-        // onClick={() => toast.error("Hoc tiepp di nhaa!")}
-        onClick={handleRollback}
-        className="absolute top-6 left-6 z-30 text-white/60 hover:text-white transition-colors duration-300"
-        aria-label="Quay lại"
-      >
-        <ArrowLeft className="w-7 h-7" />
-      </button>
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${getBackgroundGradient()} transition-all duration-[2500ms]`}
-      />
-
-      {/* 🌟 Sao */}
-      {stars.map((star, idx) => (
+    <>
+      <Header />
+      <div className="min-h-screen w-full overflow-hidden relative">
+        {/* Back button */}
+        <div className="absolute top-4 left-4 z-30">
+          <button
+            onClick={handleBackHome}
+            className="bg-gradient-to-r from-amber-800 to-stone-700 text-white px-5 py-2 rounded-full text-sm shadow-2xl hover:shadow-amber-600/40 hover:scale-105 transition-all duration-300 border-2 border-white/20"
+          >
+            ← Về trang chủ
+          </button>
+        </div>
         <div
-          key={idx}
-          className="absolute rounded-full bg-white animate-pulse pointer-events-none"
-          style={{
-            left: `${star.x}%`,
-            top: `${star.y}%`,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            animationDelay: `${star.delay}s`,
-            animationDuration: `${2 + Math.random() * 2}s`,
-            opacity: isForestBright ? 0.9 : 0.3,
-          }}
+          className={`absolute inset-0 bg-gradient-to-br ${getBackgroundGradient()} transition-all duration-[2500ms]`}
         />
-      ))}
 
-      {/* 🌲 Cây + đom đóm bay */}
-      {isForestBright && (
-        <>
-          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-green-900/40 to-transparent pointer-events-none transition-opacity duration-2000" />
-          {trees.map((tree) => (
-            <div
-              key={tree.id}
-              className="absolute bottom-0 transition-all duration-1000 ease-out pointer-events-none"
-              style={{
-                left: `${tree.x}%`,
-                width: `${tree.width}px`,
-                height: `${tree.height}px`,
-                opacity: tree.opacity,
-                transitionDelay: `${tree.delay}s`,
-                transform:
-                  tree.opacity > 0 ? "translateY(0)" : "translateY(50px)",
-              }}
-            >
-              <div className="relative w-full h-full">
-                <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-green-900 via-green-800 to-green-700 rounded-t-full" />
-                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-green-800 to-green-600 rounded-t-full blur-sm opacity-50" />
+        {stars.map((star, idx) => (
+          <div
+            key={idx}
+            className="absolute rounded-full bg-white animate-pulse pointer-events-none"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              animationDelay: `${star.delay}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+              opacity: isForestBright ? 0.9 : 0.3,
+            }}
+          />
+        ))}
+
+        {isForestBright && (
+          <>
+            <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-green-900/40 to-transparent pointer-events-none transition-opacity duration-2000" />
+            {trees.map((tree) => (
+              <div
+                key={tree.id}
+                className="absolute bottom-0 transition-all duration-1000 ease-out pointer-events-none"
+                style={{
+                  left: `${tree.x}%`,
+                  width: `${tree.width}px`,
+                  height: `${tree.height}px`,
+                  opacity: tree.opacity,
+                  transitionDelay: `${tree.delay}s`,
+                  transform:
+                    tree.opacity > 0 ? "translateY(0)" : "translateY(50px)",
+                }}
+              >
+                <div className="relative w-full h-full">
+                  <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-green-900 via-green-800 to-green-700 rounded-t-full" />
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-green-800 to-green-600 rounded-t-full blur-sm opacity-50" />
+                </div>
               </div>
-            </div>
-          ))}
-          {floatingFireflies.map((f) => (
+            ))}
+            {floatingFireflies.map((f) => (
+              <div
+                key={f.id}
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                  left: `${f.x}%`,
+                  top: `${f.y}%`,
+                  width: `${f.size}px`,
+                  height: `${f.size}px`,
+                  animation: `floatFirefly ${f.duration}s infinite ease-in-out`,
+                  animationDelay: `${f.delay}s`,
+                }}
+              >
+                <div className="relative w-full h-full">
+                  <div className="absolute inset-0 bg-yellow-300 rounded-full blur-md opacity-70" />
+                  <div className="absolute inset-0 bg-yellow-200 rounded-full" />
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+
+        <div
+          ref={canvasRef}
+          onClick={handleCanvasClick}
+          className={`absolute inset-0 ${
+            fireflies.length < 10 ? "cursor-pointer" : "cursor-default"
+          }`}
+        >
+          {fireflies.map((f) => (
             <div
               key={f.id}
-              className="absolute rounded-full pointer-events-none"
+              className="absolute pointer-events-none"
               style={{
                 left: `${f.x}%`,
                 top: `${f.y}%`,
-                width: `${f.size}px`,
-                height: `${f.size}px`,
-                animation: `floatFirefly ${f.duration}s infinite ease-in-out`,
-                animationDelay: `${f.delay}s`,
+                transform: "translate(-50%, -50%)",
               }}
             >
-              <div className="relative w-full h-full">
-                <div className="absolute inset-0 bg-yellow-300 rounded-full blur-md opacity-70" />
-                <div className="absolute inset-0 bg-yellow-200 rounded-full" />
+              <div
+                className="relative"
+                style={{ width: `${f.size}px`, height: `${f.size}px` }}
+              >
+                <div
+                  className="absolute inset-0 rounded-full bg-yellow-300 blur-md"
+                  style={{
+                    opacity: f.brightness * 0.7,
+                    boxShadow: `0 0 ${f.size * 2.5}px ${
+                      f.size * 1.2
+                    }px rgba(250,204,21,${f.brightness * 0.5})`,
+                  }}
+                />
+                <div
+                  className="absolute inset-0 rounded-full bg-yellow-100"
+                  style={{ opacity: f.brightness }}
+                />
               </div>
             </div>
           ))}
-        </>
-      )}
 
-      {/* 💡 Đom đóm + particle */}
-      <div
-        ref={canvasRef}
-        onClick={handleCanvasClick}
-        className={`absolute inset-0 ${
-          fireflies.length < 10 ? "cursor-pointer" : "cursor-default"
-        }`}
-      >
-        {fireflies.map((f) => (
-          <div
-            key={f.id}
-            className="absolute pointer-events-none"
-            style={{
-              left: `${f.x}%`,
-              top: `${f.y}%`,
-              transform: "translate(-50%, -50%)",
-            }}
-          >
+          {clickParticles.map((p) => (
             <div
-              className="relative"
-              style={{ width: `${f.size}px`, height: `${f.size}px` }}
+              key={p.id}
+              className="absolute pointer-events-none"
+              style={{
+                left: `${p.x}%`,
+                top: `${p.y}%`,
+                opacity: p.life / 30,
+                transform: `translate(-50%, -50%) scale(${
+                  1 + (30 - p.life) / 30
+                })`,
+              }}
             >
-              <div
-                className="absolute inset-0 rounded-full bg-yellow-300 blur-md"
-                style={{
-                  opacity: f.brightness * 0.7,
-                  boxShadow: `0 0 ${f.size * 2.5}px ${
-                    f.size * 1.2
-                  }px rgba(250,204,21,${f.brightness * 0.5})`,
-                }}
-              />
-              <div
-                className="absolute inset-0 rounded-full bg-yellow-100"
-                style={{ opacity: f.brightness }}
-              />
+              <Sparkles className="w-4 h-4 text-yellow-300" />
+            </div>
+          ))}
+        </div>
+
+        {/* Beautiful Letter Design */}
+        <div
+          className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 transition-all duration-1000 max-w-3xl px-6 z-10 ${
+            showWhisper
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+          }`}
+        >
+          <div className="relative">
+            {/* Decorative corners */}
+            <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-amber-300/60 rounded-tl-lg"></div>
+            <div className="absolute -top-3 -right-3 w-8 h-8 border-t-2 border-r-2 border-amber-300/60 rounded-tr-lg"></div>
+            <div className="absolute -bottom-3 -left-3 w-8 h-8 border-b-2 border-l-2 border-amber-300/60 rounded-bl-lg"></div>
+            <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-amber-300/60 rounded-br-lg"></div>
+
+            {/* Main letter card */}
+            <div className="bg-gradient-to-br from-amber-50/95 via-white/90 to-amber-50/95 backdrop-blur-xl rounded-2xl shadow-2xl border-2 border-amber-200/50 overflow-hidden">
+              {/* Decorative header */}
+              <div className="bg-gradient-to-r from-amber-100/50 via-yellow-50/50 to-amber-100/50 border-b border-amber-200/30 py-4 px-8">
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></div>
+                  <Heart className="w-5 h-5 text-rose-400 animate-pulse drop-shadow-sm" />
+                  <Sparkles className="w-5 h-5 text-amber-400 animate-pulse" />
+                  <Heart className="w-5 h-5 text-rose-400 animate-pulse drop-shadow-sm" />
+                  <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></div>
+                </div>
+                <p className="text-center text-amber-800/60 text-sm font-light mt-2 tracking-widest">
+                  Học Bài Đi
+                </p>
+              </div>
+
+              {/* Letter content */}
+              <div className="px-10 py-8 max-h-96 overflow-y-auto">
+                <div className="relative">
+                  {/* Decorative quotation marks */}
+                  <div className="absolute -top-2 -left-4 text-6xl text-amber-300/40 font-serif leading-none">
+                    "
+                  </div>
+                  <div className="absolute -bottom-6 -right-4 text-6xl text-amber-300/40 font-serif leading-none">
+                    "
+                  </div>
+
+                  <p className="text-lg md:text-xl text-slate-700 text-center font-light leading-relaxed tracking-wide whitespace-pre-line relative z-10 py-2">
+                    {currentWhisper}
+                  </p>
+                </div>
+              </div>
+
+              {/* Decorative footer */}
+              <div className="bg-gradient-to-r from-amber-100/30 via-yellow-50/30 to-amber-100/30 border-t border-amber-200/30 py-3 px-8">
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-amber-400/50"></div>
+                  <div className="w-2 h-2 rounded-full bg-rose-400/50"></div>
+                  <div className="w-2 h-2 rounded-full bg-amber-400/50"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Soft shadow effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-300/10 to-rose-300/10 rounded-2xl blur-xl -z-10 transform scale-105"></div>
+          </div>
+        </div>
+
+        {isForestBright && (
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-[fadeIn_1s_ease-out]">
+            <button
+              onClick={resetForest}
+              className="bg-gradient-to-r from-amber-800 to-stone-700 text-white px-10 py-4 rounded-full font-light text-lg shadow-2xl hover:shadow-amber-600/40 hover:scale-105 transition-all duration-300 border-2 border-white/20"
+            >
+              Bắt đầu hành trình mới
+            </button>
+          </div>
+        )}
+
+        {!isForestBright && fireflies.length === 0 && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="text-center space-y-6 px-6">
+              <div className="text-8xl mb-4 animate-pulse">🌙</div>
+              <h1 className="text-5xl md:text-6xl font-light text-white tracking-wide">
+                Healink Trong Tim
+              </h1>
+              <p className="text-xl text-white/70 font-light max-w-md mx-auto">
+                Chạm để thắp sáng hy vọng trong đêm tối
+              </p>
             </div>
           </div>
-        ))}
+        )}
 
-        {clickParticles.map((p) => (
-          <div
-            key={p.id}
-            className="absolute pointer-events-none"
-            style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-              opacity: p.life / 30,
-              transform: `translate(-50%, -50%) scale(${
-                1 + (30 - p.life) / 30
-              })`,
-            }}
-          >
-            <Sparkles className="w-4 h-4 text-yellow-300" />
-          </div>
-        ))}
-      </div>
-
-      {/* ❤️ Whisper */}
-      <div
-        className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 transition-all duration-1000 max-w-2xl px-6 z-10 ${
-          showWhisper ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-        }`}
-      >
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl px-8 py-6 shadow-2xl border border-white/30 max-h-96 overflow-y-auto">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <Heart className="w-5 h-5 text-pink-300 animate-pulse" />
-            <Sparkles className="w-4 h-4 text-yellow-300" />
-          </div>
-          <p className="text-lg md:text-xl text-white text-center font-light leading-relaxed tracking-wide whitespace-pre-line">
-            {currentWhisper}
-          </p>
-        </div>
-      </div>
-
-      {/* 🌸 Reset */}
-      {isForestBright && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-[fadeIn_1s_ease-out]">
-          <button
-            onClick={resetForest}
-            className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-10 py-4 rounded-full font-light text-lg shadow-2xl hover:shadow-pink-500/50 hover:scale-105 transition-all duration-300 border-2 border-white/30"
-          >
-            Bắt đầu hành trình mới
-          </button>
-        </div>
-      )}
-
-      {/* 🌙 Màn mở đầu */}
-      {!isForestBright && fireflies.length === 0 && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="text-center space-y-6 px-6">
-            <div className="text-8xl mb-4 animate-pulse">🌙</div>
-            <h1 className="text-5xl md:text-6xl font-light text-white tracking-wide">
-              Đom Đóm Trong Tim
-            </h1>
-            <p className="text-xl text-white/70 font-light max-w-md mx-auto">
-              Chạm để thắp sáng hy vọng trong đêm tối
-            </p>
-          </div>
-        </div>
-      )}
-
-      <style>{`
+        <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateX(-50%) translateY(20px); }
           to { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -428,7 +476,8 @@ function Game() {
           75% { transform: translate(15px, 5px); opacity: 0.9; }
         }
       `}</style>
-    </div>
+      </div>
+    </>
   );
 }
 

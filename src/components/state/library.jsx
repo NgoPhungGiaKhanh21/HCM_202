@@ -14,7 +14,7 @@ export function buildNotebookPagesFlexible({
   coverBackFront, // ảnh cho mặt còn lại của bìa sau
   ruledTexture = "ruled-paper",
 } = {}) {
-  const imgAt = (i) => images[i] ?? ruledTexture;
+  const imgAt = (i) => images[i] ?? (ruledTexture || "ruled-paper"); // Thêm fallback
 
   // Tạo các trang từ cặp ảnh liên tiếp
   const innerPages = [];
@@ -59,9 +59,9 @@ export const BOOK_LIBRARY = [
     pages: buildNotebookPagesFlexible({
       coverFront: "page-01-front",
       coverFrontBack: "page-1", // mặt sau của bìa trước
-      coverBackFront: "page-18", // mặt trước của bìa sau
+      coverBackFront: "page-01-back", // mặt trước của bìa sau
       coverBack: "page-01-back",
-      ruledTexture: "",
+      ruledTexture: "ruled-paper",
       images: [
         "page-2",
         "page-3",
@@ -79,6 +79,15 @@ export const BOOK_LIBRARY = [
         "page-15",
         "page-16",
         "page-17",
+        "page-18",
+        "page-19",
+        "page-20",
+        "page-21",
+        "page-22",
+        "page-23",
+        "page-24",
+        "page-25",
+        "page-26",
       ],
     }),
     bookmark: { front: "bookmark-1-front", back: "bookmark-1-back" },
