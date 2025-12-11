@@ -137,7 +137,7 @@ const events = [
     description:
       "Chủ tịch Tôn Đức Thắng ra lệnh Tổng động viên toàn quốc; Trung Quốc tuyên bố rút quân, nhưng căng thẳng kéo dài.",
     image: "/timeline_img/Picture15.png",
-    icon: " mobilization",
+    icon: "📢",
   },
   {
     date: "8-1979",

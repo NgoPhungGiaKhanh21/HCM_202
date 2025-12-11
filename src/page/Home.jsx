@@ -18,6 +18,7 @@ import {
   FireIcon,
   StarIcon,
 } from "@heroicons/react/24/solid";
+import ChatBoxAI from "../components/ChatBoxAI";
 
 const timelineEvents = [
   {
@@ -444,6 +445,7 @@ export default function Home() {
             — Trích Lịch sử Đảng Cộng sản Việt Nam
           </p>
         </div>
+        <ChatBoxAI />
       </section>
     </div>
   );

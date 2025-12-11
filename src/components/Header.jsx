@@ -48,7 +48,7 @@ export default function Header() {
               <li key={to}>
                 <Link
                   to={to}
-                  className="text-gray-800 dark:text-gray-100 transition-colors transition-transform duration-150 ease-out hover:text-[#a40000] hover:scale-105"
+                  className="text-yellow-600 dark:text-gray-100 transition-colors transition-transform duration-150 ease-out hover:text-[#a40000] hover:scale-105"
                 >
                   {label}
                 </Link>
