@@ -28,7 +28,7 @@ function Carousel() {
       badge: "1979-1981",
     },
     {
-      image: "../../public/timeline_img/intro2.png",
+      image: "/image/img4.jpg",
       title: "Bảo vệ Tổ quốc & Công cuộc Đổi mới",
       description:
         "Biên giới Tây Nam: đánh bại Pol Pot, giải phóng Phnom Penh 7/1/1979. Biên giới phía Bắc: đẩy lùi cuộc tấn công 17/2/1979, Trung Quốc rút 5/3. Giữ vững an ninh nội địa, làm thất bại FULRO và các lực lượng vũ trang lưu vong. Đại hội VI (1986) mở ra công cuộc Đổi mới toàn diện.",
