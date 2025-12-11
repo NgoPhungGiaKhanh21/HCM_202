@@ -57,7 +57,7 @@ export default function Header() {
               ["/", "Trang chủ"],
               ["/introduction", "Giới thiệu"],
               ["/timeline", "Mốc thời gian"],
-              ["/game", "Game"],
+              ["/game", "Câu nói lịch sử"],
               ["/quiz", "Quiz"],
               ["/phu-luc-ai", "Phụ lục AI"],
             ].map(([to, label]) => (

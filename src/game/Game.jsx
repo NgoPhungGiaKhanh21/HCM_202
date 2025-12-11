@@ -5,35 +5,45 @@ import { useNavigate } from "react-router";
 import Header from "../components/Header";
 // import { toast } from "react-toastify";
 const whispers = [
-  "1. Giai đoạn 1975-1981: Thời kỳ Đảng Cộng sản Việt Nam lãnh đạo cả nước quá độ lên chủ nghĩa xã hội, đặc trưng bởi thống nhất đất nước, xây dựng CNXH và bảo vệ Tổ quốc.",
+  "“Nước Việt Nam là một, dân tộc Việt Nam là một… Sông có thể cạn, núi có thể mòn, nhưng chân lý ấy không bao giờ thay đổi.” – Hồ Chí Minh",
 
-  "2. Hội nghị TW 24 (8/1975): Chủ trương hoàn thành thống nhất nước nhà, đưa cả nước tiến nhanh, tiến mạnh, tiến vững chắc lên CNXH. Miền Bắc tiếp tục xây dựng CNXH, miền Nam đồng thời cải tạo và xây dựng CNXH.",
+  "“Không có gì quý hơn độc lập, tự do.” – Hồ Chí Minh",
 
-  "3. Thống nhất đất nước (1975-1976):\n• 25/4/1976: Tổng tuyển cử với 98,77% cử tri\n• 24/6-3/7/1976: Quốc hội quyết định:\n  - Tên nước: Cộng hòa Xã hội chủ nghĩa Việt Nam\n  - Thủ đô: Hà Nội\n  - Đổi Sài Gòn → TP Hồ Chí Minh",
+  "“Đảng ta là người tổ chức, lãnh đạo toàn bộ cuộc đấu tranh của nhân dân Việt Nam.” – Lê Duẩn",
 
-  "4. Đại hội IV (12/1976):\n• Đổi tên: Đảng Lao động VN → Đảng Cộng sản VN\n• Đặc điểm: Tiến thẳng lên CNXH từ nền kinh tế sản xuất nhỏ, bỏ qua giai đoạn TBCN\n• Tiến hành đồng thời 3 cuộc cách mạng: quan hệ SX, khoa học-kỹ thuật (then chốt), tư tưởng-văn hóa",
+  "“Chiến thắng 30/4 là chiến thắng của toàn dân tộc Việt Nam.” – Lê Duẩn",
 
-  "5. Ba cuộc cách mạng đồng thời:\n1️⃣ Cách mạng quan hệ sản xuất\n2️⃣ Cách mạng khoa học-kỹ thuật (then chốt)\n3️⃣ Cách mạng tư tưởng-văn hóa",
+  "“Tổ quốc Việt Nam không chỉ của riêng một ai, mà của mọi người dân Việt Nam.” – Võ Văn Kiệt",
 
-  "6. Kế hoạch 5 năm (1976-1980): Hai mục tiêu cơ bản:\n• Bảo đảm nhu cầu đời sống nhân dân\n• Tích lũy xây dựng cơ sở vật chất-kỹ thuật CNXH",
+  "“Không để một người dân nào chết đói.” – Võ Văn Kiệt",
 
-  "7. Khó khăn kinh tế (1976-1979):\n• Chủ trương nóng vội, chủ quan duy ý chí\n• Ưu tiên công nghiệp nặng vượt khả năng\n• Hậu quả: Lưu thông rối ren, giá tăng vọt, nhập khẩu gấp 4-5 lần xuất khẩu, đời sống khó khăn",
+  "“Chỉ có làm và làm thật nhanh.” – Võ Văn Kiệt",
 
-  "8. Hội nghị TW 6 (8/1979): Bước đột phá đầu tiên - Khắc phục khuyết điểm quản lý kinh tế để 'sản xuất bung ra'. Bắt đầu điều chỉnh nhận thức về phát triển kinh tế.",
+  "“Sức mạnh của dân tộc là đoàn kết, đoàn kết, đại đoàn kết.” – Hồ Chí Minh",
 
-  "9. Chỉ thị 100-CT/TW (1/1981) - 'Khoán 100':\n• Khoán sản phẩm đến nhóm và người lao động trong HTX nông nghiệp\n• Kết quả: Sản lượng lương thực tăng từ 13,4 triệu tấn (1976-1980) lên 17 triệu tấn (1981-1985)\n• Là bước đột phá trong cải cách kinh tế",
+  "“Phải dám nghĩ, dám nói, dám làm vì lợi ích chung.” – Nguyễn Văn Linh",
 
-  "10. Quyết định 25-CP (1/1981): Mở rộng quyền chủ động sản xuất kinh doanh và tự chủ tài chính cho xí nghiệp quốc doanh → Tạo động lực sản xuất công nghiệp",
+  "“Muốn đổi mới, phải chống cái cũ, cái trì trệ, cái giáo điều.” – Nguyễn Văn Linh",
 
-  "11. Chiến tranh biên giới Tây Nam (1975-1979):\n• Nguyên nhân: Tập đoàn Pol Pot diệt chủng và tấn công biên giới VN từ 4/1975\n• Cuối 12/1978: Pol Pot tiến công quy mô lớn\n• 7/1/1979: Quân tình nguyện VN giải phóng Phnom Penh, lật đổ chế độ diệt chủng",
+  "“Đổi mới trước hết là đổi mới tư duy.” – Nguyễn Văn Linh",
 
-  "12. Chiến tranh biên giới phía Bắc (1979):\n• 1978: Quan hệ VN-Trung Quốc xấu đi, TQ rút chuyên gia và cắt viện trợ\n• 17/2/1979: TQ huy động >60 vạn quân tấn công biên giới phía Bắc\n• 5/3/1979: TQ tuyên bố rút quân\n• Cuộc chiến bảo vệ biên giới kéo dài nhiều năm sau",
+  "“Dân biết, dân bàn, dân làm, dân kiểm tra.” – Tư tưởng Hồ Chí Minh, được nhấn mạnh sau 1975",
 
-  "13. Đấu tranh chống FULRO: Quân dân thắng lợi làm thất bại âm mưu phá hoại của lực lượng phản động FULRO vũ trang ở Tây Nguyên và lực lượng lưu vong, bảo vệ vững chắc thành quả cách mạng.",
+  "“Lấy dân làm gốc — việc gì lợi cho dân phải hết sức làm.” – Hồ Chí Minh",
 
-  "14. Ý nghĩa giai đoạn 1975-1981:\n✅ Hoàn thành thống nhất đất nước\n✅ Xác lập đường lối xây dựng CNXH\n✅ Bảo vệ vững chắc chủ quyền biên giới\n✅ Bắt đầu điều chỉnh chính sách kinh tế (Khoán 100, QĐ 25)",
+  "“Không có khoa học kỹ thuật thì không có CNXH.” – Đại hội IV",
 
-  "15. Bài học kinh nghiệm:\n📌 Không chủ quan duy ý chí, đặt mục tiêu vượt khả năng\n📌 Phải điều chỉnh kịp thời khi chính sách không phù hợp\n📌 Khoán 100 chứng minh: Tôn trọng lợi ích người dân → sản xuất phát triển\n📌 Bảo vệ đất nước là nhiệm vụ thường xuyên",
+  "“Cải cách kinh tế phải lấy lợi ích của người lao động làm trung tâm.” – Quan điểm lãnh đạo sau 1980",
+
+  "“Sản xuất phải bung ra, tạo động lực cho kinh tế phát triển.” – Hội nghị TW6 (1979)",
+
+  "“Khoán là chìa khóa để giải phóng sức sản xuất.” – Tinh thần Chỉ thị 100 (1981)",
+
+  "“Mỗi chủ trương đúng sẽ tạo ra sức mạnh lớn lao trong nhân dân.” – Tổng kết sau 1975",
+
+  "“Bảo vệ Tổ quốc là nhiệm vụ thiêng liêng của toàn dân.” – Quan điểm thời chiến biên giới 1979",
+
+  "“Ổn định để phát triển, phát triển để vững mạnh.” – Tư tưởng chỉ đạo sau 1975",
 ];
 
 function Game() {
@@ -49,6 +59,11 @@ function Game() {
   const canvasRef = useRef(null);
   const particleIdRef = useRef(0);
   const audioRef = useRef(null);
+
+  // Thêm state và ref cho nhạc chill
+  const [clickCount, setClickCount] = useState(0);
+  const chillMusicRef = useRef(null);
+  const [isChillMusicPlaying, setIsChillMusicPlaying] = useState(false);
 
   useEffect(() => {
     const starArray = Array.from({ length: 50 }, () => ({
@@ -171,6 +186,40 @@ function Game() {
     }
   }, [fireflies.length, isForestBright]);
 
+  // Thêm useEffect để phát nhạc chill sau 10 click
+  useEffect(() => {
+    if (clickCount === 10 && !isChillMusicPlaying) {
+      if (!chillMusicRef.current) {
+        chillMusicRef.current = new Audio("/audio/chill.mp3");
+        chillMusicRef.current.loop = true;
+        chillMusicRef.current.volume = 0;
+      }
+
+      chillMusicRef.current
+        .play()
+        .catch((err) => console.log("Error playing chill music:", err));
+
+      // Fade in volume
+      const targetVolume = 0.3;
+      const step = 0.02;
+      const interval = setInterval(() => {
+        if (!chillMusicRef.current) {
+          clearInterval(interval);
+          return;
+        }
+        const next = Math.min(
+          targetVolume,
+          chillMusicRef.current.volume + step
+        );
+        chillMusicRef.current.volume = next;
+        if (next >= targetVolume) {
+          clearInterval(interval);
+          setIsChillMusicPlaying(true);
+        }
+      }, 100);
+    }
+  }, [clickCount, isChillMusicPlaying]);
+
   const handleCanvasClick = (e) => {
     if (fireflies.length >= 10) return;
 
@@ -195,6 +244,9 @@ function Game() {
 
     setFireflies((prev) => [...prev, newFirefly]);
 
+    // Tăng số lần click
+    setClickCount((prev) => prev + 1);
+
     const particles = Array.from({ length: 8 }, () => ({
       id: particleIdRef.current++,
       x,
@@ -218,10 +270,18 @@ function Game() {
     setClickParticles([]);
     setFloatingFireflies([]);
     setTrees([]);
+    setClickCount(0);
+    setIsChillMusicPlaying(false);
 
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
+    }
+
+    // Tắt nhạc chill
+    if (chillMusicRef.current) {
+      chillMusicRef.current.pause();
+      chillMusicRef.current.currentTime = 0;
     }
   };
 
@@ -455,7 +515,7 @@ function Game() {
             <div className="text-center space-y-6 px-6">
               <div className="text-8xl mb-4 animate-pulse">🌙</div>
               <h1 className="text-5xl md:text-6xl font-light text-white tracking-wide">
-                Healink Trong Tim
+                VNR202
               </h1>
               <p className="text-xl text-white/70 font-light max-w-md mx-auto">
                 Chạm để thắp sáng hy vọng trong đêm tối
@@ -474,6 +534,10 @@ function Game() {
           25% { transform: translate(15px, -20px); opacity: 1; }
           50% { transform: translate(30px, -10px); opacity: 0.8; }
           75% { transform: translate(15px, 5px); opacity: 0.9; }
+        }
+        @keyframes slideInRight {
+          from { opacity: 0; transform: translateX(100%); }
+          to { opacity: 1; transform: translateX(0); }
         }
       `}</style>
       </div>
