@@ -137,7 +137,7 @@ const events = [
     description:
       "Chủ tịch Tôn Đức Thắng ra lệnh Tổng động viên toàn quốc; Trung Quốc tuyên bố rút quân, nhưng căng thẳng kéo dài.",
     image: "/timeline_img/Picture15.png",
-    icon: " mobilization",
+    icon: "📢",
   },
   {
     date: "8-1979",
@@ -203,13 +203,13 @@ const placeholderImage =
 
 // Danh sách màu sắc cho từng card (có thể điều chỉnh)
 const colors = [
-  "border-amber-500 bg-amber-50 dark:bg-amber-900/10", // amber
-  "border-blue-500 bg-blue-50 dark:bg-blue-900/10", // blue
-  "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/10", // green
-  "border-purple-500 bg-purple-50 dark:bg-purple-900/10", // purple
-  "border-teal-500 bg-teal-50 dark:bg-teal-900/10", // teal
-  "border-orange-500 bg-orange-50 dark:bg-orange-900/10", // orange
-  "border-red-500 bg-red-50 dark:bg-red-900/10", // red
+  "border-amber-500 bg-amber-50 dark:bg-slate-800/90 dark:border-amber-400", // amber
+  "border-blue-500 bg-blue-50 dark:bg-slate-800/90 dark:border-blue-400", // blue
+  "border-emerald-500 bg-emerald-50 dark:bg-slate-800/90 dark:border-emerald-400", // green
+  "border-purple-500 bg-purple-50 dark:bg-slate-800/90 dark:border-purple-400", // purple
+  "border-teal-500 bg-teal-50 dark:bg-slate-800/90 dark:border-teal-400", // teal
+  "border-orange-500 bg-orange-50 dark:bg-slate-800/90 dark:border-orange-400", // orange
+  "border-red-500 bg-red-50 dark:bg-slate-800/90 dark:border-red-400", // red
 ];
 
 const getYearStats = () => {
@@ -288,7 +288,7 @@ export default function Timeline() {
     <article
       className={`border-l-4 p-4 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-[1.02] ${eventColor} `}
     >
-      <div className="flex items-center justify-between mb-3 border-b pb-2 border-gray-200 dark:border-slate-700">
+      <div className="flex items-center justify-between mb-3 border-b pb-2 border-gray-200 dark:border-slate-600">
         <span
           className={`text-xl font-extrabold px-3 py-1 rounded-full text-white shadow-md ${yearColor}`}
         >
@@ -302,13 +302,13 @@ export default function Timeline() {
         alt={ev.title}
         className="w-full h-32 md:h-40 object-cover rounded-md mb-3 border border-gray-100 dark:border-slate-700"
       />
-      <div className="text-sm text-gray-600 dark:text-gray-400 mb-1 font-mono">
+      <div className="text-sm text-gray-700 dark:text-gray-200 mb-1 font-mono font-semibold">
         {ev.date}
       </div>
-      <h3 className="font-bold text-xl mb-2 text-gray-900 dark:text-gray-100">
+      <h3 className="font-bold text-xl mb-2 text-gray-900 dark:text-white">
         {ev.title}
       </h3>
-      <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+      <p className="text-gray-800 dark:text-gray-200 text-base leading-relaxed font-medium">
         {ev.description}
       </p>
     </article>
@@ -324,7 +324,7 @@ export default function Timeline() {
         <Header />
       </div>
 
-      <div className="flex w-full pt-6">
+      <div className="flex w-full pt-2">
         {/* appendix box - positioned at left edge */}
         <aside
           className="hidden lg:block w-72 flex-shrink-0 h-fit sticky p-4"
@@ -398,8 +398,8 @@ export default function Timeline() {
                       onClick={() => scrollToEvent(i)}
                       className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors text-left border-2 border-transparent ${
                         i === active
-                          ? "bg-red-50 dark:bg-red-900/30 text-gray-800 dark:text-gray-100 !border-red-600 font-bold shadow-inner"
-                          : "hover:bg-gray-100 dark:hover:bg-slate-700"
+                          ? "bg-red-50 dark:bg-red-500/20 text-red-700 dark:text-red-200 !border-red-500 font-bold shadow-md ring-1 ring-red-500/50"
+                          : "hover:bg-gray-100 dark:hover:bg-slate-700/50 border-transparent text-gray-600 dark:text-gray-400"
                       }`}
                     >
                       <span className="text-xl">{ev.icon}</span>
@@ -424,7 +424,7 @@ export default function Timeline() {
             <div className="w-1 bg-gray-300 dark:bg-gray-700 h-full mx-auto shadow-md" />
           </div>
 
-          <div className="space-y-12 py-8">
+          <div className="space-y-12 py-4">
             {filteredEvents.map((ev, idx) => {
               const isLeft = idx % 2 === 0;
               const eventColorClass = colors[idx % colors.length];
@@ -446,7 +446,7 @@ export default function Timeline() {
                   {/* left column (Card hoặc khoảng trống) */}
                   <div
                     className={`col-span-1 ${
-                      isLeft ? "md:text-right md:pr-10" : "md:pr-10"
+                      isLeft ? "md:text-right md:pr-4" : "md:pr-4"
                     } max-w-3xl mx-auto md:mx-0 ${
                       !isLeft ? "hidden md:block" : ""
                     }`} // Ẩn cột này trên mobile nếu là right
@@ -486,7 +486,7 @@ export default function Timeline() {
                   {/* right column (Card hoặc khoảng trống) */}
                   <div
                     className={`col-span-1 ${
-                      !isLeft ? "md:text-left md:pl-10" : "md:pl-10"
+                      !isLeft ? "md:text-left md:pl-4" : "md:pl-4"
                     } max-w-3xl mx-auto md:mx-0 ${
                       isLeft ? "hidden md:block" : ""
                     }`} // Ẩn cột này trên mobile nếu là left

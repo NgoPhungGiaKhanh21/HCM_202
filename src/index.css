@@ -575,5 +575,31 @@ html {
   border-radius: 10px;
   z-index: -1;
 }
+/* Mặc định (Light Mode) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
+/* --- Xử lý cho Dark Mode --- */
+/* Khi class 'dark' xuất hiện ở thẻ html/body, đổi màu scrollbar sáng lên */
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e293b; /* slate-800: trùng màu nền sidebar để track chìm đi */
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569; /* slate-600: màu xám sáng hơn nền */
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* slate-400: khi hover thì sáng rực lên */
+}
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { MessageCircle, Send, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react"; // ⬅️ Đảm bảo có useRef và useEffect
 
 const intents = [
   // Giai đoạn 1975-1981
@@ -20,7 +20,7 @@ const intents = [
       "cộng hòa xã hội chủ nghĩa việt nam",
     ],
     response:
-      "Hoàn thành thống nhất đất nước (1975-1976):\n• Hội nghị lần thứ 24 Ban Chấp hành TW Đảng khóa III (8/1975): Chủ trương hoàn thành thống nhất nước nhà, đưa cả nước tiến nhanh, tiến mạnh, tiến vững chắc lên CNXH\n• 25/4/1976: Tổng tuyển cử với 98,77% cử tri đi bầu\n• 24/6-3/7/1976: Kỳ họp thứ nhất Quốc hội quyết định:\n  - Đặt tên nước: Cộng hòa Xã hội chủ nghĩa Việt Nam\n  - Thủ đô: Hà Nội\n  - Đổi tên Sài Gòn thành TP Hồ Chí Minh",
+      "Hoàn thành thống nhất đất nước (1975-1976):\n• Hội nghị lần thứ 24 Ban Chấp hành TW Đảng khóa III (8/1975): Chủ trương hoàn thành thống nhất nước nhà, đưa cả nước tiến nhanh, tiến mạnh, tiến vững chắc lên CNXH\n• 25/4/1976: Tổng tuyển cử với 98,77% cử tri đi bầu\n• 24/6-3/7/1976: Kỳ họp thứ nhất Quốc hội quyết định:\n  - Đặt tên nước: Cộng hòa Xã hội chủ nghĩa Việt Nam\n  - Thủ đô: Hà Nội\n  - Đổi tên Sài Gòn thành TP Hồ Chí Minh",
   },
 
   // Đại hội IV
@@ -41,7 +41,7 @@ const intents = [
   {
     patterns: ["khoán 100", "chỉ thị 100", "khoán sản phẩm", "1981"],
     response:
-      "Chỉ thị số 100-CT/TW (1/1981) - 'Khoán 100':\n• Nội dung: Khoán sản phẩm đến nhóm và người lao động trong hợp tác xã nông nghiệp\n• Kết quả:\n  - Sản lượng lương thực tăng từ 13,4 triệu tấn/năm (1976-1980) lên 17 triệu tấn/năm (1981-1985)\n  - Nông dân ủng hộ nhiệt liệt\n  - Là bước đột phá đầu tiên trong cải cách kinh tế",
+      "Chỉ thị số 100-CT/TW (1/1981) - 'Khoán 100':\n• Nội dung: Khoán sản phẩm đến nhóm và người lao động trong hợp tác xã nông nghiệp\n• Kết quả:\n  - Sản lượng lương thực tăng từ 13,4 triệu tấn/năm (1976-1980) lên 17 triệu tấn/năm (1981-1985)\n  - Nông dân ủng hộ nhiệt liệt\n  - Là bước đột phá đầu tiên trong cải cách kinh tế",
   },
 
   // Quyết định 25
@@ -60,7 +60,7 @@ const intents = [
   {
     patterns: ["khó khăn kinh tế", "khủng hoảng", "1979", "lạm phát"],
     response:
-      "Khó khăn kinh tế giai đoạn 1976-1979:\n• Nguyên nhân:\n  - Chủ trương nóng vội, chủ quan duy ý chí\n  - Ưu tiên phát triển công nghiệp nặng vượt khả năng\n  - Đặt chỉ tiêu không thực tế\n• Hậu quả:\n  - Lưu thông, phân phối rối ren\n  - Giá cả tăng vọt\n  - Nhập khẩu gấp 4-5 lần xuất khẩu\n  - Đời sống nhân dân khó khăn",
+      "Khó khăn kinh tế giai đoạn 1976-1979:\n• Nguyên nhân:\n  - Chủ trương nóng vội, chủ quan duy ý chí\n  - Ưu tiên phát triển công nghiệp nặng vượt khả năng\n  - Đặt chỉ tiêu không thực tế\n• Hậu quả:\n  - Lưu thông, phân phối rối ren\n  - Giá cả tăng vọt\n  - Nhập khẩu gấp 4-5 lần xuất khẩu\n  - Đời sống nhân dân khó khăn",
   },
 
   // Hội nghị Trung ương 6
@@ -269,6 +269,26 @@ export default function ChatBoxAI() {
   ]);
   const [input, setInput] = useState("");
 
+  // 1. Dùng Ref cho tin nhắn cuối cùng (Tin nhắn bot mới nhất)
+  const lastMessageRef = useRef(null);
+
+  // 2. Hàm cuộn tới đầu tin nhắn cuối cùng
+  const scrollToLastMessage = () => {
+    // Cuộn đến đầu phần tử ('block: "start"') để hiển thị nội dung ngay từ đầu
+    lastMessageRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  // 3. Kích hoạt cuộn khi messages thay đổi
+  useEffect(() => {
+    if (messages.length > 1) {
+      // Chỉ cuộn sau tin nhắn chào mừng ban đầu
+      scrollToLastMessage();
+    }
+  }, [messages]);
+
   const handleSend = () => {
     if (!input.trim()) return;
     const userMsg = { sender: "user", text: input };
@@ -280,6 +300,7 @@ export default function ChatBoxAI() {
     };
     setMessages((prev) => [...prev, userMsg, botMsg]);
     setInput("");
+    // Việc cuộn sẽ được xử lý tự động bởi useEffect
   };
 
   const handleKeywordClick = (keyword) => {
@@ -291,6 +312,7 @@ export default function ChatBoxAI() {
       keywords: response.keywords,
     };
     setMessages((prev) => [...prev, userMsg, botMsg]);
+    // Việc cuộn sẽ được xử lý tự động bởi useEffect
   };
 
   return (
@@ -320,39 +342,49 @@ export default function ChatBoxAI() {
             </div>
 
             <div className="max-h-64 overflow-y-auto bg-gray-50 p-4 space-y-3">
-              {messages.map((msg, idx) => (
-                <div key={idx}>
+              {messages.map((msg, idx) => {
+                // 4. Chỉ gán ref cho div bọc tin nhắn cuối cùng
+                const isLastMessage = idx === messages.length - 1;
+
+                return (
                   <div
-                    className={`flex ${
-                      msg.sender === "user" ? "justify-end" : "justify-start"
-                    }`}
+                    key={idx}
+                    // Gán ref vào div bọc ngoài của tin nhắn cuối cùng
+                    ref={isLastMessage ? lastMessageRef : null}
                   >
                     <div
-                      className={`max-w-xs px-4 py-2 rounded-lg text-sm leading-relaxed ${
-                        msg.sender === "user"
-                          ? "bg-red-600 text-white rounded-br-none"
-                          : "bg-white text-gray-800 border border-gray-200 rounded-bl-none"
+                      className={`flex ${
+                        msg.sender === "user" ? "justify-end" : "justify-start"
                       }`}
                     >
-                      {msg.text}
+                      <div
+                        className={`max-w-xs px-4 py-2 rounded-lg text-sm leading-relaxed ${
+                          msg.sender === "user"
+                            ? "bg-red-600 text-white rounded-br-none"
+                            : "bg-white text-gray-800 border border-gray-200 rounded-bl-none"
+                        }`}
+                      >
+                        {msg.text}
+                      </div>
                     </div>
-                  </div>
 
-                  {msg.keywords && (
-                    <div className="mt-2 flex flex-wrap gap-2 justify-start">
-                      {msg.keywords.map((keyword, keyIdx) => (
-                        <button
-                          key={keyIdx}
-                          onClick={() => handleKeywordClick(keyword)}
-                          className="bg-red-100 hover:bg-red-200 text-red-800 text-xs px-3 py-1 rounded-full border border-red-200 transition-colors duration-200"
-                        >
-                          {keyword}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+                    {msg.keywords && (
+                      <div className="mt-2 flex flex-wrap gap-2 justify-start">
+                        {msg.keywords.map((keyword, keyIdx) => (
+                          <button
+                            key={keyIdx}
+                            onClick={() => handleKeywordClick(keyword)}
+                            className="bg-red-100 hover:bg-red-200 text-red-800 text-xs px-3 py-1 rounded-full border border-red-200 transition-colors duration-200"
+                          >
+                            {keyword}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              {/* KHÔNG CẦN THẺ NEO RỖNG NỮA */}
             </div>
 
             <div className="border-t border-gray-200 p-4 bg-white flex gap-2">

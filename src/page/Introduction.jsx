@@ -1,6 +1,9 @@
 import React from "react";
-import Header from "../components/Header"; // Giả sử Header có thiết kế hiện đại
-
+import Header from "../components/Header";
+import intro1 from "../../public/timeline_img/intro1.png";
+import intro2 from "../../public/timeline_img/intro2.png";
+import intro3 from "../../public/timeline_img/intro3.png";
+import intro4 from "../../public/timeline_img/intro4.png";
 // Cập nhật cấu trúc accent: sử dụng màu sắc hiện đại hơn
 const sections = [
   {
@@ -16,8 +19,7 @@ const sections = [
       "Khó khăn: hậu quả chiến tranh, kinh tế kiệt quệ, bối cảnh quốc tế phức tạp",
     ],
     // Dùng query gợi ý hình ảnh có giá trị thông tin
-    image:
-      "url(/placeholder.svg?height=320&width=640&query=Vietnam%201975%20map)",
+    image: `url(${intro1})`,
   },
   {
     id: "unification",
@@ -54,8 +56,7 @@ const sections = [
         ],
       },
     ],
-    image:
-      "url(/placeholder.svg?height=320&width=640&query=Vietnam%20reunification%20election)",
+    image: `url(${intro2})`,
   },
   {
     id: "congress4",
@@ -98,8 +99,7 @@ const sections = [
       "Chỉ thị 100-CT/TW (1/1981): khoán sản phẩm nông nghiệp (Khoán 100), sản lượng lương thực tăng",
       "Quyết định 25-CP (1/1981): mở rộng quyền tự chủ SXKD, tài chính cho xí nghiệp quốc doanh",
     ],
-    image:
-      "url(/placeholder.svg?height=320&width=640&query=Vietnam%20agriculture%20innovation%201980)",
+    image: `url(${intro3})`,
   },
   {
     id: "defense",
@@ -136,8 +136,7 @@ const sections = [
         ],
       },
     ],
-    image:
-      "url(/placeholder.svg?height=320&width=640&query=Vietnam%20border%20defense%201979)",
+    image: `url(${intro4})`,
   },
 ];
 
@@ -237,18 +236,18 @@ export default function Introduction() {
                 </div>
 
                 <div className="p-8 md:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                  <div className="space-y-6">
+                  <div className="space-y-6 w-full">
                     {s.description && (
-                      <blockquote className="border-l-4 border-red-500 pl-4 text-base md:text-lg italic text-stone-700 leading-relaxed bg-red-50/50 p-3 rounded-md">
+                      <blockquote className="w-full border-l-4 border-red-500 pl-4 text-base md:text-lg italic text-stone-700 leading-relaxed bg-red-50/50 p-3 rounded-md">
                         {s.description}
                       </blockquote>
                     )}
                     {/* List Points - Dùng icon (dấu check) để sinh động hơn */}
-                    <ul className="space-y-3 pt-2">
+                    <ul className="w-full space-y-3 pt-2">
                       {s.points.map((pt, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-3 text-base leading-relaxed text-stone-800"
+                          className="flex items-start gap-3 text-base leading-relaxed text-stone-800 w-full"
                         >
                           {/* Icon mô phỏng dấu check hoặc ngôi sao */}
                           <svg
@@ -259,30 +258,41 @@ export default function Introduction() {
                           >
                             <path d="M10 12.58l-1.94 1.94-2.83-2.83-1.41 1.41L10 15.4l5.18-5.18-1.41-1.41-2.83 2.83zM10 2a8 8 0 100 16 8 8 0 000-16z" />
                           </svg>
-                          <span className="font-medium">{pt}</span>
+                          <span className="font-medium flex-1">{pt}</span>
                         </li>
                       ))}
                     </ul>
+                    {/* Tìm đến đoạn s.bulletGroups && (...) và thay thế toàn bộ bằng đoạn này: */}
+
                     {s.bulletGroups && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                      // 1. Container: Sử dụng flex-col để xếp chồng lên nhau, w-full để full bề ngang
+                      <div className="flex flex-col gap-5 pt-4 w-full">
                         {s.bulletGroups.map((group, i) => (
                           <div
                             key={i}
-                            // Tăng sự tương phản: dùng bg-stone-50/70, border đậm hơn
-                            className="rounded-xl border border-stone-200 bg-stone-50/70 p-5 shadow-inner"
+                            className="w-full rounded-xl border border-stone-200 bg-stone-50/70 p-5 shadow-inner hover:bg-white hover:shadow-md transition-all duration-200"
                           >
-                            <p className="text-sm font-bold text-red-600 mb-3 uppercase tracking-wide">
-                              {group.title}
-                            </p>
-                            <ul className="space-y-2 text-sm text-stone-700">
+                            {/* Tiêu đề Card */}
+                            <div className="border-b border-red-100 pb-2 mb-3">
+                              <p className="text-sm font-bold text-red-600 uppercase tracking-wide">
+                                {group.title}
+                              </p>
+                            </div>
+
+                            {/* Nội dung List */}
+                            <ul className="space-y-3 text-sm text-stone-700">
                               {group.items.map((it, idx2) => (
                                 <li
                                   key={idx2}
-                                  className="flex gap-2 items-start"
+                                  className="flex gap-3 items-start"
                                 >
-                                  {/* Dùng màu sắc nổi bật hơn cho bullet */}
-                                  <span className="text-red-500 mt-0.5">•</span>
-                                  <span>{it}</span>
+                                  {/* Bullet point chỉnh lại cho đẹp */}
+                                  <span className="text-red-500 font-bold text-lg leading-none mt-[-1px] select-none">
+                                    •
+                                  </span>
+                                  <span className="leading-relaxed text-stone-800">
+                                    {it}
+                                  </span>
                                 </li>
                               ))}
                             </ul>
@@ -290,31 +300,16 @@ export default function Introduction() {
                         ))}
                       </div>
                     )}
-                    {s.subPoints && (
-                      <div className="mt-4 rounded-xl border-l-4 border-blue-500 bg-blue-50/70 p-5 shadow-sm space-y-2">
-                        <p className="text-sm font-bold text-blue-700 mb-2">
-                          Điều chỉnh & đột phá (1979-1981)
-                        </p>
-                        <ul className="space-y-2 text-sm text-stone-800">
-                          {s.subPoints.map((sp, i) => (
-                            <li key={i} className="flex gap-2 items-start">
-                              <span className="text-blue-600 mt-0.5">•</span>
-                              <span>{sp}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
                   </div>
 
                   {/* Image Card - Thiết kế hiện đại hơn */}
-                  <div className="relative rounded-2xl overflow-hidden border border-stone-200 shadow-xl self-start sticky top-28">
+                  <div className="rounded-2xl overflow-hidden border border-stone-200 shadow-xl self-start sticky top-28">
                     <div
                       className="h-56 md:h-72 lg:h-full min-h-[300px] bg-cover bg-center"
                       style={{ backgroundImage: s.image }}
                     />
                     {/* Caption/Chú thích ảnh */}
-                    <div className="p-5 bg-gradient-to-br from-stone-50 to-red-50/50 text-sm text-stone-700">
+                    {/* <div className="p-5 bg-gradient-to-br from-stone-50 to-red-50/50 text-sm text-stone-700">
                       <p className="font-semibold text-stone-900">
                         Minh họa: {s.title}
                       </p>
@@ -322,7 +317,7 @@ export default function Introduction() {
                         (Bạn có thể thay bằng ảnh tư liệu lịch sử thực tế để
                         tăng tính trực quan và giá trị thông tin.)
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </section>

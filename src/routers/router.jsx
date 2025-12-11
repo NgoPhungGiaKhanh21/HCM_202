@@ -8,6 +8,9 @@ import BookSection from "../components/Book/BookSection";
 import TimeLine from "../page/Timeline";
 import TakeQuiz from "../page/TakeQuiz";
 import Introduction from "../page/Introduction";
+import QAPage from "../page/Q&A";
+import ThankYouPage from "../page/ThankYou";
+import AIAppendix from "../page/AI_Comment";
 
 const router = createBrowserRouter([
   {
@@ -16,12 +19,14 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <Home /> },
       { path: "game", element: <Game /> },
-      { path: "podcast", element: <Podcast /> },
       { path: "notebook", element: <Notebook /> },
       { path: "book", element: <BookSection /> },
       { path: "timeline", element: <TimeLine /> },
       { path: "quiz", element: <TakeQuiz /> },
       { path: "introduction", element: <Introduction /> },
+      { path: "qa", element: <QAPage /> },
+      { path: "thank-you", element: <ThankYouPage /> },
+      { path: "phu-luc-ai", element: <AIAppendix /> },
     ],
   },
 ]);
