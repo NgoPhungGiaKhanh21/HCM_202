@@ -157,17 +157,24 @@ export default function Home() {
       <div className="sticky top-0 z-50">
         <Header />
       </div>
-      <section
-        className="relative w-full min-h-[700px] md:min-h-[800px] flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage:
-            "url(/placeholder.svg?height=800&width=1600&query=Vietnam%20history%20dark%20red%20revolutionary)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <section className="relative w-full min-h-[700px] md:min-h-[800px] flex items-center justify-center overflow-hidden">
+        {/* 1. The Video Element */}
+        <video
+          // The path to your video file, accessible via the /audio folder
+          src="/audio/VN2.mp4"
+          // Auto-plays the video as soon as the page loads
+          autoPlay
+          // Loops the video continuously
+          loop
+          // Mutes the audio (required for most browsers to allow autoPlay)
+          muted
+          // Prevents the video from showing controls
+          playsInline
+          // CSS class to ensure it covers the background
+          className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        />
         {/* Dark red overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-red-900/80 via-red-800/75 to-red-900/80" />
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-red-900/80 via-red-800/75 to-red-900/80" /> */}
 
         {/* Content container */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
@@ -186,13 +193,13 @@ export default function Home() {
               Bảo vệ Tổ quốc
             </h2>
 
-            <p className="text-lg md:text-xl text-gray-100 mb-6 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-white mb-6 max-w-3xl mx-auto leading-relaxed">
               Giai đoạn quá độ lên CNXH: hoàn thành thống nhất nhà nước, triển
               khai đường lối Đại hội IV và kiên quyết bảo vệ biên giới trong bối
               cảnh hậu chiến nhiều khó khăn.
             </p>
 
-            <p className="text-base md:text-lg text-yellow-200/90 mb-12 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-white mb-12 max-w-2xl mx-auto">
               Tinh thần: đoàn kết, xây dựng, đổi mới tư duy kinh tế và giữ vững
               chủ quyền lãnh thổ.
             </p>

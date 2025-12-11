@@ -8,6 +8,8 @@ import BookSection from "../components/Book/BookSection";
 import TimeLine from "../page/Timeline";
 import TakeQuiz from "../page/TakeQuiz";
 import Introduction from "../page/Introduction";
+import QAPage from "../page/Q&A";
+import ThankYouPage from "../page/ThankYou";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,8 @@ const router = createBrowserRouter([
       { path: "timeline", element: <TimeLine /> },
       { path: "quiz", element: <TakeQuiz /> },
       { path: "introduction", element: <Introduction /> },
+      { path: "qa", element: <QAPage /> },
+      { path: "thank-you", element: <ThankYouPage /> },
     ],
   },
 ]);
