@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react"; // Nhớ import useRef và useEffect
 import Header from "../components/Header";
-
-import { useState } from "react";
 import Carousel from "./Carousel";
 import poster1 from "../../image/carousel1.png";
 import poster2 from "../../image/carousel1.png";
@@ -19,6 +17,59 @@ import {
   StarIcon,
 } from "@heroicons/react/24/solid";
 import ChatBoxAI from "../components/ChatBoxAI";
+
+// --- COMPONENT HIỆU ỨNG (RevealOnScroll) ---
+// Component này giúp phần tử con trượt lên và hiện ra khi cuộn tới
+const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Khi phần tử xuất hiện trong màn hình (dù chỉ 10%)
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target); // Chỉ chạy 1 lần rồi thôi
+        }
+      },
+      {
+        threshold: 0.1, // Ngưỡng xuất hiện 10%
+        rootMargin: "0px 0px -50px 0px", // Offset một chút để hiệu ứng tự nhiên hơn
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      // Tailwind classes cho hiệu ứng:
+      // duration-1000: Thời gian chạy 1s
+      // ease-out: Chậm dần về cuối (mượt mà)
+      // translate-y-20: Vị trí ban đầu thấp hơn 20 đơn vị
+      // opacity-0: Ban đầu ẩn
+      className={`transition-all duration-1000 ease-out transform ${
+        isVisible
+          ? "opacity-100 translate-y-0 scale-100"
+          : "opacity-0 translate-y-20 scale-95"
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }} // Độ trễ cho hiệu ứng domino
+    >
+      {children}
+    </div>
+  );
+};
+// ---------------------------------------------
 
 const timelineEvents = [
   {
@@ -158,81 +209,84 @@ export default function Home() {
         <Header />
       </div>
       <section className="relative w-full min-h-[700px] md:min-h-[800px] flex items-center justify-center overflow-hidden">
-        {/* 1. The Video Element */}
         <video
-          // The path to your video file, accessible via the /audio folder
           src="/audio/VN2.mp4"
-          // Auto-plays the video as soon as the page loads
           autoPlay
-          // Loops the video continuously
           loop
-          // Mutes the audio (required for most browsers to allow autoPlay)
           muted
-          // Prevents the video from showing controls
           playsInline
-          // CSS class to ensure it covers the background
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
         />
-        {/* Dark red overlay */}
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-red-900/80 via-red-800/75 to-red-900/80" /> */}
 
-        {/* Content container */}
+        {/* Content container - Áp dụng hiệu ứng cho text trong Hero */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
           <div className="text-center mb-16">
-            <div className="inline-block mb-8 animate-pulse">
-              <span className="px-6 py-3 border-2 border-yellow-500 text-yellow-400 rounded-full text-base font-bold tracking-wider">
-                1975 - 1981
-              </span>
-            </div>
+            <RevealOnScroll>
+              <div className="inline-block mb-8 animate-pulse">
+                <span className="px-6 py-3 border-2 border-yellow-500 text-yellow-400 rounded-full text-base font-bold tracking-wider">
+                  1975 - 1981
+                </span>
+              </div>
+            </RevealOnScroll>
 
-            <h1 className="text-6xl md:text-7xl font-black text-white mb-6 leading-tight">
-              Xây dựng Chủ nghĩa Xã hội
-            </h1>
+            <RevealOnScroll delay={200}>
+              <h1 className="text-6xl md:text-7xl font-black text-white mb-6 leading-tight drop-shadow-lg">
+                Xây dựng Chủ nghĩa Xã hội
+              </h1>
+            </RevealOnScroll>
 
-            <h2 className="text-5xl md:text-6xl font-black text-yellow-400 mb-8 leading-tight">
-              Bảo vệ Tổ quốc
-            </h2>
+            <RevealOnScroll delay={400}>
+              <h2 className="text-5xl md:text-6xl font-black text-yellow-400 mb-8 leading-tight drop-shadow-lg">
+                Bảo vệ Tổ quốc
+              </h2>
+            </RevealOnScroll>
 
-            <p className="text-lg md:text-xl text-white mb-6 max-w-3xl mx-auto leading-relaxed">
-              Giai đoạn quá độ lên CNXH: hoàn thành thống nhất nhà nước, triển
-              khai đường lối Đại hội IV và kiên quyết bảo vệ biên giới trong bối
-              cảnh hậu chiến nhiều khó khăn.
-            </p>
-
-            <p className="text-base md:text-lg text-white mb-12 max-w-2xl mx-auto">
-              Tinh thần: đoàn kết, xây dựng, đổi mới tư duy kinh tế và giữ vững
-              chủ quyền lãnh thổ.
-            </p>
+            <RevealOnScroll delay={600}>
+              <p className="text-lg md:text-xl text-white mb-6 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+                Giai đoạn quá độ lên CNXH: hoàn thành thống nhất nhà nước, triển
+                khai đường lối Đại hội IV và kiên quyết bảo vệ biên giới trong
+                bối cảnh hậu chiến nhiều khó khăn.
+              </p>
+              <p className="text-base md:text-lg text-white mb-12 max-w-2xl mx-auto drop-shadow-md">
+                Tinh thần: đoàn kết, xây dựng, đổi mới tư duy kinh tế và giữ
+                vững chủ quyền lãnh thổ.
+              </p>
+            </RevealOnScroll>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
             {timelineEvents.map((event, index) => {
               const Icon = event.icon;
               return (
-                <button
-                  key={index}
-                  onClick={() => setActiveTimeline(index)}
-                  className={`p-6 rounded-lg border-2 transition-all duration-300 cursor-pointer transform hover:scale-105 ${
-                    activeTimeline === index
-                      ? "border-yellow-500 bg-red-700/60 text-white shadow-2xl"
-                      : "border-red-700/50 bg-red-900/50 text-gray-100 hover:border-yellow-400/50"
-                  }`}
-                >
-                  <div className="flex justify-center mb-4">
-                    <Icon
-                      className={`h-8 w-8 ${
-                        activeTimeline === index
-                          ? "text-yellow-400"
-                          : "text-yellow-300"
-                      }`}
-                    />
-                  </div>
-                  <div className="text-2xl font-black mb-2">{event.year}</div>
-                  <div className="font-bold text-sm mb-2">{event.title}</div>
-                  <div className="text-xs opacity-80 leading-relaxed">
-                    {event.description}
-                  </div>
-                </button>
+                <RevealOnScroll key={index} delay={index * 150}>
+                  <button
+                    onClick={() => setActiveTimeline(index)}
+                    className={`w-full text-left p-6 rounded-lg border-2 transition-all duration-300 cursor-pointer transform hover:scale-105 h-full ${
+                      activeTimeline === index
+                        ? "border-yellow-500 bg-red-700/80 text-white shadow-2xl backdrop-blur-sm"
+                        : "border-red-700/50 bg-red-900/60 text-gray-100 hover:border-yellow-400/50 backdrop-blur-sm"
+                    }`}
+                  >
+                    <div className="flex justify-center mb-4">
+                      <Icon
+                        className={`h-8 w-8 ${
+                          activeTimeline === index
+                            ? "text-yellow-400"
+                            : "text-yellow-300"
+                        }`}
+                      />
+                    </div>
+                    <div className="text-2xl font-black mb-2 text-center">
+                      {event.year}
+                    </div>
+                    <div className="font-bold text-sm mb-2 text-center">
+                      {event.title}
+                    </div>
+                    <div className="text-xs opacity-80 leading-relaxed text-center">
+                      {event.description}
+                    </div>
+                  </button>
+                </RevealOnScroll>
               );
             })}
           </div>
@@ -243,147 +297,163 @@ export default function Home() {
 
       {/* Main Content Section */}
       <section className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-        <div className="bg-white rounded-2xl shadow-2xl border-2 border-slate-200 p-8 md:p-12 mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
-            Các Cột Mốc Lịch Sử Chi Tiết
-          </h2>
+        {/* Timeline Details */}
+        <RevealOnScroll>
+          <div className="bg-white rounded-2xl shadow-2xl border-2 border-slate-200 p-8 md:p-12 mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+              Các Cột Mốc Lịch Sử Chi Tiết
+            </h2>
 
-          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8 border-l-4 border-red-600">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="text-4xl font-black text-red-600">
-                {timelineEvents[activeTimeline].year}
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                  {timelineEvents[activeTimeline].title}
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                  {timelineEvents[activeTimeline].description}
-                </p>
-              </div>
-            </div>
-
-            {/* Detailed timeline events */}
-            <div className="border-t-2 border-slate-200 pt-6 mt-6">
-              <h4 className="text-lg font-bold text-slate-900 mb-4">
-                Sự kiện chính trong giai đoạn:
-              </h4>
-              <ul className="space-y-3">
-                {timelineEvents[activeTimeline].details.map((detail, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start gap-3 text-slate-700"
-                  >
-                    <span className="text-red-600 font-bold mt-1">•</span>
-                    <span className="leading-relaxed">{detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Key Highlights Section */}
-        <div className="bg-white rounded-2xl shadow-2xl border-2 border-amber-200 p-8 md:p-12 mb-16">
-          <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
-            <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
-              Ý chính giai đoạn 1975 - 1981
-            </h3>
-            <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-sm font-semibold">
-              Quá độ lên CNXH & bảo vệ Tổ quốc
-            </span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {keyHighlights.map((item, idx) => (
-              <div
-                key={idx}
-                className="rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50 to-white p-6 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-black">
-                    {idx + 1}
-                  </div>
-                  <h4 className="text-lg font-bold text-slate-900">
-                    {item.title}
-                  </h4>
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8 border-l-4 border-red-600 transition-all duration-500">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="text-4xl font-black text-red-600">
+                  {timelineEvents[activeTimeline].year}
                 </div>
-                <ul className="space-y-2 text-sm text-slate-700">
-                  {item.points.map((point, pIdx) => (
-                    <li key={pIdx} className="flex items-start gap-2">
-                      <span className="text-amber-600 mt-0.5">•</span>
-                      <span className="leading-relaxed">{point}</span>
-                    </li>
-                  ))}
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    {timelineEvents[activeTimeline].title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    {timelineEvents[activeTimeline].description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="border-t-2 border-slate-200 pt-6 mt-6">
+                <h4 className="text-lg font-bold text-slate-900 mb-4">
+                  Sự kiện chính trong giai đoạn:
+                </h4>
+                <ul className="space-y-3">
+                  {timelineEvents[activeTimeline].details.map(
+                    (detail, index) => (
+                      <li
+                        key={index}
+                        className="flex items-start gap-3 text-slate-700 animate-fadeIn"
+                        style={{ animationDelay: `${index * 100}ms` }}
+                      >
+                        <span className="text-red-600 font-bold mt-1">•</span>
+                        <span className="leading-relaxed">{detail}</span>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
+        </RevealOnScroll>
+
+        {/* Key Highlights Section */}
+        <RevealOnScroll>
+          <div className="bg-white rounded-2xl shadow-2xl border-2 border-amber-200 p-8 md:p-12 mb-16">
+            <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+                Ý chính giai đoạn 1975 - 1981
+              </h3>
+              <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-sm font-semibold">
+                Quá độ lên CNXH & bảo vệ Tổ quốc
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {keyHighlights.map((item, idx) => (
+                <RevealOnScroll key={idx} delay={idx * 150} className="h-full">
+                  <div className="rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50 to-white p-6 shadow-sm hover:shadow-md transition-all h-full hover:-translate-y-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-black shrink-0">
+                        {idx + 1}
+                      </div>
+                      <h4 className="text-lg font-bold text-slate-900">
+                        {item.title}
+                      </h4>
+                    </div>
+                    <ul className="space-y-2 text-sm text-slate-700">
+                      {item.points.map((point, pIdx) => (
+                        <li key={pIdx} className="flex items-start gap-2">
+                          <span className="text-amber-600 mt-0.5">•</span>
+                          <span className="leading-relaxed">{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </RevealOnScroll>
+              ))}
+            </div>
+          </div>
+        </RevealOnScroll>
 
         {/* Carousel Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
-            Hình Ảnh Lịch Sử
-          </h2>
-          <div className="rounded-2xl overflow-hidden shadow-2xl">
-            <Carousel
-              autoplay
-              autoplaySpeed={5000}
-              dotPosition="bottom"
-              effect="fade"
-            >
-              {[poster1, poster2, poster3, poster4].map((img, index) => (
-                <div key={index} className="relative group bg-black">
-                  <img
-                    src={
-                      img ||
-                      "/placeholder.svg?height=600&width=1200&query=Vietnam%20history"
-                    }
-                    alt={`Poster ${index + 1}`}
-                    className="w-full h-96 md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                    <div className="text-2xl font-bold mb-2">
-                      Năm {1975 + index}
+        <RevealOnScroll>
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+              Hình Ảnh Lịch Sử
+            </h2>
+            <div className="rounded-2xl overflow-hidden shadow-2xl ring-4 ring-slate-100">
+              <Carousel
+                autoplay
+                autoplaySpeed={5000}
+                dotPosition="bottom"
+                effect="fade"
+              >
+                {[poster1, poster2, poster3, poster4].map((img, index) => (
+                  <div key={index} className="relative group bg-black">
+                    <img
+                      src={
+                        img ||
+                        "/placeholder.svg?height=600&width=1200&query=Vietnam%20history"
+                      }
+                      alt={`Poster ${index + 1}`}
+                      className="w-full h-96 md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-1000"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                      <div className="text-2xl font-bold mb-2">
+                        Năm {1975 + index}
+                      </div>
+                      <p className="text-sm opacity-90">
+                        Giai đoạn xây dựng chủ nghĩa xã hội
+                      </p>
                     </div>
-                    <p className="text-sm opacity-90">
-                      Giai đoạn xây dựng chủ nghĩa xã hội
-                    </p>
                   </div>
-                </div>
-              ))}
-            </Carousel>
+                ))}
+              </Carousel>
+            </div>
           </div>
-        </div>
+        </RevealOnScroll>
 
-        {/* Content Sections Grid */}
+        {/* Content Sections Grid - Staggered Effect */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">
-            Các Lĩnh Vực Phát Triển
-          </h2>
+          <RevealOnScroll>
+            <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">
+              Các Lĩnh Vực Phát Triển
+            </h2>
+          </RevealOnScroll>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contentSections.map((section, index) => {
               const Icon = section.icon;
               return (
-                <div
+                <RevealOnScroll
                   key={index}
-                  className={`${section.color} rounded-xl p-8 border-2 ${section.borderColor} hover:shadow-lg transition-all duration-300 group cursor-pointer`}
+                  delay={index * 150}
+                  className="h-full"
                 >
-                  <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                    <Icon className={`h-12 w-12 ${section.accentColor}`} />
+                  <div
+                    className={`${section.color} rounded-xl p-8 border-2 ${section.borderColor} hover:shadow-xl transition-all duration-300 group cursor-pointer h-full hover:-translate-y-2`}
+                  >
+                    <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                      <Icon className={`h-12 w-12 ${section.accentColor}`} />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">
+                      {section.title}
+                    </h3>
+                    <p className="text-slate-700 text-sm leading-relaxed">
+                      {section.description}
+                    </p>
+                    <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-slate-600 group-hover:text-slate-900 transition-colors">
+                      Tìm hiểu thêm
+                      <ArrowRightIcon className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">
-                    {section.title}
-                  </h3>
-                  <p className="text-slate-700 text-sm leading-relaxed">
-                    {section.description}
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-slate-600 group-hover:text-slate-900 transition-colors">
-                    Tìm hiểu thêm
-                    <ArrowRightIcon className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
+                </RevealOnScroll>
               );
             })}
           </div>
@@ -391,67 +461,64 @@ export default function Home() {
 
         {/* Key Achievements Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl p-8 md:p-12 text-white shadow-xl">
-            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
-              <BuildingLibraryIcon className="h-8 w-8" />
-              Xây Dựng Kinh Tế
-            </h3>
-            <ul className="space-y-4 text-base">
-              <li className="flex items-start gap-3">
-                <span className="text-2xl mt-0">✓</span>
-                <span>Công nghiệp hóa bước đầu toàn quốc</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-2xl mt-0">✓</span>
-                <span>Nông nghiệp hóa theo hình thức xã hội chủ nghĩa</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-2xl mt-0">✓</span>
-                <span>Phát triển cơ sở hạ tầng và giao thông</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-2xl mt-0">✓</span>
-                <span>Cải tạo xã hội chủ nghĩa ở miền Nam</span>
-              </li>
-            </ul>
-          </div>
+          <RevealOnScroll className="h-full">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl p-8 md:p-12 text-white shadow-xl h-full hover:shadow-2xl transition-shadow">
+              <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <BuildingLibraryIcon className="h-8 w-8" />
+                Xây Dựng Kinh Tế
+              </h3>
+              <ul className="space-y-4 text-base">
+                {[
+                  "Công nghiệp hóa bước đầu toàn quốc",
+                  "Nông nghiệp hóa theo hình thức xã hội chủ nghĩa",
+                  "Phát triển cơ sở hạ tầng và giao thông",
+                  "Cải tạo xã hội chủ nghĩa ở miền Nam",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="text-2xl mt-0">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </RevealOnScroll>
 
-          <div className="bg-gradient-to-br from-red-600 to-red-500 rounded-2xl p-8 md:p-12 text-white shadow-xl">
-            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
-              <ShieldCheckIcon className="h-8 w-8" />
-              Bảo Vệ Tổ Quốc
-            </h3>
-            <ul className="space-y-4 text-base">
-              <li className="flex items-start gap-3">
-                <span className="text-2xl mt-0">✓</span>
-                <span>Chiến tranh biên giới Tây Nam 1977-1979</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-2xl mt-0">✓</span>
-                <span>Chiến tranh biên giới phía Bắc 1979</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-2xl mt-0">✓</span>
-                <span>Bảo vệ chủ quyền lãnh thổ quốc gia</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-2xl mt-0">✓</span>
-                <span>Tăng cường lực lượng vũ trang nhân dân</span>
-              </li>
-            </ul>
-          </div>
+          <RevealOnScroll className="h-full" delay={200}>
+            <div className="bg-gradient-to-br from-red-600 to-red-500 rounded-2xl p-8 md:p-12 text-white shadow-xl h-full hover:shadow-2xl transition-shadow">
+              <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <ShieldCheckIcon className="h-8 w-8" />
+                Bảo Vệ Tổ Quốc
+              </h3>
+              <ul className="space-y-4 text-base">
+                {[
+                  "Chiến tranh biên giới Tây Nam 1977-1979",
+                  "Chiến tranh biên giới phía Bắc 1979",
+                  "Bảo vệ chủ quyền lãnh thổ quốc gia",
+                  "Tăng cường lực lượng vũ trang nhân dân",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="text-2xl mt-0">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </RevealOnScroll>
         </div>
 
         {/* Quote Section */}
-        <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white shadow-2xl border-l-4 border-amber-500">
-          <p className="text-2xl md:text-3xl font-bold mb-6 italic leading-relaxed">
-            "Trong bất kỳ hoàn cảnh nào, chúng ta cũng kiên quyết giữ vững độc
-            lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Tổ quốc"
-          </p>
-          <p className="text-amber-300 font-semibold">
-            — Trích Lịch sử Đảng Cộng sản Việt Nam
-          </p>
-        </div>
+        <RevealOnScroll>
+          <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white shadow-2xl border-l-4 border-amber-500 hover:scale-[1.02] transition-transform duration-500">
+            <p className="text-2xl md:text-3xl font-bold mb-6 italic leading-relaxed">
+              "Trong bất kỳ hoàn cảnh nào, chúng ta cũng kiên quyết giữ vững độc
+              lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Tổ quốc"
+            </p>
+            <p className="text-amber-300 font-semibold">
+              — Trích Lịch sử Đảng Cộng sản Việt Nam
+            </p>
+          </div>
+        </RevealOnScroll>
+
         <ChatBoxAI />
       </section>
     </div>
