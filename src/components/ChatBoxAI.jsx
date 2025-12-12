@@ -317,91 +317,183 @@ export default function ChatBoxAI() {
 
   return (
     <>
+      {/* Thay thế đoạn {!isOpen && (...)} bằng đoạn này */}
+      {/* Thay thế đoạn {!isOpen && (...)} bằng đoạn này */}
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 bg-gradient-to-br from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700 text-white p-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 z-40"
-        >
-          <MessageCircle size={28} />
-        </button>
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
+          {/* 1. Bong bóng thoại chào mời (Nằm trên đầu con bot) */}
+          <div className="mb-2 mr-2 bg-white px-4 py-2 rounded-2xl rounded-br-none shadow-xl border border-red-100 animate-bounce origin-bottom-right">
+            <p className="text-xs text-gray-800 font-bold whitespace-nowrap">
+              Hỏi tớ về 1975-1981 nhé! 👇
+            </p>
+          </div>
+
+          {/* 2. Nút hình con Bot */}
+          <button
+            onClick={() => setIsOpen(true)}
+            className="relative group transition-transform hover:-translate-y-1 duration-300"
+          >
+            {/* Hình ảnh Robot (Bạn thay link ảnh của bạn vào src bên dưới) */}
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+              alt="AI Bot"
+              className="w-20 h-20 drop-shadow-2xl hover:brightness-110 transition-all"
+            />
+
+            {/* Dấu chấm xanh báo Online */}
+            <span className="absolute bottom-2 right-2 flex h-4 w-4">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white"></span>
+            </span>
+
+            {/* Số thông báo giả lập (Màu đỏ) */}
+            <div className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white shadow-sm transform translate-x-1 -translate-y-1">
+              1
+            </div>
+          </button>
+        </div>
       )}
 
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-80 sm:w-96 z-50">
-          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-red-200">
-            <div className="bg-gradient-to-r from-red-600 to-yellow-600 text-white p-4 flex justify-between items-center">
-              <span className="font-semibold text-sm">
-                Chat – Giai đoạn 1975-1981
-              </span>
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
+          {/* Container chính: Tăng Width và Height, bo góc lớn, đổ bóng đậm */}
+          <div className="w-[90vw] sm:w-[420px] h-[600px] max-h-[80vh] bg-gray-50 rounded-3xl shadow-2xl overflow-hidden flex flex-col border border-gray-200 font-sans animate-fade-in-up">
+            {/* --- HEADER: Gradient Đỏ Vàng rực rỡ --- */}
+            <div className="bg-gradient-to-r from-red-700 via-red-600 to-yellow-500 p-5 flex justify-between items-center shadow-md shrink-0 relative overflow-hidden">
+              {/* Họa tiết trang trí (Đã sửa z-0 để nằm dưới) */}
+              <div className="absolute top-0 right-0 -mt-2 -mr-2 w-24 h-24 bg-white opacity-10 rounded-full blur-xl pointer-events-none"></div>
+
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 bg-white rounded-full p-1 shadow-sm flex items-center justify-center">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+                    alt="Bot"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-lg leading-tight">
+                    Sử Việt 1975-1981
+                  </h3>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span className="text-red-100 text-xs font-medium">
+                      Đang trực tuyến
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* NÚT TẮT (Đã sửa: thêm relative z-50 và cursor-pointer) */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-white hover:bg-red-700 p-1 rounded-lg transition-colors"
+                className="relative z-50 text-white/90 hover:text-white hover:bg-white/20 p-2 rounded-full transition-all cursor-pointer"
+                aria-label="Đóng chat"
               >
-                <X size={18} />
+                <X size={24} />
               </button>
             </div>
 
-            <div className="max-h-64 overflow-y-auto bg-gray-50 p-4 space-y-3">
+            {/* --- BODY: Tin nhắn --- */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-5 bg-[#f8f9fa] custom-scrollbar">
               {messages.map((msg, idx) => {
-                // 4. Chỉ gán ref cho div bọc tin nhắn cuối cùng
                 const isLastMessage = idx === messages.length - 1;
+                const isUser = msg.sender === "user";
 
                 return (
                   <div
                     key={idx}
-                    // Gán ref vào div bọc ngoài của tin nhắn cuối cùng
                     ref={isLastMessage ? lastMessageRef : null}
+                    className={`flex w-full ${
+                      isUser ? "justify-end" : "justify-start"
+                    }`}
                   >
                     <div
-                      className={`flex ${
-                        msg.sender === "user" ? "justify-end" : "justify-start"
+                      className={`flex max-w-[85%] gap-2 ${
+                        isUser ? "flex-row-reverse" : "flex-row"
                       }`}
                     >
-                      <div
-                        className={`max-w-xs px-4 py-2 rounded-lg text-sm leading-relaxed ${
-                          msg.sender === "user"
-                            ? "bg-red-600 text-white rounded-br-none"
-                            : "bg-white text-gray-800 border border-gray-200 rounded-bl-none"
-                        }`}
-                      >
-                        {msg.text}
+                      {/* Avatar nhỏ bên cạnh tin nhắn Bot */}
+                      {!isUser && (
+                        <div className="w-8 h-8 rounded-full bg-white border border-gray-200 p-1 shrink-0 self-end mb-1 shadow-sm">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+                            alt="Bot"
+                          />
+                        </div>
+                      )}
+
+                      <div className="flex flex-col gap-1">
+                        {/* Bong bóng chat */}
+                        <div
+                          className={`px-5 py-3 text-sm leading-relaxed shadow-sm ${
+                            isUser
+                              ? "bg-gradient-to-br from-red-600 to-orange-500 text-white rounded-2xl rounded-tr-none"
+                              : "bg-white text-gray-800 border border-gray-100 rounded-2xl rounded-tl-none"
+                          }`}
+                        >
+                          {/* Xử lý xuống dòng cho nội dung dài */}
+                          <div className="whitespace-pre-line">{msg.text}</div>
+                        </div>
+
+                        {/* Keywords gợi ý (Chỉ hiện cho Bot) */}
+                        {!isUser && msg.keywords && (
+                          <div className="flex flex-wrap gap-2 mt-1 ml-1">
+                            {msg.keywords.map((keyword, keyIdx) => (
+                              <button
+                                key={keyIdx}
+                                onClick={() => handleKeywordClick(keyword)}
+                                className="bg-white hover:bg-red-50 text-red-700 text-xs font-medium px-3 py-1.5 rounded-lg border border-red-200 shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
+                              >
+                                {keyword}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Thời gian (Giả lập) */}
+                        <span
+                          className={`text-[10px] text-gray-400 ${
+                            isUser ? "text-right mr-1" : "text-left ml-1"
+                          }`}
+                        >
+                          {isUser ? "Bạn" : "Bot Lịch sử"}
+                        </span>
                       </div>
                     </div>
-
-                    {msg.keywords && (
-                      <div className="mt-2 flex flex-wrap gap-2 justify-start">
-                        {msg.keywords.map((keyword, keyIdx) => (
-                          <button
-                            key={keyIdx}
-                            onClick={() => handleKeywordClick(keyword)}
-                            className="bg-red-100 hover:bg-red-200 text-red-800 text-xs px-3 py-1 rounded-full border border-red-200 transition-colors duration-200"
-                          >
-                            {keyword}
-                          </button>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 );
               })}
-              {/* KHÔNG CẦN THẺ NEO RỖNG NỮA */}
             </div>
 
-            <div className="border-t border-gray-200 p-4 bg-white flex gap-2">
-              <input
-                type="text"
-                placeholder="Nhập câu hỏi..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleSend()}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
-              />
-              <button
-                onClick={handleSend}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-1"
-              >
-                <Send size={16} />
-              </button>
+            {/* --- FOOTER: Ô nhập liệu --- */}
+            <div className="p-4 bg-white border-t border-gray-100 shrink-0">
+              <div className="relative flex items-center bg-gray-100 rounded-full px-4 py-2 border border-transparent focus-within:border-red-300 focus-within:bg-white focus-within:ring-2 focus-within:ring-red-100 transition-all">
+                <input
+                  type="text"
+                  placeholder="Nhập câu hỏi về lịch sử..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={(e) => e.key === "Enter" && handleSend()}
+                  className="flex-1 bg-transparent border-none outline-none text-sm text-gray-700 placeholder-gray-400 h-8"
+                />
+                <button
+                  onClick={handleSend}
+                  disabled={!input.trim()}
+                  className={`ml-2 p-2 rounded-full transition-all duration-200 ${
+                    input.trim()
+                      ? "bg-red-600 text-white shadow-lg hover:bg-red-700 transform hover:scale-110"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
+                >
+                  <Send size={16} className={input.trim() ? "ml-0.5" : ""} />
+                </button>
+              </div>
+              <div className="text-center mt-2">
+                <p className="text-[10px] text-gray-400">
+                  Hỗ trợ bởi AI Lịch sử Việt Nam
+                </p>
+              </div>
             </div>
           </div>
         </div>

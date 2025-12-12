@@ -28,7 +28,7 @@ export default function VideoPage() {
             controls
             autoPlay
             // src sẽ trỏ thẳng vào thư mục public
-            src="../../public/audio/Việt_Nam_1975-1981.mp4"
+            src="/audio/Việt_Nam_1975-1981.mp4"
           >
             Trình duyệt của bạn không hỗ trợ thẻ video.
           </video>
