@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from "react"; // Nhớ import useRef và useEffect
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Carousel from "./Carousel";
 import poster1 from "../../image/carousel1.png";
 import poster2 from "../../image/carousel1.png";
 import poster3 from "../../image/carousel1.png";
 import poster4 from "../../image/carousel1.png";
+import ChatBoxAI from "../components/ChatBoxAI";
+
+// Import icons từ Heroicons (cho phần cũ)
 import {
   ArrowRightIcon,
   FlagIcon,
@@ -16,10 +19,12 @@ import {
   FireIcon,
   StarIcon,
 } from "@heroicons/react/24/solid";
-import ChatBoxAI from "../components/ChatBoxAI";
+
+// Import icons từ Lucide (cho phần QuoteSlider mới)
+// Nếu chưa cài, bạn chạy: npm install lucide-react
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 // --- COMPONENT HIỆU ỨNG (RevealOnScroll) ---
-// Component này giúp phần tử con trượt lên và hiện ra khi cuộn tới
 const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -27,15 +32,14 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Khi phần tử xuất hiện trong màn hình (dù chỉ 10%)
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target); // Chỉ chạy 1 lần rồi thôi
+          observer.unobserve(entry.target);
         }
       },
       {
-        threshold: 0.1, // Ngưỡng xuất hiện 10%
-        rootMargin: "0px 0px -50px 0px", // Offset một chút để hiệu ứng tự nhiên hơn
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
       }
     );
 
@@ -53,30 +57,25 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
   return (
     <div
       ref={ref}
-      // Tailwind classes cho hiệu ứng:
-      // duration-1000: Thời gian chạy 1s
-      // ease-out: Chậm dần về cuối (mượt mà)
-      // translate-y-20: Vị trí ban đầu thấp hơn 20 đơn vị
-      // opacity-0: Ban đầu ẩn
       className={`transition-all duration-1000 ease-out transform ${
         isVisible
           ? "opacity-100 translate-y-0 scale-100"
           : "opacity-0 translate-y-20 scale-95"
       } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }} // Độ trễ cho hiệu ứng domino
+      style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
     </div>
   );
 };
-// ---------------------------------------------
 
+// --- DATA & CONFIG ---
 const timelineEvents = [
   {
     year: "1975",
     title: "Thống nhất đất nước",
     description:
-      "Ngày 30/4/1975, Đại thắng mùa Xuân. Việt Nam độc lập, thống nhất, bước vào kỷ nguyên mới",
+      "Ngày 30/4/1975, Đại thắng mùa Xuân. Việt Nam độc lập, thống nhất.",
     details: [
       "Quân Giải phóng chiếm Sài Gòn ngày 30/4/1975",
       "Tập đoàn Pôn Pốt thi hành chính sách diệt chủng ở Campuchia",
@@ -102,8 +101,7 @@ const timelineEvents = [
   {
     year: "1977-1979",
     title: "Chiến tranh biên giới, Bảo vệ Tổ quốc",
-    description:
-      "Xung đột với Trung Quốc và Campuchia, giải phóng Campuchia khỏi chế độ Pol Pot",
+    description: "Xung đột với Trung Quốc và Campuchia, giải phóng Campuchia",
     details: [
       "Năm 1978: Trung Quốc tuyên bố rút chuyên gia, cắt viện trợ, lấn chiếm biên giới",
       "Cuối 12/1978: Chính quyền Pôn Pốt tấn công xâm lược trên biên giới Tây Nam",
@@ -199,6 +197,109 @@ const keyHighlights = [
   },
 ];
 
+// --- DATA CÁC CÂU TRÍCH DẪN ---
+const quotes = [
+  {
+    text: "Trong bất kỳ hoàn cảnh nào, chúng ta cũng kiên quyết giữ vững độc lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Tổ quốc.",
+    author: "Lịch sử Đảng Cộng sản Việt Nam",
+  },
+  {
+    text: "Thắng lợi của nhân dân ta là thắng lợi của sức mạnh đoàn kết toàn dân, của truyền thống yêu nước nồng nàn, của tinh thần hy sinh dũng cảm vì độc lập tự do.",
+    author: "Đại hội Đảng toàn quốc lần thứ IV (1976)",
+  },
+  {
+    text: "Non sông Việt Nam là một, dân tộc Việt Nam là một. Sông có thể cạn, núi có thể mòn, song chân lý ấy không bao giờ thay đổi.",
+    author: "Chủ tịch Hồ Chí Minh",
+  },
+  {
+    text: "Chúng ta phải xây dựng đất nước ta đàng hoàng hơn, to đẹp hơn.",
+    author: "Di chúc Chủ tịch Hồ Chí Minh",
+  },
+];
+
+// --- COMPONENT QUOTE SLIDER MỚI ---
+const QuoteSlider = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const nextQuote = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev === quotes.length - 1 ? 0 : prev + 1));
+      setIsAnimating(false);
+    }, 200);
+  };
+
+  const prevQuote = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev === 0 ? quotes.length - 1 : prev - 1));
+      setIsAnimating(false);
+    }, 200);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextQuote, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <RevealOnScroll>
+      <div className="relative group bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-center text-white shadow-2xl border-l-4 border-amber-500 hover:scale-[1.01] transition-transform duration-500 select-none">
+        {/* Icon trang trí nền */}
+        <div className="absolute top-4 left-4 opacity-10 text-amber-500">
+          <Quote size={60} />
+        </div>
+
+        {/* Nội dung trích dẫn */}
+        <div
+          className={`transition-opacity duration-300 transform ${
+            isAnimating
+              ? "opacity-0 translate-y-2"
+              : "opacity-100 translate-y-0"
+          }`}
+        >
+          <p className="text-xl md:text-3xl font-bold mb-6 italic leading-relaxed min-h-[120px] flex items-center justify-center">
+            "{quotes[currentIndex].text}"
+          </p>
+          <div className="w-16 h-1 bg-amber-500 mx-auto mb-4 rounded-full"></div>
+          <p className="text-amber-300 font-semibold uppercase tracking-wider text-sm md:text-base">
+            — {quotes[currentIndex].author}
+          </p>
+        </div>
+
+        {/* Nút điều hướng */}
+        <button
+          onClick={prevQuote}
+          className="absolute top-1/2 left-2 md:left-4 -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-amber-500 hover:text-slate-900 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
+        >
+          <ChevronLeft size={32} />
+        </button>
+
+        <button
+          onClick={nextQuote}
+          className="absolute top-1/2 right-2 md:right-4 -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-amber-500 hover:text-slate-900 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
+        >
+          <ChevronRight size={32} />
+        </button>
+
+        {/* Chỉ số trang (Dots) */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {quotes.map((_, idx) => (
+            <div
+              key={idx}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                idx === currentIndex ? "w-6 bg-amber-500" : "w-2 bg-gray-600"
+              }`}
+            ></div>
+          ))}
+        </div>
+      </div>
+    </RevealOnScroll>
+  );
+};
+
+// --- COMPONENT CHÍNH (HOME) ---
 export default function Home() {
   const [activeTimeline, setActiveTimeline] = useState(0);
 
@@ -218,7 +319,7 @@ export default function Home() {
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
         />
 
-        {/* Content container - Áp dụng hiệu ứng cho text trong Hero */}
+        {/* Content container */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
           <div className="text-center mb-16">
             <RevealOnScroll>
@@ -419,7 +520,7 @@ export default function Home() {
           </div>
         </RevealOnScroll>
 
-        {/* Content Sections Grid - Staggered Effect */}
+        {/* Content Sections Grid */}
         <div className="mb-16">
           <RevealOnScroll>
             <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">
@@ -506,18 +607,8 @@ export default function Home() {
           </RevealOnScroll>
         </div>
 
-        {/* Quote Section */}
-        <RevealOnScroll>
-          <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white shadow-2xl border-l-4 border-amber-500 hover:scale-[1.02] transition-transform duration-500">
-            <p className="text-2xl md:text-3xl font-bold mb-6 italic leading-relaxed">
-              "Trong bất kỳ hoàn cảnh nào, chúng ta cũng kiên quyết giữ vững độc
-              lập, chủ quyền, thống nhất và toàn vẹn lãnh thổ của Tổ quốc"
-            </p>
-            <p className="text-amber-300 font-semibold">
-              — Trích Lịch sử Đảng Cộng sản Việt Nam
-            </p>
-          </div>
-        </RevealOnScroll>
+        {/* QUOTE SECTION ĐÃ ĐƯỢC THAY THẾ */}
+        <QuoteSlider />
 
         <ChatBoxAI />
       </section>

@@ -304,7 +304,6 @@ function Game() {
 
   return (
     <>
-      <Header />
       <div className="min-h-screen w-full overflow-hidden relative">
         {/* Back button */}
         <div className="absolute top-4 left-4 z-30">

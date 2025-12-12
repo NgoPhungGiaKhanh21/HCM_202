@@ -144,19 +144,18 @@ export default function AIAppendix() {
             </div>
           </RevealOnScroll>
 
-          {/* Grid Thành viên: Bay vào lần lượt (Staggered Effect) */}
+          {/* Grid Thành viên */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {members.map((mem, index) => {
               const isLeader = mem.role === "Leader";
               return (
-                // Delay tăng dần theo index: 0ms, 100ms, 200ms...
                 <RevealOnScroll
                   key={index}
                   delay={index * 100}
                   className="h-full"
                 >
                   <div
-                    className={`relative h-full p-6 rounded-2xl border-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl bg-[#fcf7ee] group ${
+                    className={`relative h-full p-6 rounded-2xl border-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl bg-[#fcf7ee] group flex flex-col justify-between ${
                       isLeader
                         ? "border-[#9b2f2f] shadow-md ring-4 ring-[#9b2f2f]/10"
                         : "border-stone-300 hover:border-amber-400"
@@ -169,8 +168,9 @@ export default function AIAppendix() {
                     )}
 
                     <div className="flex items-center gap-4">
+                      {/* Avatar */}
                       <div
-                        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-transform duration-500 group-hover:scale-110 ${
+                        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shrink-0 transition-transform duration-500 group-hover:scale-110 ${
                           isLeader
                             ? "bg-[#9b2f2f] text-amber-100"
                             : "bg-stone-200 text-stone-600 group-hover:bg-amber-100 group-hover:text-amber-600"
@@ -178,22 +178,32 @@ export default function AIAppendix() {
                       >
                         {mem.name.charAt(0)}
                       </div>
-                      <div>
+
+                      {/* Thông tin */}
+                      <div className="flex-1">
                         <h3
-                          className={`font-bold text-lg ${
+                          className={`font-bold text-lg leading-tight ${
                             isLeader ? "text-[#9b2f2f]" : "text-stone-800"
                           }`}
                         >
                           {mem.name}
                         </h3>
-                        <p className="text-sm font-mono text-stone-500">
+                        <p className="text-sm font-mono text-stone-500 mt-1 mb-2">
                           {mem.id}
                         </p>
-                        {isLeader && (
-                          <span className="text-xs font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded mt-1 inline-block">
-                            TEAM LEADER
-                          </span>
-                        )}
+
+                        {/* Tag Phân loại */}
+                        <div>
+                          {isLeader ? (
+                            <span className="text-[10px] uppercase font-bold text-amber-800 bg-amber-100 border border-amber-200 px-2 py-1 rounded inline-block tracking-wider">
+                              Team Leader
+                            </span>
+                          ) : (
+                            <span className="text-[10px] uppercase font-bold text-stone-500 bg-stone-200/50 border border-stone-200 px-2 py-1 rounded inline-block tracking-wider">
+                              Member
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -297,11 +307,6 @@ export default function AIAppendix() {
           </RevealOnScroll>
         </section>
       </main>
-
-      {/* Footer nhỏ */}
-      <footer className="text-center py-8 text-stone-500 text-sm">
-        © 2025 History Project 1975-1981. Designed with AI Assistance.
-      </footer>
     </div>
   );
 }
