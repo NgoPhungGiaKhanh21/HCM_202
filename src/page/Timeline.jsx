@@ -73,7 +73,7 @@ const events = [
     description:
       "Quyết định tên nước là Cộng hòa Xã hội chủ nghĩa Việt Nam, đặt Thủ đô là Hà Nội, đổi tên Sài Gòn thành TP. Hồ Chí Minh.",
     image: "/timeline_img/Picture8.png",
-    icon: "🇻🇳",
+    icon: "🤝",
   },
   {
     date: "14 đến 20-12-1976",
