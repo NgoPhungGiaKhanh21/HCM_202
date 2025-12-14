@@ -100,7 +100,7 @@ const intents = [
   {
     patterns: ["hello", "xin chào", "chào", "hi"],
     response:
-      "Xin chào! 🇻🇳 Tôi có thể giúp bạn tìm hiểu về giai đoạn 1975-1981:\n• Thống nhất đất nước 1975-1976\n• Đại hội IV năm 1976\n• Khoán 100 và Quyết định 25\n• Chiến tranh biên giới Tây Nam và phía Bắc\nBạn muốn hỏi gì? 😊",
+      "Xin chào! ⭐ Tôi có thể giúp bạn tìm hiểu về giai đoạn 1975-1981:\n• Thống nhất đất nước 1975-1976\n• Đại hội IV năm 1976\n• Khoán 100 và Quyết định 25\n• Chiến tranh biên giới Tây Nam và phía Bắc\nBạn muốn hỏi gì? 😊",
   },
 ];
 
@@ -263,7 +263,7 @@ export default function ChatBoxAI() {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Xin chào! 🇻🇳 Tôi có thể giúp bạn tìm hiểu về giai đoạn 1975-1981:",
+      text: "Xin chào! ⭐ Tôi có thể giúp bạn tìm hiểu về giai đoạn 1975-1981:",
       keywords: defaultKeywords,
     },
   ]);
