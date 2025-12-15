@@ -250,4 +250,83 @@ export const quizQuestions = [
     explanation:
       "Quyết định 25-CP là bước đột phá trong công nghiệp, trao quyền tự chủ một phần cho xí nghiệp (Kế hoạch 3 phần).",
   },
+  {
+    id: 16,
+    question:
+      "Từ tháng 4-1975, tập đoàn Pôn Pốt đã tăng cường chống Việt Nam và gây xung đột ở khu vực biên giới nào?",
+    options: [
+      { id: "A", text: "Biên giới phía Bắc." },
+      { id: "B", text: "Biên giới phía Đông." },
+      { id: "C", text: "Biên giới phía Tây." },
+      { id: "D", text: "Biên giới phía Tây Nam." },
+    ],
+    answer: "D",
+    explanation:
+      "Tập đoàn Pôn Pốt đã tiến hành nhiều cuộc xâm lấn biên giới Tây Nam, tàn sát dân thường dã man.",
+  },
+  {
+    id: 17,
+    question:
+      "Quân tình nguyện Việt Nam phối hợp và giúp đỡ Campuchia tổng tiến công, đánh đổ chế độ diệt chủng Pôn Pốt, giải phóng Phnôm Pênh vào thời gian nào?",
+    options: [
+      { id: "A", text: "Cuối tháng 12-1978." },
+      { id: "B", text: "Ngày 7-1-1979." },
+      { id: "C", text: "Ngày 17-2-1979." },
+      { id: "D", text: "Ngày 18-2-1979." },
+    ],
+    answer: "B",
+    explanation:
+      "Ngày 7/1/1979, thủ đô Phnôm Pênh được giải phóng, chế độ diệt chủng Pôn Pốt bị lật đổ.",
+  },
+  {
+    id: 18,
+    question:
+      "Cuộc tấn công toàn tuyến biên giới phía Bắc của Trung Quốc bắt đầu vào ngày, tháng, năm nào?",
+    options: [
+      { id: "A", text: "5-3-1979." },
+      { id: "B", text: "17-2-1979." },
+      { id: "C", text: "18-4-1979." },
+      { id: "D", text: "26-12-1978." },
+    ],
+    answer: "B",
+    explanation:
+      "Sáng 17/2/1979, quân đội Trung Quốc huy động lực lượng lớn tấn công toàn tuyến biên giới phía Bắc nước ta.",
+  },
+  {
+    id: 19,
+    question:
+      "Kết quả của giai đoạn 1975-1981 nhìn chung đã không đạt chỉ tiêu do Đại hội IV đề ra, với biểu hiện nào sau đây?",
+    options: [
+      { id: "A", text: "Lạm phát được kiểm soát ở mức thấp." },
+      { id: "B", text: "Xuất khẩu tăng gấp 4-5 lần nhập khẩu." },
+      {
+        id: "C",
+        text: "Lưu thông, phân phối rối ren, giá cả tăng vọt, nhập khẩu tăng gấp 4-5 lần xuất khẩu.",
+      },
+      {
+        id: "D",
+        text: "Đời sống của nhân dân, cán bộ, công nhân viên, lực lượng vũ trang rất ổn định.",
+      },
+    ],
+    answer: "C",
+    explanation:
+      "Giai đoạn này kinh tế mất cân đối nghiêm trọng, lạm phát cao, đời sống nhân dân vô cùng khó khăn.",
+  },
+  {
+    id: 20,
+    question:
+      "Nguyên nhân chủ quan nào đã làm trầm trọng thêm những khó khăn về kinh tế-xã hội trong giai đoạn 1975-1981?",
+    options: [
+      { id: "A", text: "Nền kinh tế thấp kém, bị bao vây cấm vận." },
+      { id: "B", text: "Thiên tai nặng nề liên tiếp xảy ra." },
+      { id: "C", text: "Chiến tranh biên giới." },
+      {
+        id: "D",
+        text: "Khuyết điểm, sai lầm của Đảng, Nhà nước về lãnh đạo và quản lý kinh tế, xã hội.",
+      },
+    ],
+    answer: "D",
+    explanation:
+      "Đảng đã thừa nhận những sai lầm trong bố trí cơ cấu kinh tế, cải tạo XHCN nóng vội và duy trì cơ chế bao cấp quá lâu.",
+  },
 ];
