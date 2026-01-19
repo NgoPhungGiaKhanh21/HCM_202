@@ -40,7 +40,7 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
       {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px",
-      }
+      },
     );
 
     if (ref.current) {
@@ -322,35 +322,35 @@ export default function Home() {
         {/* Content container */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
           <div className="text-center mb-16">
-            <RevealOnScroll>
+            {/* <RevealOnScroll>
               <div className="inline-block mb-8 animate-pulse">
                 <span className="px-6 py-3 border-2 border-yellow-500 text-yellow-400 rounded-full text-base font-bold tracking-wider">
                   1975 - 1981
                 </span>
               </div>
-            </RevealOnScroll>
+            </RevealOnScroll> */}
 
             <RevealOnScroll delay={200}>
-              <h1 className="text-6xl md:text-7xl font-black text-white mb-6 leading-tight drop-shadow-lg">
-                Xây dựng Chủ nghĩa Xã hội
+              <h1 className="text-6xl md:text-5xl font-black text-white mb-6 leading-tight drop-shadow-lg">
+                “... Tham nhũng là từ trong Đảng mà ra....”
               </h1>
             </RevealOnScroll>
 
             <RevealOnScroll delay={400}>
-              <h2 className="text-5xl md:text-6xl font-black text-yellow-400 mb-8 leading-tight drop-shadow-lg">
-                Bảo vệ Tổ quốc
+              <h2 className="text-5xl md:text-4xl font-black text-yellow-400 mb-8 leading-tight drop-shadow-lg">
+                thách thức nào cho việc xây dựng Đảng và Nhà nước hiện nay?
               </h2>
             </RevealOnScroll>
 
             <RevealOnScroll delay={600}>
               <p className="text-lg md:text-xl text-white mb-6 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-                Giai đoạn quá độ lên CNXH: hoàn thành thống nhất nhà nước, triển
-                khai đường lối Đại hội IV và kiên quyết bảo vệ biên giới trong
-                bối cảnh hậu chiến nhiều khó khăn.
+                "Tham ô thực chất là hành động “lấy của công dùng vào việc tư”.
+                Đó là việc cán bộ, đảng viên quên mất đức tính thanh liêm, đạo
+                đức để chiếm đoạt tài sản của Nhà nước hoặc của nhân dân làm lợi
+                cho bản thân."
               </p>
               <p className="text-base md:text-lg text-white mb-12 max-w-2xl mx-auto drop-shadow-md">
-                Tinh thần: đoàn kết, xây dựng, đổi mới tư duy kinh tế và giữ
-                vững chủ quyền lãnh thổ.
+                - Hồ Chí Minh -
               </p>
             </RevealOnScroll>
           </div>
@@ -435,7 +435,7 @@ export default function Home() {
                         <span className="text-red-600 font-bold mt-1">•</span>
                         <span className="leading-relaxed">{detail}</span>
                       </li>
-                    )
+                    ),
                   )}
                 </ul>
               </div>
