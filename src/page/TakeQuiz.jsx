@@ -187,11 +187,10 @@ export default function TakeQuiz() {
             <button
               onClick={handleNext}
               disabled={!isAnswered}
-              className={`w-full py-4 rounded-xl text-sm font-bold tracking-wide uppercase border-2 transition-all duration-200 shadow-md ${
-                isAnswered
-                  ? "bg-[#9b2f2f] text-amber-100 border-[#7d2525] hover:bg-[#7d2525] hover:scale-105"
-                  : "bg-stone-200 text-stone-500 border-stone-300 cursor-not-allowed"
-              }`}
+              className={`w-full py-4 rounded-xl text-sm font-bold tracking-wide uppercase border-2 transition-all duration-200 shadow-md ${isAnswered
+                ? "bg-[#9b2f2f] text-amber-100 border-[#7d2525] hover:bg-[#7d2525] hover:scale-105"
+                : "bg-stone-200 text-stone-500 border-stone-300 cursor-not-allowed"
+                }`}
             >
               {isLastQuestion ? "Hoàn thành" : "Tiếp theo →"}
             </button>
@@ -208,9 +207,6 @@ export default function TakeQuiz() {
                   <span className="text-2xl font-black text-amber-800">
                     GIẢI MẬT MÃ
                   </span>
-                  <span className="text-sm text-stone-600">
-                    Chủ đề 1975-1981
-                  </span>
                 </div>
               </div>
               <div className="flex items-center gap-3 text-sm font-semibold">
@@ -224,9 +220,6 @@ export default function TakeQuiz() {
               <div className="bg-[#9b2f2f] text-amber-100 px-6 py-3 flex items-center justify-between">
                 <span className="text-lg font-semibold">
                   Câu hỏi {currentIndex + 1}
-                </span>
-                <span className="text-sm opacity-80">
-                  Thời kỳ quá độ lên CNXH
                 </span>
               </div>
               <div className="p-6 md:p-8">
@@ -264,8 +257,8 @@ export default function TakeQuiz() {
                     ? isTimeout
                       ? "Hết giờ"
                       : isCorrect
-                      ? "Chính xác!"
-                      : "Sai rồi"
+                        ? "Chính xác!"
+                        : "Sai rồi"
                     : "Hãy chọn đáp án"}
                 </div>
                 {isAnswered && (
