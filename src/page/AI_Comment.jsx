@@ -1,25 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import {
-  Users,
-  Crown,
-  Cpu,
   Code2,
-  PenTool,
-  BookOpen,
   Box,
-  Sparkles,
   Terminal,
-  Palette,
+  ImageIcon,
+  Layers,
+  FileText,
+  BookOpen,
+  Link as LinkIcon,
+  Cpu,
+  PenTool,
 } from "lucide-react";
 
-// --- COMPONENT HIỆU ỨNG (Dùng chung) ---
-// Nếu bạn đã tách cái này ra file riêng thì import vào, còn chưa thì để nguyên ở đây
+// --- COMPONENT HIỆU ỨNG REVEAL ---
 const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
+    const currentRef = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -29,20 +29,19 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
       },
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
-    if (ref.current) observer.observe(ref.current);
+    if (currentRef) observer.observe(currentRef);
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out transform ${
-        isVisible
-          ? "opacity-100 translate-y-0 scale-100"
-          : "opacity-0 translate-y-12 scale-95"
-      } ${className}`}
+      className={`transition-all duration-1000 ease-out transform ${isVisible
+        ? "opacity-100 translate-y-0 scale-100"
+        : "opacity-0 translate-y-12 scale-95"
+        } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -51,215 +50,231 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
 };
 
 export default function AIAppendix() {
-  // Dữ liệu thành viên
-  const members = [
-    { name: "Ngô Phùng Gia Khánh", id: "SE182960", role: "Leader" },
-    { name: "Vũ Minh Đức", id: "SE182942", role: "Member" },
-    { name: "Huỳnh Quốc Khang", id: "SE182958", role: "Member" },
-    { name: "Nguyễn Hoàng Thiên", id: "SE182297", role: "Member" },
-    { name: "Trần Mạnh Phú", id: "SE180166", role: "Member" },
-  ];
+  // --- DỮ LIỆU ---
 
-  // Dữ liệu Công cụ & AI
-  const aiTools = [
-    {
-      title: "NotebookLM & Research",
-      icon: <BookOpen className="w-6 h-6" />,
-      toolName: "Notebook / Docs",
-      description: "Soạn thảo và Quản lý nội dung",
-      details: [
-        "Soạn thảo kịch bản chi tiết cho dòng thời gian 1975-1981.",
-        "Lọc ý chính, sắp xếp các sự kiện lịch sử theo trình tự logic.",
-        "Lưu trữ và phân loại các nguồn tài liệu tham khảo.",
-      ],
-      color: "bg-blue-100 text-blue-800 border-blue-200",
-    },
-    {
-      title: "Trợ lý AI Tổng hợp",
-      icon: <Sparkles className="w-6 h-6" />,
-      toolName: "Google Gemini",
-      description: "Sáng tạo và Kiểm chứng thông tin",
-      details: [
-        "Gợi ý cấu trúc website và các tính năng tương tác (Quiz, Flipbook).",
-        "Tóm tắt các văn kiện Đại hội Đảng, nghị quyết trung ương ngắn gọn.",
-        "Tìm kiếm và đối chiếu nguồn gốc hình ảnh, sự kiện lịch sử.",
-        "Tạo prompt để sinh hình ảnh minh họa cho các phần thiếu tư liệu.",
-      ],
-      color: "bg-purple-100 text-purple-800 border-purple-200",
-    },
-    {
-      title: "Lập trình & Code",
-      icon: <Terminal className="w-6 h-6" />,
-      toolName: "Copilot & Cursor",
-      description: "Trợ lý Lập trình thông minh",
-      details: [
-        "Hỗ trợ viết code ReactJS nhanh chóng và tối ưu cấu trúc component.",
-        "Debug lỗi logic trong các hàm xử lý Quiz và hiệu ứng chuyển trang.",
-        "Gợi ý cách tổ chức CSS (Tailwind) để giao diện đồng nhất.",
-        "Refactor code để tăng hiệu năng tải trang.",
-      ],
-      color: "bg-emerald-100 text-emerald-800 border-emerald-200",
-    },
-    {
-      title: "Thiết kế 3D & Hiệu ứng",
-      icon: <Box className="w-6 h-6" />,
-      toolName: "Blender",
-      description: "Tạo hình và Hiệu ứng 3D",
-      details: [
-        "Dựng mô hình cuốn sách 3D (Flipbook) chi tiết.",
-        "Xử lý ánh sáng (Lighting) và vật liệu (Texture) để sách trông cổ kính.",
-        "Render các asset cần thiết để tích hợp vào môi trường Web.",
-      ],
-      color: "bg-orange-100 text-orange-800 border-orange-200",
-    },
-  ];
-
-  const techStack = [
+  // Công cụ làm web
+  const webTools = [
     {
       name: "ReactJS",
-      desc: "Xây dựng giao diện người dùng (UI) hiện đại, quản lý trạng thái (State) của ứng dụng.",
-      icon: <Code2 className="w-8 h-8 text-[#61DAFB]" />,
+      icon: <Code2 className="w-6 h-6 text-white" />,
+      // Ảnh minh họa Code/React
+      image: "https://statics.cdn.200lab.io/2024/09/reactjs-la-gi.png",
+      description: "Xây dựng giao diện người dùng hiện đại",
+      details: [
+        "Framework JavaScript UI component-based",
+        "Quản lý state và routing phức tạp",
+        "Tối ưu hiệu năng với Virtual DOM",
+      ],
     },
     {
-      name: "Three.js / R3F",
-      desc: "Thư viện cốt lõi để hiển thị mô hình 3D và thực hiện hiệu ứng lật trang (Flipbook) mượt mà trên trình duyệt.",
-      icon: <Box className="w-8 h-8 text-stone-800" />,
+      name: "Three.js",
+      icon: <Box className="w-6 h-6 text-white" />,
+      // Ảnh minh họa 3D Abstract
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNzjRIDpyx7Ntz0fCjgo2bwA0YCZnzNw_UuQ&s",
+      description: "Xây dựng flipbook mô hình 3D tương tác",
+      details: [
+        "Thư viện WebGL render đồ họa 3D trên trình duyệt",
+        "Tạo hiệu ứng lật trang flipbook mượt mà",
+        "Xử lý animation và tương tác người dùng",
+      ],
+    },
+    {
+      name: "Cursor & Copilot",
+      icon: <Terminal className="w-6 h-6 text-white" />,
+      // Ảnh minh họa Terminal/Matrix
+      image: "https://blog.nashtechglobal.com/wp-content/uploads/2025/06/cursor-vs-copilot.webp",
+      description: "Trợ lý AI: Viết code, thiết kế và sửa lỗi",
+      details: [
+        "AI code assistant tăng tốc độ phát triển",
+        "Gợi ý cấu trúc component thông minh",
+        "Debug và refactor code tối ưu",
+      ],
+    },
+    {
+      name: "Nano Banana (Gemini) & Canva",
+      icon: <ImageIcon className="w-6 h-6 text-white" />,
+      // Ảnh minh họa Art/Design
+      image: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/a82a88d5-9407-479b-ac50-1de4f8ddf071/image.png?t=1762100196",
+      description: "Sáng tạo và xử lý hình ảnh",
+      details: [
+        "Tạo hình ảnh minh họa AI từ text prompt",
+        "Thiết kế đồ họa, banner, infographic",
+        "Tối ưu hóa visual cho nền tảng web",
+      ],
+    },
+    {
+      name: "Blender",
+      icon: <Layers className="w-6 h-6 text-white" />,
+      // Ảnh minh họa 3D Modeling/Mesh
+      image: "https://cdn-media.sforum.vn/storage/app/media/Van%20Pham/2/2d/tai-blender-thumbnail.jpg",
+      description: "Dựng mô hình 3D chuyên nghiệp",
+      details: [
+        "Dựng model cuốn sách 3D chi tiết",
+        "Xử lý ánh sáng (Lighting) và vật liệu (Texture)",
+        "Render assets tích hợp vào WebGL",
+      ],
+    },
+  ];
+
+  // Công cụ soạn thảo nội dung
+  const contentTools = [
+    {
+      name: "Notebook",
+      icon: <FileText className="w-6 h-6 text-white" />,
+      // Ảnh minh họa Writing/Vintage
+      image: "https://phongvu.vn/cong-nghe/wp-content/uploads/2025/03/cach-su-dung-notebooklm-1.jpg",
+      description: "Soạn thảo, lưu trữ và tổng hợp tư liệu",
+      details: [
+        "Xây dựng kịch bản dòng thời gian 1975-1981",
+        "Hệ thống hóa các sự kiện lịch sử logic",
+        "Lưu trữ và phân loại nguồn tài liệu tham khảo",
+        "Tóm tắt văn kiện, nghị quyết quan trọng",
+      ],
+    },
+  ];
+
+  // Tài liệu tham khảo
+  const references = [
+    {
+      title: "Giáo trình học phần Tư tưởng Hồ Chí Minh",
+      url: "https://drive.google.com/file/d/1IcRiR-SGJ0s6omK8pE6TfDtzvVehSRyn/view",
+      type: "Giáo trình",
+    },
+    {
+      title: "Tư liệu văn kiện Đảng Cộng sản Việt Nam",
+      url: "https://tulieuvankien.dangcongsan.vn/page/Article/Book/Detail/review/69049c865fda1e07a9075f54",
+      type: "Văn kiện",
+    },
+    {
+      title: "Tài liệu về chống tham nhũng",
+      url: "https://drive.google.com/file/d/1Tf3Fyybs8puDEnp5JGw3zqezIfreh6H2/view",
+      type: "Tài liệu",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#f6f1e7] text-stone-900 font-sans">
+    <div className="min-h-screen bg-[#f5efe2] text-gray-900 font-sans">
       <Header />
 
-      <main className="max-w-6xl mx-auto px-4 py-12 space-y-16">
-        {/* --- PHẦN 1: THÀNH VIÊN NHÓM --- */}
+      <main className="max-w-6xl mx-auto px-4 py-16 space-y-20">
+        {/* --- PHẦN 1: CÔNG CỤ LÀM WEB --- */}
         <section>
-          {/* Header Section: Bay vào đầu tiên */}
           <RevealOnScroll>
-            <div className="flex items-center gap-3 mb-8">
-              <Users className="w-8 h-8 text-[#9b2f2f]" />
-              <h2 className="text-3xl font-black text-[#9b2f2f] uppercase tracking-wide">
-                Thành viên nhóm
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-3 bg-[#8B1E1E] rounded-full shadow-lg shadow-[#8B1E1E]/30">
+                <Cpu className="w-8 h-8 text-[#f5efe2]" />
+              </div>
+              <h2 className="text-4xl font-black text-[#8B1E1E] uppercase tracking-wide">
+                Công cụ kỹ thuật
               </h2>
             </div>
+            <p className="text-[#8B1E1E]/80 mb-12 max-w-2xl text-lg font-serif italic">
+              "Những công nghệ nền tảng giúp tái hiện lịch sử sống động trên môi trường số."
+            </p>
           </RevealOnScroll>
 
-          {/* Grid Thành viên */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {members.map((mem, index) => {
-              const isLeader = mem.role === "Leader";
-              return (
-                <RevealOnScroll
-                  key={index}
-                  delay={index * 100}
-                  className="h-full"
-                >
-                  <div
-                    className={`relative h-full p-6 rounded-2xl border-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl bg-[#fcf7ee] group flex flex-col justify-between ${
-                      isLeader
-                        ? "border-[#9b2f2f] shadow-md ring-4 ring-[#9b2f2f]/10"
-                        : "border-stone-300 hover:border-amber-400"
-                    }`}
-                  >
-                    {isLeader && (
-                      <div className="absolute -top-3 -right-3 bg-[#9b2f2f] text-amber-100 p-2 rounded-full shadow-sm z-10 animate-bounce">
-                        <Crown className="w-5 h-5" />
-                      </div>
-                    )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {webTools.map((tool, idx) => (
+              <RevealOnScroll key={idx} delay={idx * 100} className="h-full">
+                <div className="group bg-white rounded-3xl border border-[#C5A065]/40 shadow-md hover:shadow-2xl hover:shadow-[#8B1E1E]/20 overflow-hidden flex flex-col h-full hover:-translate-y-2 transition-all duration-500">
 
-                    <div className="flex items-center gap-4">
-                      {/* Avatar */}
-                      <div
-                        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shrink-0 transition-transform duration-500 group-hover:scale-110 ${
-                          isLeader
-                            ? "bg-[#9b2f2f] text-amber-100"
-                            : "bg-stone-200 text-stone-600 group-hover:bg-amber-100 group-hover:text-amber-600"
-                        }`}
-                      >
-                        {mem.name.charAt(0)}
-                      </div>
+                  {/* PHẦN HÌNH ẢNH */}
+                  <div className="relative h-48 overflow-hidden">
+                    {/* Overlay màu để ảnh hòa vào background */}
+                    <div className="absolute inset-0 bg-[#8B1E1E]/20 group-hover:bg-transparent transition-colors duration-500 z-10 mix-blend-multiply"></div>
+                    <img
+                      src={tool.image}
+                      alt={tool.name}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    />
 
-                      {/* Thông tin */}
-                      <div className="flex-1">
-                        <h3
-                          className={`font-bold text-lg leading-tight ${
-                            isLeader ? "text-[#9b2f2f]" : "text-stone-800"
-                          }`}
-                        >
-                          {mem.name}
-                        </h3>
-                        <p className="text-sm font-mono text-stone-500 mt-1 mb-2">
-                          {mem.id}
-                        </p>
-
-                        {/* Tag Phân loại */}
-                        <div>
-                          {isLeader ? (
-                            <span className="text-[10px] uppercase font-bold text-amber-800 bg-amber-100 border border-amber-200 px-2 py-1 rounded inline-block tracking-wider">
-                              Team Leader
-                            </span>
-                          ) : (
-                            <span className="text-[10px] uppercase font-bold text-stone-500 bg-stone-200/50 border border-stone-200 px-2 py-1 rounded inline-block tracking-wider">
-                              Member
-                            </span>
-                          )}
-                        </div>
+                    {/* Badge Icon & Name nổi trên ảnh */}
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-[#2c1b12] to-transparent z-20 flex items-center gap-3">
+                      <div className="p-2 bg-[#8B1E1E] rounded-lg shadow-lg">
+                        {tool.icon}
                       </div>
+                      <span className="font-bold text-xl text-[#f5efe2] text-shadow-sm">{tool.name}</span>
                     </div>
                   </div>
-                </RevealOnScroll>
-              );
-            })}
+
+                  {/* PHẦN NỘI DUNG */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h4 className="font-bold text-[#8B1E1E] mb-4 text-lg border-b border-[#C5A065]/30 pb-2">
+                      {tool.description}
+                    </h4>
+                    <ul className="space-y-3 mt-auto">
+                      {tool.details.map((detail, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-3 text-gray-700"
+                        >
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C5A065] shrink-0" />
+                          <span className="text-sm leading-relaxed font-medium">
+                            {detail}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </RevealOnScroll>
+            ))}
           </div>
         </section>
 
         <RevealOnScroll>
-          <div className="border-t-2 border-dashed border-stone-300"></div>
+          <div className="border-t border-[#C5A065]/40 max-w-xs mx-auto"></div>
         </RevealOnScroll>
 
-        {/* --- PHẦN 2: PHỤ LỤC AI & CÔNG NGHỆ --- */}
+        {/* --- PHẦN 2: CÔNG CỤ SOẠN THẢO NỘI DUNG --- */}
         <section>
           <RevealOnScroll>
-            <div className="flex items-center gap-3 mb-2">
-              <Cpu className="w-8 h-8 text-[#9b2f2f]" />
-              <h2 className="text-3xl font-black text-[#9b2f2f] uppercase tracking-wide">
-                Phụ lục AI & Công nghệ
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-3 bg-[#8B1E1E] rounded-full shadow-lg shadow-[#8B1E1E]/30">
+                <PenTool className="w-8 h-8 text-[#f5efe2]" />
+              </div>
+              <h2 className="text-4xl font-black text-[#8B1E1E] uppercase tracking-wide">
+                Biên tập nội dung
               </h2>
             </div>
-            <p className="text-stone-600 mb-8 max-w-2xl text-lg">
-              Bảng tổng hợp các công cụ Trí tuệ nhân tạo và Kỹ thuật lập trình
-              được sử dụng để xây dựng dự án.
+            <p className="text-[#8B1E1E]/80 mb-12 max-w-2xl text-lg font-serif italic">
+              "Quy trình nghiên cứu và tổng hợp tư liệu khoa học."
             </p>
           </RevealOnScroll>
 
-          {/* Grid Tools: Cũng bay vào lần lượt */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {aiTools.map((tool, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            {contentTools.map((tool, idx) => (
               <RevealOnScroll key={idx} delay={idx * 150} className="h-full">
-                <div className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div
-                    className={`px-6 py-4 border-b border-stone-100 flex items-center justify-between ${tool.color}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {tool.icon}
-                      <span className="font-bold text-lg">{tool.toolName}</span>
+                <div className="group bg-white rounded-3xl border border-[#C5A065]/40 shadow-md hover:shadow-2xl hover:shadow-[#8B1E1E]/20 overflow-hidden flex flex-col h-full hover:-translate-y-2 transition-all duration-500">
+
+                  {/* PHẦN HÌNH ẢNH */}
+                  <div className="relative h-56 overflow-hidden">
+                    <div className="absolute inset-0 bg-[#8B1E1E]/20 group-hover:bg-transparent transition-colors duration-500 z-10 mix-blend-multiply"></div>
+                    <img
+                      src={tool.image}
+                      alt={tool.name}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-[#2c1b12] to-transparent z-20 flex items-center gap-3">
+                      <div className="p-2 bg-[#8B1E1E] rounded-lg shadow-lg">
+                        {tool.icon}
+                      </div>
+                      <span className="font-bold text-xl text-[#f5efe2]">{tool.name}</span>
                     </div>
-                    <span className="text-xs font-semibold uppercase tracking-wider opacity-80">
-                      AI Tool
-                    </span>
                   </div>
-                  <div className="p-6 flex-1">
-                    <h4 className="font-bold text-stone-800 mb-3 text-lg">
+
+                  <div className="p-8 flex-1">
+                    <h4 className="font-bold text-[#8B1E1E] mb-4 text-xl border-b border-[#C5A065]/30 pb-2">
                       {tool.description}
                     </h4>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {tool.details.map((detail, i) => (
                         <li
                           key={i}
-                          className="flex items-start gap-2 text-stone-600"
+                          className="flex items-start gap-3 text-gray-700"
                         >
-                          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-stone-400 shrink-0" />
-                          <span className="text-sm leading-relaxed">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C5A065] shrink-0" />
+                          <span className="text-base leading-relaxed font-medium">
                             {detail}
                           </span>
                         </li>
@@ -271,34 +286,45 @@ export default function AIAppendix() {
             ))}
           </div>
 
-          {/* Phần Core Technology: Bay vào cuối cùng */}
+          {/* Tài liệu tham khảo - Style cũ nhưng tinh chỉnh */}
           <RevealOnScroll delay={200}>
-            <div className="bg-[#2c1b12] text-amber-50 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden transform transition-transform hover:scale-[1.01]">
-              {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#9b2f2f] opacity-10 rounded-full blur-3xl -mr-16 -mt-16 animate-pulse"></div>
+            <div className="bg-[#2c1b12] text-[#f5efe2] rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden border border-[#C5A065]/30">
+              {/* Decorative Background */}
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[#8B1E1E] opacity-20 rounded-full blur-[100px] -mr-20 -mt-20"></div>
+              <div className="absolute bottom-0 left-0 w-60 h-60 bg-[#C5A065] opacity-10 rounded-full blur-[80px] -ml-10 -mb-10"></div>
 
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <Palette className="w-6 h-6 text-amber-400" />
-                  Công nghệ cốt lõi (Core Tech Stack)
+                <h3 className="text-3xl font-bold mb-8 flex items-center gap-3 text-[#C5A065]">
+                  <BookOpen className="w-8 h-8" />
+                  Nguồn Tài Liệu Tham Khảo
                 </h3>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {techStack.map((tech, idx) => (
-                    <RevealOnScroll key={idx} delay={400 + idx * 100}>
-                      <div className="flex gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors h-full">
-                        <div className="mt-1 bg-white/10 p-2 rounded-lg h-fit">
-                          {tech.icon}
+                <div className="space-y-4">
+                  {references.map((ref, idx) => (
+                    <RevealOnScroll key={idx} delay={300 + idx * 100}>
+                      <a
+                        href={ref.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-5 p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#8B1E1E]/40 hover:border-[#C5A065]/50 transition-all duration-300 group"
+                      >
+                        <div className="bg-white/10 p-3 rounded-xl group-hover:scale-110 transition-transform">
+                          <LinkIcon className="w-6 h-6 text-[#C5A065]" />
                         </div>
-                        <div>
-                          <h4 className="text-xl font-bold text-amber-400 mb-2">
-                            {tech.name}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1.5">
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#2c1b12] bg-[#C5A065] px-2 py-0.5 rounded-sm">
+                              {ref.type}
+                            </span>
+                          </div>
+                          <h4 className="text-lg font-bold text-[#f5efe2] mb-1 group-hover:text-[#C5A065] transition-colors truncate">
+                            {ref.title}
                           </h4>
-                          <p className="text-stone-300 text-sm leading-relaxed opacity-90">
-                            {tech.desc}
+                          <p className="text-white/40 text-sm truncate font-mono">
+                            {ref.url}
                           </p>
                         </div>
-                      </div>
+                      </a>
                     </RevealOnScroll>
                   ))}
                 </div>
