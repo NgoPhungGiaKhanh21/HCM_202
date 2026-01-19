@@ -21,11 +21,11 @@ export default function Header() {
         {/* --- LOGO + TITLE --- */}
         <Link
           to="/"
-          className="flex items-center gap-3 no-underline text-black dark:text-white group shrink-0"
+          className="flex items-center gap-4 no-underline text-black dark:text-white group shrink-0 max-w-[300px] md:max-w-md"
           aria-label="Trang chủ"
         >
           <svg
-            className="w-14 h-14 shrink-0 transform transition-transform duration-200 group-hover:scale-105"
+            className="w-12 h-12 md:w-16 md:h-16 shrink-0 transform transition-transform duration-200 ease-out group-hover:scale-105 group-hover:-rotate-3"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
@@ -39,12 +39,15 @@ export default function Header() {
             </g>
           </svg>
 
-          <div className="leading-tight whitespace-nowrap">
-            <div className="text-sm md:text-lg font-extrabold uppercase tracking-wide group-hover:text-[#a40000] dark:group-hover:text-[#ff4d4d]">
-              Xây dựng Đảng &amp; Nhà nước
+          <div className="leading-tight">
+            {/* Câu trích dẫn chính */}
+            <div className="text-xs md:text-base font-black italic transition-colors duration-200 group-hover:text-[#a40000] dark:group-hover:text-[#ff4d4d] leading-snug">
+              “... Tham nhũng là từ trong Đảng mà ra....”
             </div>
-            <div className="text-xs text-gray-700 dark:text-gray-400 italic font-medium">
-              Liêm chính – Kiến tạo – Vì dân
+
+            {/* Vế câu hỏi/Thách thức */}
+            <div className="text-[10px] md:text-xs mt-1 text-gray-700 dark:text-gray-400 font-medium uppercase tracking-wider transition-colors duration-200 group-hover:text-gray-900 dark:group-hover:text-gray-200">
+              Thách thức nào cho việc xây dựng Đảng &amp; Nhà nước hiện nay?
             </div>
           </div>
         </Link>
