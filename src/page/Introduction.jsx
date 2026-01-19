@@ -7,14 +7,13 @@ import intro3 from "../../public/image/phan3.png";
 import intro4 from "../../public/timeline_img/intro4.png";
 import intro5 from "../../public/image/phan5.png";
 
-// ... (Giữ nguyên phần RevealOnScroll và data sections) ...
 
-// --- COMPONENT HIỆU ỨNG (Giữ nguyên) ---
 const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
+    const currentRef = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -24,20 +23,19 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
       },
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
-    if (ref.current) observer.observe(ref.current);
+    if (currentRef) observer.observe(currentRef);
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out transform ${
-        isVisible
-          ? "opacity-100 translate-y-0 scale-100"
-          : "opacity-0 translate-y-12 scale-95"
-      } ${className}`}
+      className={`transition-all duration-1000 ease-out transform ${isVisible
+        ? "opacity-100 translate-y-0 scale-100"
+        : "opacity-0 translate-y-12 scale-95"
+        } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -273,7 +271,7 @@ const scrollToSection = (id) => {
   }
 };
 
-export default function Introduction({ imageFit = "contain" }) {
+export default function Introduction() {
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans w-full overflow-x-hidden">
       <div className="sticky top-0 z-50">
@@ -365,79 +363,84 @@ export default function Introduction({ imageFit = "contain" }) {
                   </span>
                 </div>
 
-                <div className="flex flex-col lg:flex-row h-full">
-                  {/* Cột chữ: Giữ nguyên w-35rem */}
-                  <div className="w-full lg:w-[35rem] flex-shrink-0 p-8 md:p-10 lg:p-12 space-y-6">
-                    {s.description && (
-                      <blockquote className="w-full border-l-4 border-red-500 pl-4 text-base md:text-lg italic text-stone-700 leading-relaxed bg-red-50/50 p-3 rounded-md">
-                        {s.description}
-                      </blockquote>
-                    )}
-
-                    <ul className="w-full space-y-3 pt-2">
-                      {s.points.map((pt, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-3 text-base leading-relaxed text-stone-800 w-full"
-                        >
-                          <svg
-                            className="w-5 h-5 text-red-500 flex-shrink-0 mt-1"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M10 12.58l-1.94 1.94-2.83-2.83-1.41 1.41L10 15.4l5.18-5.18-1.41-1.41-2.83 2.83zM10 2a8 8 0 100 16 8 8 0 000-16z" />
-                          </svg>
-                          <span className="font-medium flex-1">{pt}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {s.bulletGroups && (
-                      <div className="flex flex-col gap-5 pt-4 w-full">
-                        {s.bulletGroups.map((group, i) => (
-                          <RevealOnScroll
-                            key={i}
-                            delay={i * 100}
-                            className="w-full"
-                          >
-                            <div className="w-full rounded-xl border border-stone-200 bg-stone-50/70 p-5 shadow-inner hover:bg-white hover:shadow-md transition-all duration-200">
-                              <div className="border-b border-red-100 pb-2 mb-3">
-                                <p className="text-sm font-bold text-red-600 uppercase tracking-wide">
-                                  {group.title}
-                                </p>
-                              </div>
-                              <ul className="space-y-3 text-sm text-stone-700">
-                                {group.items.map((it, idx2) => (
-                                  <li
-                                    key={idx2}
-                                    className="flex gap-3 items-start"
-                                  >
-                                    <span className="text-red-500 font-bold text-lg leading-none mt-[-1px] select-none">
-                                      •
-                                    </span>
-                                    <span className="leading-relaxed text-stone-800">
-                                      {it}
-                                    </span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </RevealOnScroll>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Cột ảnh: Giữ nguyên */}
-                  <div className="w-full lg:flex-1 relative min-h-[300px] lg:min-h-auto bg-stone-100">
+                <div className="flex flex-col">
+                  {/* Ảnh ở trên cùng - Full width */}
+                  <div className="w-full relative h-[400px] md:h-[500px] bg-stone-100">
                     <div
-                      className={`absolute inset-0 w-full h-full bg-left-top bg-no-repeat bg-${imageFit}`}
+                      className="absolute inset-0 w-full h-full bg-center bg-cover bg-no-repeat"
                       style={{
                         backgroundImage: s.image,
-                        backgroundSize: imageFit,
                       }}
                     />
-                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent hidden lg:block"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/30"></div>
+                  </div>
+
+                  {/* Nội dung ở dưới - Chia cột để không quá dài */}
+                  <div className="p-8 md:p-10 lg:p-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      {/* Cột trái: Description và Points */}
+                      <div className="space-y-6">
+                        {s.description && (
+                          <blockquote className="border-l-4 border-red-500 pl-4 text-base md:text-lg italic text-stone-700 leading-relaxed bg-red-50/50 p-3 rounded-md">
+                            {s.description}
+                          </blockquote>
+                        )}
+
+                        <ul className="space-y-3">
+                          {s.points.map((pt, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-3 text-base leading-relaxed text-stone-800"
+                            >
+                              <svg
+                                className="w-5 h-5 text-red-500 flex-shrink-0 mt-1"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M10 12.58l-1.94 1.94-2.83-2.83-1.41 1.41L10 15.4l5.18-5.18-1.41-1.41-2.83 2.83zM10 2a8 8 0 100 16 8 8 0 000-16z" />
+                              </svg>
+                              <span className="font-medium">{pt}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Cột phải: Bullet Groups */}
+                      {s.bulletGroups && (
+                        <div className="flex flex-col gap-5">
+                          {s.bulletGroups.map((group, i) => (
+                            <RevealOnScroll
+                              key={i}
+                              delay={i * 100}
+                              className="w-full"
+                            >
+                              <div className="rounded-xl border border-stone-200 bg-stone-50/70 p-5 shadow-inner hover:bg-white hover:shadow-md transition-all duration-200">
+                                <div className="border-b border-red-100 pb-2 mb-3">
+                                  <p className="text-sm font-bold text-red-600 uppercase tracking-wide">
+                                    {group.title}
+                                  </p>
+                                </div>
+                                <ul className="space-y-3 text-sm text-stone-700">
+                                  {group.items.map((it, idx2) => (
+                                    <li
+                                      key={idx2}
+                                      className="flex gap-3 items-start"
+                                    >
+                                      <span className="text-red-500 font-bold text-lg leading-none mt-[-1px] select-none">
+                                        •
+                                      </span>
+                                      <span className="leading-relaxed text-stone-800">
+                                        {it}
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </RevealOnScroll>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </section>

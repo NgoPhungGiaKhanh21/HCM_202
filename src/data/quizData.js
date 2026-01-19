@@ -1,332 +1,145 @@
 export const quizQuestions = [
   {
     id: 1,
-    question: "Hoàn cảnh lịch sử nước ta sau năm 1975 được mô tả như thế nào?",
+    question:
+      "Theo tư tưởng Hồ Chí Minh, bản chất của tham nhũng được ví như điều gì?",
     options: [
-      {
-        id: "A",
-        text: "Đất nước hòa bình, độc lập, thống nhất, cả nước quá độ lên TBCN.",
-      },
-      {
-        id: "B",
-        text: "Đất nước có nhiều thuận lợi, không phải khắc phục hậu quả chiến tranh.",
-      },
-      {
-        id: "C",
-        text: "Hòa bình, độc lập, thống nhất, cả nước quá độ lên CNXH, nhưng phải khắc phục hậu quả chiến tranh nặng nề.",
-      },
-      {
-        id: "D",
-        text: "Các nước XHCN không bộc lộ khó khăn, không bị bao vây cấm vận.",
-      },
+      { id: "A", text: "Giặc ngoại xâm" },
+      { id: "B", text: "Giặc nội xâm" },
+      { id: "C", text: "Bạn đồng minh của nhân dân" },
+      { id: "D", text: "Công cụ phát triển kinh tế" },
     ],
-    answer: "C",
+    answer: "B",
     explanation:
-      "Sau 1975, nước ta thuận lợi là hòa bình, thống nhất nhưng gặp khó khăn lớn là hậu quả chiến tranh và nền kinh tế lạc hậu.",
+      'Hồ Chí Minh gọi tham nhũng, tham ô, lãng phí, quan liêu là "giặc nội xâm" hay "giặc ở trong lòng" vì nó phá hoại tổ chức từ bên trong, nguy hiểm không kém giặc ngoại xâm.',
   },
   {
     id: 2,
     question:
-      "Sau đại thắng mùa Xuân năm 1975, nhiệm vụ đầu tiên, bức thiết nhất được Đảng đặt ra là gì?",
+      "Hồ Chí Minh xác định vị trí của cán bộ nhà nước đối với nhân dân là gì?",
     options: [
-      { id: "A", text: "Tiến hành đồng thời ba cuộc cách mạng." },
-      { id: "B", text: "Đẩy mạnh công nghiệp hóa xã hội chủ nghĩa." },
-      { id: "C", text: "Lãnh đạo thống nhất nước nhà về mặt nhà nước." },
-      { id: "D", text: "Xóa bỏ chế độ người bóc lột người." },
+      { id: "A", text: "Quan cách mạng" },
+      { id: "B", text: "Cha mẹ của dân" },
+      { id: "C", text: "Công bộc, đầy tớ của dân" },
+      { id: "D", text: "Lãnh đạo tối cao" },
     ],
     answer: "C",
     explanation:
-      "Để phát huy sức mạnh toàn dân tộc và tạo điều kiện thống nhất các lĩnh vực khác, nhiệm vụ đầu tiên là thống nhất về mặt nhà nước.",
+      'Người khẳng định cán bộ từ trên xuống dưới phải là "công bộc", là người phục vụ nhân dân, tuyệt đối không được mang thái độ "quan cách mạng" xa dân, hách dịch.',
   },
   {
     id: 3,
     question:
-      "Hội nghị nào của BCH Trung ương Đảng (khóa III) đã chủ trương 'Hoàn thành thống nhất nước nhà, đưa cả nước tiến nhanh, tiến mạnh, tiến vững chắc lên CNXH'?",
+      '"Bệnh mẹ" sinh ra mọi thói hư tật xấu dẫn đến tham nhũng theo Hồ Chí Minh là gì?',
     options: [
-      { id: "A", text: "Hội nghị lần thứ 20 (8-1975)." },
-      { id: "B", text: "Hội nghị lần thứ 24 (8-1975)." },
-      { id: "C", text: "Hội nghị lần thứ 26 (11-1975)." },
-      { id: "D", text: "Hội nghị lần thứ 25 (11-1975)." },
+      { id: "A", text: "Chủ nghĩa cá nhân" },
+      { id: "B", text: "Cơ chế thị trường" },
+      { id: "C", text: "Thiếu hệ thống pháp luật" },
+      { id: "D", text: "Sự nghèo đói" },
     ],
-    answer: "B",
+    answer: "A",
     explanation:
-      "Hội nghị lần thứ 24 (8/1975) đề ra nhiệm vụ chiến lược là hoàn thành thống nhất nước nhà và đưa cả nước đi lên CNXH.",
+      "Hồ Chí Minh coi chủ nghĩa cá nhân là gốc rễ của mọi thói hư tật xấu, làm cán bộ quên lợi ích chung, chỉ lo vun vén cho bản thân, từ đó dẫn tới tham nhũng, thoái hóa.",
   },
   {
     id: 4,
     question:
-      "Cuộc Tổng tuyển cử bầu Quốc hội chung cho cả nước Việt Nam thống nhất được tiến hành vào thời gian nào?",
+      "Theo quan điểm của Hồ Chí Minh, công tác chỉnh đốn Đảng cần được thực hiện với tần suất như thế nào?",
     options: [
-      { id: "A", text: "3-7-1976." },
-      { id: "B", text: "15-11-1975." },
-      { id: "C", text: "25-4-1976." },
-      { id: "D", text: "3-1-1976." },
+      { id: "A", text: "Chỉ khi có sai phạm nghiêm trọng" },
+      { id: "B", text: "Định kỳ 5 năm một lần" },
+      { id: "C", text: "Thường xuyên như rửa mặt hằng ngày" },
+      { id: "D", text: "Khi nhân dân có ý kiến phản ánh" },
     ],
     answer: "C",
     explanation:
-      "Ngày 25/4/1976 là ngày hội lớn của toàn dân, bầu ra Quốc hội chung của cả nước (Quốc hội khóa VI).",
+      "Hồ Chí Minh ví việc chỉnh đốn Đảng, tự phê bình và phê bình như rửa mặt hằng ngày, phải làm thường xuyên, liên tục để giữ gìn sự trong sạch của Đảng.",
   },
   {
     id: 5,
     question:
-      "Tại Kỳ họp thứ nhất của Quốc hội nước Việt Nam thống nhất (6-7/1976), thành phố Sài Gòn đã được đổi tên là gì?",
+      'Hành vi "lấy của công dùng vào việc tư" trong tư tưởng Hồ Chí Minh là biểu hiện của khái niệm nào?',
     options: [
-      { id: "A", text: "Thành phố Thống Nhất." },
-      { id: "B", text: "Thành phố Hồ Chí Minh." },
-      { id: "C", text: "Thành phố Hòa Bình." },
-      { id: "D", text: "Thành phố Việt Nam." },
+      { id: "A", text: "Lãng phí" },
+      { id: "B", text: "Quan liêu" },
+      { id: "C", text: "Tham ô" },
+      { id: "D", text: "Tiết kiệm" },
     ],
-    answer: "B",
+    answer: "C",
     explanation:
-      "Quốc hội khóa VI đã quyết định đổi tên thành phố Sài Gòn - Gia Định là Thành phố Hồ Chí Minh.",
+      "Tham ô là hành vi lợi dụng chức vụ, quyền hạn để chiếm đoạt tài sản công làm tài sản riêng, là biểu hiện điển hình của suy thoái đạo đức cách mạng.",
   },
   {
     id: 6,
     question:
-      "Thành tựu 'Hoàn thành thống nhất nước nhà về mặt nhà nước' có ý nghĩa quan trọng nhất là gì?",
+      "Theo Hồ Chí Minh, yếu tố nào quyết định trực tiếp đến bản chất và hiệu quả hoạt động của Nhà nước?",
     options: [
-      {
-        id: "A",
-        text: "Là cơ sở để đưa cả nước tiến thẳng lên chủ nghĩa tư bản.",
-      },
-      {
-        id: "B",
-        text: "Là thành tựu thể hiện sự lãnh đạo của Chính phủ cách mạng lâm thời.",
-      },
-      {
-        id: "C",
-        text: "Là cơ sở thống nhất các lĩnh vực khác, tạo sức mạnh toàn diện, là điều kiện tiên quyết đưa cả nước lên CNXH.",
-      },
-      {
-        id: "D",
-        text: "Là điều kiện để tạm hoãn công cuộc xây dựng chủ nghĩa xã hội.",
-      },
+      { id: "A", text: "Sự giàu có về tài nguyên" },
+      { id: "B", text: "Sự trong sạch, vững mạnh của Đảng" },
+      { id: "C", text: "Sự ủng hộ của quốc tế" },
+      { id: "D", text: "Số lượng đảng viên" },
     ],
-    answer: "C",
+    answer: "B",
     explanation:
-      "Thống nhất nhà nước là nền tảng chính trị pháp lý để thống nhất kinh tế, văn hóa, xã hội và bảo vệ tổ quốc.",
+      "Vì Đảng là lực lượng lãnh đạo Nhà nước và xã hội, nên nếu Đảng trong sạch, vững mạnh thì Nhà nước mới hoạt động hiệu quả, thực sự là Nhà nước của dân, do dân, vì dân.",
   },
   {
     id: 7,
     question:
-      "Đại hội đại biểu toàn quốc lần thứ IV của Đảng họp vào thời gian nào?",
+      "Tại sao tham nhũng được Hồ Chí Minh và Đảng ta đánh giá là nguy hiểm hơn cả giặc ngoại xâm trong một số phương diện?",
     options: [
-      { id: "A", text: "14 đến 20-12-1975." },
-      { id: "B", text: "24 đến 6-7-1976." },
-      { id: "C", text: "14 đến 20-12-1976." },
-      { id: "D", text: "27 đến 31-3-1982." },
+      { id: "A", text: "Vì nó phá hoại từ bên trong tổ chức" },
+      { id: "B", text: "Vì nó có vũ khí hiện đại" },
+      { id: "C", text: "Vì nó đến từ các thế lực thù địch bên ngoài" },
+      { id: "D", text: "Vì nó luôn công khai phá hoại" },
     ],
-    answer: "C",
+    answer: "A",
     explanation:
-      "Đại hội IV diễn ra từ 14 đến 20/12/1976 tại Hà Nội, là đại hội toàn thắng của sự nghiệp giải phóng dân tộc.",
+      "Tham nhũng, suy thoái diễn ra ngay trong nội bộ, làm mục ruỗng tổ chức, làm mất niềm tin của nhân dân, nên mức độ nguy hiểm rất lớn và khó nhận diện hơn kẻ thù bên ngoài.",
   },
   {
     id: 8,
     question:
-      "Một trong những quyết định quan trọng về tổ chức của Đảng tại Đại hội IV (12/1976) là gì?",
+      "Để xây dựng Đảng trong sạch, vững mạnh, Hồ Chí Minh luôn nhắc nhở cán bộ, đảng viên phải thấm nhuần những phẩm chất đạo đức nào?",
     options: [
-      { id: "A", text: "Bầu đồng chí Trường Chinh làm Tổng Bí thư." },
-      {
-        id: "B",
-        text: "Đổi tên Đảng Lao động Việt Nam thành Đảng Cộng sản Việt Nam.",
-      },
-      { id: "C", text: "Bầu đồng chí Phạm Văn Đồng làm Chủ tịch Đảng." },
-      { id: "D", text: "Quyết định thành lập Ủy ban dự thảo Hiến pháp mới." },
+      { id: "A", text: "Cần, Kiệm, Liêm, Chính" },
+      { id: "B", text: "Nhân, Nghĩa, Lễ, Trí" },
+      { id: "C", text: "Tự do, Bình đẳng, Bác ái" },
+      { id: "D", text: "Thông minh, Sáng tạo" },
     ],
-    answer: "B",
+    answer: "A",
     explanation:
-      "Đại hội IV quyết định đổi tên Đảng Lao động Việt Nam thành Đảng Cộng sản Việt Nam và bầu đ/c Lê Duẩn làm Tổng Bí thư.",
+      '"Cần, Kiệm, Liêm, Chính, Chí công vô tư" là hệ chuẩn đạo đức cách mạng mà Hồ Chí Minh coi là nền tảng để chống chủ nghĩa cá nhân và tham nhũng.',
   },
   {
     id: 9,
     question:
-      "Đại hội IV xác định đặc điểm nào là lớn nhất, quy định nội dung, hình thức, bước đi của cách mạng XHCN ở nước ta?",
+      "Một trong những giải pháp dựa vào dân để phòng, chống tham nhũng theo tư tưởng Hồ Chí Minh là gì?",
     options: [
-      { id: "A", text: "Tổ quốc đã hòa bình, độc lập, thống nhất." },
+      { id: "A", text: "Chỉ yêu cầu dân đóng thuế" },
       {
         id: "B",
-        text: "Cuộc đấu tranh giữa thế lực cách mạng và phản cách mạng còn gay go.",
+        text: "Huy động nhân dân giám sát, phê bình, kiến nghị bãi miễn cán bộ hư hỏng",
       },
-      {
-        id: "C",
-        text: "Phải khắc phục những hậu quả nặng nề của chiến tranh.",
-      },
-      {
-        id: "D",
-        text: "Từ sản xuất nhỏ tiến thẳng lên CNXH, bỏ qua giai đoạn phát triển tư bản chủ nghĩa.",
-      },
+      { id: "C", text: "Cấm nhân dân bàn luận chính trị" },
+      { id: "D", text: "Để nhân dân tự xử lý cán bộ vi phạm" },
     ],
-    answer: "D",
+    answer: "B",
     explanation:
-      "Đây là đặc điểm bao trùm, chi phối các đặc điểm khác và quy định tính chất khó khăn, lâu dài của thời kỳ quá độ.",
+      "Hồ Chí Minh khẳng định nhân dân có quyền giám sát, phê bình và bầu hoặc bãi miễn đại biểu của mình; muốn chống tham nhũng hiệu quả phải dựa vào sức mạnh và tiếng nói của nhân dân.",
   },
   {
     id: 10,
     question:
-      "Đại hội IV xác định ba cuộc cách mạng phải tiến hành đồng thời, trong đó cuộc cách mạng nào là then chốt?",
+      "Nguyên tắc xử lý kỷ luật đối với hành vi tham nhũng và cán bộ thoái hóa theo tinh thần tư tưởng Hồ Chí Minh và đường lối hiện nay là gì?",
     options: [
-      { id: "A", text: "Quan hệ sản xuất là then chốt." },
-      { id: "B", text: "Khoa học - kỹ thuật là then chốt." },
-      { id: "C", text: "Tư tưởng - văn hóa là then chốt." },
-      { id: "D", text: "Chuyên chính vô sản là then chốt." },
-    ],
-    answer: "B",
-    explanation:
-      "Đại hội IV xác định: QHSX là mở đường, Tư tưởng-văn hóa đi trước một bước, Khoa học-kỹ thuật là then chốt.",
-  },
-  {
-    id: 11,
-    question:
-      "Đường lối xây dựng, phát triển kinh tế của Đại hội IV nhấn mạnh điều gì?",
-    options: [
-      { id: "A", text: "Ưu tiên phát triển nông nghiệp và công nghiệp nhẹ." },
-      { id: "B", text: "Kết hợp kinh tế toàn dân với kinh tế tư nhân." },
-      { id: "C", text: "Tập trung phát triển kinh tế địa phương." },
-      {
-        id: "D",
-        text: "Ưu tiên phát triển công nghiệp nặng hợp lý trên cơ sở phát triển nông nghiệp và công nghiệp nhẹ.",
-      },
-    ],
-    answer: "D",
-    explanation:
-      "Chủ trương này nhằm xây dựng cơ sở vật chất kỹ thuật, nhưng thực tế việc ưu tiên quá mức CN nặng khi nông nghiệp còn yếu là sai lầm.",
-  },
-  {
-    id: 12,
-    question:
-      "Hạn chế lớn trong việc đề ra chỉ tiêu và thời gian hoàn thành xây dựng CNXH của Đại hội IV là gì?",
-    options: [
-      { id: "A", text: "Chưa xác định CNH là nhiệm vụ trung tâm." },
-      { id: "B", text: "Chưa tổng kết kinh nghiệm miền Bắc." },
-      {
-        id: "C",
-        text: "Dự kiến hoàn thành quá trình đưa nền kinh tế lên sản xuất lớn XHCN trong 20 năm là nóng vội.",
-      },
-      { id: "D", text: "Không đề ra ba cuộc cách mạng đồng thời." },
+      { id: "A", text: "Xử lý nội bộ, đóng cửa bảo nhau" },
+      { id: "B", text: "Có vùng cấm cho lãnh đạo cấp cao" },
+      { id: "C", text: "Nghiêm minh, công bằng, không có vùng cấm" },
+      { id: "D", text: "Khoan hồng cho người có chức vụ" },
     ],
     answer: "C",
     explanation:
-      "Đảng đã chủ quan, nóng vội khi mong muốn hoàn thành quá độ lên CNXH trong thời gian quá ngắn (khoảng 20 năm).",
-  },
-  {
-    id: 13,
-    question:
-      "Hội nghị nào được coi là bước đột phá đầu tiên đổi mới kinh tế với chủ trương 'làm cho sản xuất bung ra'?",
-    options: [
-      { id: "A", text: "Hội nghị Trung ương 4 (12-1976)." },
-      { id: "B", text: "Hội nghị Trung ương 6 (8-1979)." },
-      { id: "C", text: "Hội nghị Trung ương 8 (6-1985)." },
-      { id: "D", text: "Hội nghị Trung ương 10 (9-1980)." },
-    ],
-    answer: "B",
-    explanation:
-      "Nghị quyết Trung ương 6 (khóa IV) tháng 8/1979 là bước đột phá đầu tiên, tháo gỡ rào cản để sản xuất bung ra.",
-  },
-  {
-    id: 14,
-    question:
-      "Văn kiện nào của Ban Bí thư (1/1981) đã hợp thức hóa 'khoán chui', thực hiện khoán sản phẩm đến nhóm và người lao động?",
-    options: [
-      { id: "A", text: "Nghị quyết 10 của Bộ Chính trị." },
-      { id: "B", text: "Quyết định số 25-CP." },
-      { id: "C", text: "Chỉ thị số 100-CT/TW." },
-      { id: "D", text: "Quyết định số 26-CP." },
-    ],
-    answer: "C",
-    explanation:
-      "Chỉ thị 100 (Khoán 100) là bước đột phá trong nông nghiệp, chuyển từ khoán việc sang khoán sản phẩm.",
-  },
-  {
-    id: 15,
-    question:
-      "Chính phủ đã ban hành văn kiện nào (1/1981) về quyền chủ động SXKD và tự chủ tài chính của các xí nghiệp quốc doanh?",
-    options: [
-      { id: "A", text: "Chỉ thị số 100-CT/TW." },
-      { id: "B", text: "Quyết định số 25-CP." },
-      { id: "C", text: "Nghị quyết Trung ương 6." },
-      { id: "D", text: "Hiến pháp năm 1980." },
-    ],
-    answer: "B",
-    explanation:
-      "Quyết định 25-CP là bước đột phá trong công nghiệp, trao quyền tự chủ một phần cho xí nghiệp (Kế hoạch 3 phần).",
-  },
-  {
-    id: 16,
-    question:
-      "Từ tháng 4-1975, tập đoàn Pôn Pốt đã tăng cường chống Việt Nam và gây xung đột ở khu vực biên giới nào?",
-    options: [
-      { id: "A", text: "Biên giới phía Bắc." },
-      { id: "B", text: "Biên giới phía Đông." },
-      { id: "C", text: "Biên giới phía Tây." },
-      { id: "D", text: "Biên giới phía Tây Nam." },
-    ],
-    answer: "D",
-    explanation:
-      "Tập đoàn Pôn Pốt đã tiến hành nhiều cuộc xâm lấn biên giới Tây Nam, tàn sát dân thường dã man.",
-  },
-  {
-    id: 17,
-    question:
-      "Quân tình nguyện Việt Nam phối hợp và giúp đỡ Campuchia tổng tiến công, đánh đổ chế độ diệt chủng Pôn Pốt, giải phóng Phnôm Pênh vào thời gian nào?",
-    options: [
-      { id: "A", text: "Cuối tháng 12-1978." },
-      { id: "B", text: "Ngày 7-1-1979." },
-      { id: "C", text: "Ngày 17-2-1979." },
-      { id: "D", text: "Ngày 18-2-1979." },
-    ],
-    answer: "B",
-    explanation:
-      "Ngày 7/1/1979, thủ đô Phnôm Pênh được giải phóng, chế độ diệt chủng Pôn Pốt bị lật đổ.",
-  },
-  {
-    id: 18,
-    question:
-      "Cuộc tấn công toàn tuyến biên giới phía Bắc của Trung Quốc bắt đầu vào ngày, tháng, năm nào?",
-    options: [
-      { id: "A", text: "5-3-1979." },
-      { id: "B", text: "17-2-1979." },
-      { id: "C", text: "18-4-1979." },
-      { id: "D", text: "26-12-1978." },
-    ],
-    answer: "B",
-    explanation:
-      "Sáng 17/2/1979, quân đội Trung Quốc huy động lực lượng lớn tấn công toàn tuyến biên giới phía Bắc nước ta.",
-  },
-  {
-    id: 19,
-    question:
-      "Kết quả của giai đoạn 1975-1981 nhìn chung đã không đạt chỉ tiêu do Đại hội IV đề ra, với biểu hiện nào sau đây?",
-    options: [
-      { id: "A", text: "Lạm phát được kiểm soát ở mức thấp." },
-      { id: "B", text: "Xuất khẩu tăng gấp 4-5 lần nhập khẩu." },
-      {
-        id: "C",
-        text: "Lưu thông, phân phối rối ren, giá cả tăng vọt, nhập khẩu tăng gấp 4-5 lần xuất khẩu.",
-      },
-      {
-        id: "D",
-        text: "Đời sống của nhân dân, cán bộ, công nhân viên, lực lượng vũ trang rất ổn định.",
-      },
-    ],
-    answer: "C",
-    explanation:
-      "Giai đoạn này kinh tế mất cân đối nghiêm trọng, lạm phát cao, đời sống nhân dân vô cùng khó khăn.",
-  },
-  {
-    id: 20,
-    question:
-      "Nguyên nhân chủ quan nào đã làm trầm trọng thêm những khó khăn về kinh tế-xã hội trong giai đoạn 1975-1981?",
-    options: [
-      { id: "A", text: "Nền kinh tế thấp kém, bị bao vây cấm vận." },
-      { id: "B", text: "Thiên tai nặng nề liên tiếp xảy ra." },
-      { id: "C", text: "Chiến tranh biên giới." },
-      {
-        id: "D",
-        text: "Khuyết điểm, sai lầm của Đảng, Nhà nước về lãnh đạo và quản lý kinh tế, xã hội.",
-      },
-    ],
-    answer: "D",
-    explanation:
-      "Đảng đã thừa nhận những sai lầm trong bố trí cơ cấu kinh tế, cải tạo XHCN nóng vội và duy trì cơ chế bao cấp quá lâu.",
+      "Việc xử lý sai phạm phải dựa trên nguyên tắc pháp luật, kỷ luật Đảng nghiêm minh, bất kể chức vụ, không có ngoại lệ, qua đó giữ vững kỷ cương và củng cố niềm tin của nhân dân.",
   },
 ];
