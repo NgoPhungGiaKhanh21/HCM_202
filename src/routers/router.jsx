@@ -11,6 +11,9 @@ import Introduction from "../page/Introduction";
 import QAPage from "../page/Q&A";
 import ThankYouPage from "../page/ThankYou";
 import AIAppendix from "../page/AI_Comment";
+import VideoPage from "../page/Video";
+import Exhibition from "../page/Exhibition";
+import Document from "../page/Document";
 
 const router = createBrowserRouter([
   {
@@ -24,9 +27,12 @@ const router = createBrowserRouter([
       { path: "timeline", element: <TimeLine /> },
       { path: "quiz", element: <TakeQuiz /> },
       { path: "introduction", element: <Introduction /> },
+      { path: "documents", element: <Document /> },
+      { path: "exhibition", element: <Exhibition /> },
       { path: "qa", element: <QAPage /> },
       { path: "thank-you", element: <ThankYouPage /> },
       { path: "phu-luc-ai", element: <AIAppendix /> },
+      { path: "video", element: <VideoPage /> },
     ],
   },
 ]);

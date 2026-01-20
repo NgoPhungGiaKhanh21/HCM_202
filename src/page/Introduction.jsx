@@ -1,142 +1,263 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
-import intro1 from "../../public/timeline_img/intro1.png";
-import intro2 from "../../public/timeline_img/intro2.png";
-import intro3 from "../../public/timeline_img/intro3.png";
+// Import ảnh của bạn...
+import intro1 from "../../public/image/tutuonghcm.png";
+import intro2 from "../../public/image/thamnhung.png";
+import intro3 from "../../public/image/phan3.png";
 import intro4 from "../../public/timeline_img/intro4.png";
-// Cập nhật cấu trúc accent: sử dụng màu sắc hiện đại hơn
+import intro5 from "../../public/image/phan5.png";
+
+
+const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const currentRef = ref.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+    if (currentRef) observer.observe(currentRef);
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-1000 ease-out transform ${isVisible
+        ? "opacity-100 translate-y-0 scale-100"
+        : "opacity-0 translate-y-12 scale-95"
+        } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
+
+// --- DỮ LIỆU SECTIONS (5 Phần I - V) ---
 const sections = [
   {
-    id: "overview",
-    title: "Tổng quan giai đoạn 1975-1981",
-    // Cải tiến gradient: dùng màu đỏ ấm và vàng đất
-    accent: "from-red-700/90 via-amber-600/90 to-stone-800/90",
+    id: "i-hochiminh-overview",
+    title: "I. Tư tưởng Hồ Chí Minh về xây dựng Đảng và Nhà nước",
+    accent: "from-teal-700/90 via-cyan-600/90 to-blue-700/90",
     description:
-      "Giai đoạn 1975–1981: Đảng Cộng sản Việt Nam lãnh đạo cả nước quá độ lên CNXH và bảo vệ Tổ quốc. Thuận lợi: sức mạnh tổng hợp sau thống nhất, niềm tin và đoàn kết toàn dân. Khó khăn: hậu quả chiến tranh nặng nề, kinh tế kiệt quệ, bối cảnh quốc tế phức tạp.",
+      "Xây dựng Đảng trong sạch, vững mạnh và xây dựng Nhà nước của dân, do dân, vì dân là hai nội dung thống nhất, có quan hệ biện chứng với nhau. Sự trong sạch của Đảng quyết định trực tiếp bản chất và hiệu quả hoạt động của Nhà nước.",
     points: [
-      "Giai đoạn quá độ lên CNXH, vừa xây dựng vừa bảo vệ Tổ quốc sau thống nhất",
-      "Thuận lợi: sức mạnh tổng hợp sau Đại thắng 1975, tinh thần đoàn kết",
-      "Khó khăn: hậu quả chiến tranh, kinh tế kiệt quệ, bối cảnh quốc tế phức tạp",
-    ],
-    // Dùng query gợi ý hình ảnh có giá trị thông tin
-    image: `url(${intro1})`,
-  },
-  {
-    id: "unification",
-    title: "Hoàn thành thống nhất nhà nước (1975-1976)",
-    // Gradient vàng đất/cam
-    accent: "from-amber-700/90 via-orange-600/90 to-amber-800/90",
-    description:
-      "Sau Đại thắng mùa Xuân 1975, nhiệm vụ cấp thiết: thống nhất nhà nước, hợp nhất hai chính quyền hai miền, tạo bộ máy quản lý thống nhất cho xây dựng và phát triển.",
-    points: [
-      "Hội nghị TƯ 24 (8/1975): chủ trương hoàn thành thống nhất, đưa cả nước tiến lên CNXH",
-      "Hiệp thương chính trị Bắc - Nam (11/1975): thống nhất tổng tuyển cử chung",
-      "Tổng tuyển cử 25/4/1976: 98,77% cử tri; đặt tên nước CHXHCN Việt Nam, đổi tên TP Sài Gòn thành TP Hồ Chí Minh",
+      "Đảng là lực lượng lãnh đạo Nhà nước và xã hội, sự trong sạch quyết định hiệu quả hoạt động",
+      "Nhà nước của dân là môi trường kiểm nghiệm đạo đức, năng lực và uy tín của Đảng cầm quyền",
+      "Suy thoái trong Đảng, đặc biệt tham nhũng, trực tiếp làm biến chất Nhà nước và xâm hại lợi ích nhân dân",
     ],
     bulletGroups: [
       {
-        title: "Chủ trương chiến lược",
+        title: "Mối quan hệ biện chứng",
         items: [
-          "Hội nghị TƯ 24 (8/1975): hoàn thành thống nhất, đưa cả nước tiến nhanh, mạnh, vững lên CNXH",
-          "Miền Bắc tiếp tục hoàn thiện quan hệ sản xuất XHCN; miền Nam vừa cải tạo vừa xây dựng CNXH",
+          "Đảng Cộng sản là lực lượng lãnh đạo Nhà nước và xã hội",
+          "Sự trong sạch, vững mạnh của Đảng quyết định trực tiếp bản chất và hiệu quả Nhà nước",
+          "Nhà nước của dân là nơi kiểm nghiệm uy tín và năng lực lãnh đạo",
         ],
       },
       {
-        title: "Thống nhất & bầu cử",
+        title: "Nguy cơ tha hóa",
         items: [
-          "Hiệp thương chính trị Bắc - Nam (11/1975) tại Sài Gòn: thống nhất tổng tuyển cử toàn quốc",
-          "Tổng tuyển cử chung 25/4/1976: tỉ lệ cử tri 98,77%",
+          "Mọi suy thoái trong Đảng làm biến chất Nhà nước",
+          "Tham nhũng trực tiếp xâm hại lợi ích của nhân dân",
+          "Mất sự tin tưởng của nhân dân với chế độ",
+        ],
+      },
+    ],
+    image: `url(${intro1})`,
+  },
+  {
+    id: "ii-tham-nhung-concept",
+    title: "II. Khái niệm tham nhũng theo tư tưởng Hồ Chí Minh",
+    accent: "from-orange-700/90 via-amber-600/90 to-red-700/90",
+    description:
+      "Tham ô thực chất là hành động 'lấy của công dùng vào việc tư'. Cán bộ, đảng viên quên mất đức tính thanh liêm để chiếm đoạt tài sản Nhà nước hay nhân dân vì lợi ích cá nhân.",
+    points: [
+      "Tham nhũng là 'giặc nội xâm', nguy hiểm hơn cả giặc ngoại xâm vì phá hoại từ bên trong",
+      "Là 'bạn đồng minh của thực dân và phong kiến', cản trở con đường tiến lên chủ nghĩa xã hội",
+      "Tham nhũng trái ngược hoàn toàn với đức tính 'Liêm' - trong sạch, không tham lam",
+    ],
+    bulletGroups: [
+      {
+        title: "Định nghĩa hành vi",
+        items: [
+          "Cán bộ, đảng viên chiếm đoạt tài sản Nhà nước hoặc nhân dân",
+          "Quên mất đức tính thanh liêm và đạo đức cách mạng",
+          "'Lấy của công dùng vào việc tư' - tư lợi cá nhân thay vì lợi ích chung",
         ],
       },
       {
-        title: "Kết quả nhà nước thống nhất",
+        title: "Bản chất và mức độ nguy hiểm",
         items: [
-          "Quốc hội khóa VI (24/6 - 3/7/1976): đặt tên nước CHXHCN Việt Nam, chọn Hà Nội làm Thủ đô",
-          "Đổi tên Sài Gòn thành Thành phố Hồ Chí Minh; thống nhất các tổ chức chính trị - xã hội",
+          "Hồ Chí Minh gọi là 'giặc nội xâm' hay 'giặc ở trong lòng'",
+          "Phá hoại tổ chức từ bên trong, làm hỏng tinh thần cán bộ",
+          "Đe dọa sự nghiệp cách mạng và phát triển đất nước",
+        ],
+      },
+      {
+        title: "Mối liên hệ với đạo đức",
+        items: [
+          "'Liêm' có nghĩa là trong sạch, không tham lam, giữ gìn của công, của dân",
+          "Người tham nhũng mất lòng tự trọng và 'Chí công vô tư'",
+          "Sự ích kỷ lấn át trách nhiệm công bộc",
         ],
       },
     ],
     image: `url(${intro2})`,
   },
   {
-    id: "congress4",
-    title: "Đại hội IV và đường lối xây dựng CNXH (1976-1981)",
-    // Gradient xanh đậm/tím
-    accent: "from-blue-700/90 via-indigo-600/90 to-slate-800/90",
+    id: "iii-dan-by-dan-for-dan",
+    title: "III. Nhà nước của dân, do dân, vì dân",
+    accent: "from-green-700/90 via-emerald-600/90 to-teal-700/90",
     description:
-      "Đại hội IV (12/1976) tổng kết thắng lợi kháng chiến, xác định đường lối mới cho xây dựng CNXH, nhưng giai đoạn đầu gặp chủ quan nóng vội, phải điều chỉnh từ 1979.",
+      "Hồ Chí Minh xây dựng quan điểm về Nhà nước của nhân dân, do nhân dân và vì nhân dân. 'Bao nhiêu quyền hạn đều là của dân', cán bộ Nhà nước là đầy tớ của nhân dân, chứ không phải những 'quan cách mạng'.",
     points: [
-      "Đổi tên Đảng Lao động Việt Nam thành Đảng Cộng sản Việt Nam",
-      "Đường lối ba cuộc cách mạng: quan hệ sản xuất; khoa học-kỹ thuật (then chốt); tư tưởng-văn hóa",
-      "Kế hoạch 5 năm 1976-1980: bảo đảm đời sống nhân dân và tích lũy cơ sở vật chất-kỹ thuật",
+      "Đảng là 'đạo đức, là văn minh', không có lợi ích khác ngoài lợi ích của nhân dân và dân tộc",
+      "Đảng viên phải thực hiện 'Cần, Kiệm, Liêm, Chính, Chí công vô tư' để xứng đáng làm công bộc",
+      "Cán bộ Nhà nước từ Chủ tịch nước đến người quét rác đều là 'đầy tớ' của nhân dân",
     ],
     bulletGroups: [
       {
-        title: "Đặc điểm & đường lối",
+        title: "Mục tiêu của Đảng Cộng sản",
         items: [
-          "Tiến thẳng lên CNXH từ nền kinh tế sản xuất nhỏ, bỏ qua tư bản chủ nghĩa",
-          "Nắm vững chuyên chính vô sản, quyền làm chủ tập thể, ba cuộc cách mạng song hành",
+          "Đảng cầm quyền phải là 'đạo đức, là văn minh'",
+          "Lãnh đạo giải phóng dân tộc, giải phóng xã hội và giải phóng con người",
+          "Không có lợi ích nào khác ngoài lợi ích của nhân dân và dân tộc",
         ],
       },
       {
-        title: "Mục tiêu kế hoạch 5 năm 1976-1980",
+        title: "Yêu cầu đối với đảng viên",
         items: [
-          "Bảo đảm nhu cầu đời sống nhân dân",
-          "Tích lũy để xây dựng cơ sở vật chất - kỹ thuật CNXH",
+          "Thấm nhuần đạo đức cách mạng từ bên trong",
+          "Thực hiện 5 điều: Cần, Kiệm, Liêm, Chính, Chí công vô tư",
+          "Giữ gìn Đảng thật trong sạch để xứng đáng làm người lãnh đạo, người đầy tớ trung thành",
         ],
       },
       {
-        title: "Điều chỉnh & đột phá (1979-1981)",
+        title: "Nguyên tắc Nhà nước",
         items: [
-          "HNTƯ 6 (8/1979): 'sản xuất bung ra' khắc phục quản lý kinh tế",
-          "Chỉ thị 100-CT/TW (1/1981): Khoán 100 trong nông nghiệp, tăng sản lượng lương thực",
-          "Quyết định 25-CP (1/1981): mở rộng quyền tự chủ SXKD, tài chính cho xí nghiệp quốc doanh",
+          "'Bao nhiêu quyền hạn đều là của dân' - nhân dân là chủ, dân làm chủ",
+          "Cán bộ từ Chủ tịch nước đến người quét rác đều là 'công bộc', 'đầy tớ'",
+          "Không phải những 'quan cách mạng' để đè đầu cưỡi cổ dân",
         ],
       },
-    ],
-    subPoints: [
-      "HNTƯ6 (8/1979): đột phá 'sản xuất bung ra'",
-      "Chỉ thị 100-CT/TW (1/1981): khoán sản phẩm nông nghiệp (Khoán 100), sản lượng lương thực tăng",
-      "Quyết định 25-CP (1/1981): mở rộng quyền tự chủ SXKD, tài chính cho xí nghiệp quốc doanh",
+      {
+        title: "Cảnh báo từ 1945",
+        items: [
+          "Từ năm 1945, Hồ Chí Minh đã cảnh báo các căn bệnh: cậy thế, hủ hóa, tư túng, chia rẽ, quan liêu",
+          "'Cán bộ các cơ quan, từ thứ trưởng trở xuống, đều là đầy tớ của nhân dân'",
+          "Nhấn mạnh nguy cơ tha hóa của một Đảng cầm quyền",
+        ],
+      },
     ],
     image: `url(${intro3})`,
   },
   {
-    id: "defense",
-    title: "Bảo vệ Tổ quốc (1975-1981)",
-    // Gradient đỏ/cam cho chủ đề quốc phòng
-    accent: "from-rose-700/90 via-red-600/90 to-amber-700/90",
+    id: "iv-tham-nhung-threat",
+    title: "IV. Tham nhũng - nguy cơ đe dọa tồn vong Đảng và chế độ",
+    accent: "from-red-700/90 via-rose-600/90 to-pink-700/90",
     description:
-      "Song song xây dựng, Việt Nam phải bảo vệ biên giới Tây Nam và phía Bắc, đồng thời giữ vững an ninh nội địa.",
+      "Hồ Chí Minh chỉ rõ rằng tham nhũng là 'giặc nội xâm' phá hoại từ bên trong, làm mất niềm tin của nhân dân và tính chính danh của Đảng, trực tiếp đe dọa vận mệnh của chế độ xã hội chủ nghĩa.",
     points: [
-      "Biên giới Tây Nam: đánh bại Pol Pot, phối hợp giải phóng Phnom Penh 7/1/1979",
-      "Biên giới phía Bắc: đẩy lùi cuộc tấn công 17/2/1979, Trung Quốc tuyên bố rút 5/3/1979; xung đột còn kéo dài",
-      "An ninh nội địa: làm thất bại âm mưu FULRO và lực lượng lưu vong vũ trang",
+      "Sự tha hóa từ quyền lực: cán bộ nhà nước có nguy cơ lạm quyền, hủ hóa nếu không kiểm soát",
+      "Tham nhũng phá hoại tổ chức từ bên trong, suy yếu bộ máy và sự nghiệp xây dựng đất nước",
+      "Tham nhũng làm mất niềm tin của nhân dân, suy thoái tư tưởng chính trị của cán bộ",
+      "Chủ nghĩa cá nhân là 'bệnh mẹ' sinh ra tham nhũng; làm đứt mối quan hệ Đảng-Nhà nước-Nhân dân",
     ],
     bulletGroups: [
       {
-        title: "Chiến tranh biên giới Tây Nam",
+        title: "Thứ nhất: Tha hóa từ quyền lực",
         items: [
-          "Pol Pot lấn chiếm, diệt chủng; tấn công quy mô cuối 12/1978",
-          "Quân tình nguyện Việt Nam phối hợp Campuchia giải phóng Phnom Penh 7/1/1979, lật đổ chế độ diệt chủng",
+          "Khi nắm giữ quyền lực, cán bộ nhà nước có nguy cơ lạm quyền, 'cậy thế, cậy quyền'",
+          "Quyền lực nếu không kiểm soát bị lợi dụng để vơ vét, tư lợi cá nhân",
+          "Dẫn đến hủ hóa, suy thoái tư tưởng chính trị",
         ],
       },
       {
-        title: "Chiến tranh biên giới phía Bắc",
+        title: "Thứ hai: 'Giặc nội xâm' phá hoại từ bên trong",
         items: [
-          "Quan hệ xấu từ 1978; 17/2/1979 Trung Quốc huy động >60 vạn quân tấn công toàn tuyến",
-          "Việt Nam kiên cường phòng thủ; 5/3/1979 Trung Quốc tuyên bố rút quân, xung đột còn dai dẳng",
+          "Nguy hiểm hơn giặc ngoại xâm vì mục ruỗng tổ chức từ bên trong",
+          "Suy yếu bộ máy Nhà nước, làm hỏng tinh thần cán bộ",
+          "Phá hoại sự nghiệp xây dựng đất nước",
         ],
       },
       {
-        title: "An ninh nội địa",
+        title: "Thứ ba: Mất niềm tin và tính chính danh",
         items: [
-          "Đập tan FULRO vũ trang ở Tây Nguyên",
-          "Làm thất bại lực lượng lưu vong vũ trang, giữ vững thành quả cách mạng",
+          "Hồ Chí Minh: Nếu Đảng không còn đạo đức sẽ mất quyền lãnh đạo",
+          "Tham nhũng làm tha hóa cán bộ, gây suy thoái tư tưởng chính trị",
+          "Đe dọa trực tiếp vận mệnh của Đảng và chế độ",
+        ],
+      },
+      {
+        title: "Thứ tư: Chủ nghĩa cá nhân - 'bệnh mẹ'",
+        items: [
+          "Chủ nghĩa cá nhân là 'bệnh mẹ' sinh ra hàng trăm thứ bệnh khác",
+          "Khi cá nhân lấn át, cán bộ quên lợi ích chung, chạy theo danh lợi, quyền lực",
+          "Nhà nước bị biến dạng, đứt gãy mối quan hệ máu thịt Đảng-Nhà nước-Nhân dân",
         ],
       },
     ],
     image: `url(${intro4})`,
+  },
+  {
+    id: "v-requestion",
+    title:
+      "V. Những yêu cầu cấp bách: chỉnh đốn Đảng, kiểm soát quyền lực, phát huy nhân dân",
+    accent: "from-purple-700/90 via-pink-600/90 to-rose-700/90",
+    description:
+      "Để bảo vệ thành quả cách mạng và xây dựng xã hội chủ nghĩa, Đảng và Nhà nước phải luôn giữ gìn sự trong sạch, kiểm soát quyền lực nghiêm minh, và phát huy vai trò giám sát của nhân dân.",
+    points: [
+      "Chỉnh đốn Đảng thường xuyên như 'rửa mặt hằng ngày' để loại bỏ những phần tử thoái hóa, biến chất",
+      "Kiểm soát quyền lực bằng pháp luật dân chủ, nghiêm minh kết hợp kiểm tra từ trên xuống và giám sát từ dưới lên",
+      "Huy động nhân dân tham gia giám sát, phê bình và bãi miễn những cán bộ không xứng đáng",
+      "Thực hiện kỷ luật nghiêm minh không có 'vùng cấm' và cán bộ lãnh đạo phải gương mẫu về đạo đức",
+    ],
+    bulletGroups: [
+      {
+        title: "Thứ nhất: Chỉnh đốn Đảng thường xuyên",
+        items: [
+          "Chỉnh đốn không phải nhiệm vụ nhất thời mà là công việc lâu dài, thường xuyên",
+          "Kịp thời loại bỏ những phần tử thoái hóa, biến chất để giữ gìn sự trong sạch của Đảng",
+          "Hồ Chí Minh ví việc này như 'rửa mặt hằng ngày' - phải liên tục duy trì",
+        ],
+      },
+      {
+        title: "Thứ hai: Kiểm soát quyền lực bằng pháp luật",
+        items: [
+          "Kiểm soát quyền lực là yêu cầu tất yếu để phòng chống sự tha hóa",
+          "Xây dựng hệ thống pháp luật dân chủ, nghiêm minh, không có ngoại lệ",
+          "Kết hợp kiểm tra từ trên xuống với giám sát từ dưới lên theo hệ thống",
+        ],
+      },
+      {
+        title: "Thứ ba: Huy động nhân dân tham gia giám sát",
+        items: [
+          "Đảng và Nhà nước phải dựa hẳn vào nhân dân, hoan nghênh quần chúng phê bình, đôn đốc",
+          "Nhân dân có quyền giám sát, phê bình và thậm chí bãi miễn những cán bộ không xứng đáng",
+          "Phát huy vai trò của nhân dân để củng cố niềm tin vào chế độ",
+        ],
+      },
+      {
+        title: "Thứ tư: Kỷ luật nghiêm minh và nêu gương",
+        items: [
+          "Kiên quyết xử lý những cán bộ thoái hóa, biến chất, không có 'vùng cấm'",
+          "Cán bộ lãnh đạo, nhất là người đứng đầu, phải gương mẫu về đạo đức và lối sống",
+          "'Một tấm gương sống còn có giá trị hơn một trăm bài diễn văn tuyên truyền'",
+        ],
+      },
+    ],
+    image: `url(${intro5})`,
   },
 ];
 
@@ -152,73 +273,80 @@ const scrollToSection = (id) => {
 
 export default function Introduction() {
   return (
-    // Nền thay đổi: bg-stone-50 (tinh tế hơn)
-    <div className="min-h-screen bg-stone-50 text-stone-800 font-sans">
+    <div className="min-h-screen bg-stone-50 text-stone-800 font-sans w-full overflow-x-hidden">
       <div className="sticky top-0 z-50">
-        {/* Giả định Header được thiết kế lại: nổi bật, dùng backdrop-blur nếu có thể */}
         <Header />
       </div>
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-10 lg:py-14 relative">
-        {/* Sidebar TOC (desktop fixed) - Tinh chỉnh thiết kế */}
-        <aside className="hidden lg:block lg:fixed lg:w-64 lg:left-[max(16px,calc((100%-72rem)/2+16px))] lg:top-28 sticky">
-          {/* Thay border màu đậm bằng border mỏng nhẹ hơn */}
-          <div className="border-r border-stone-300 pr-4">
-            <p className="text-xs uppercase tracking-[0.18em] text-red-600 font-semibold mb-4">
-              Mục lục
-            </p>
-            <ul className="space-y-4 text-base leading-relaxed text-stone-700">
-              {sections.map((s, idx) => (
-                <li key={s.id}>
-                  <button
-                    onClick={() => scrollToSection(s.id)}
-                    className="text-left hover:text-red-700 transition-colors group"
+
+      <div className="w-full pl-4 md:pl-6 pr-0 py-10 lg:py-14 relative">
+        {/* --- SIDEBAR MỚI (Card Style) --- */}
+        <aside className="hidden lg:block lg:fixed lg:w-72 lg:left-6 lg:top-32 sticky z-40">
+          <RevealOnScroll className="h-full">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-stone-200/60 shadow-xl shadow-stone-200/50 p-6 relative overflow-hidden">
+              {/* Vạch màu trang trí bên trái */}
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-red-600 via-amber-500 to-red-700"></div>
+
+              {/* Header Mục lục */}
+              <div className="flex items-center gap-3 mb-6 pl-2 border-b border-stone-100 pb-4">
+                <div className="w-8 h-8 rounded bg-red-50 flex items-center justify-center text-red-600">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <span className="font-bold mr-2 text-red-600 group-hover:text-red-700">
-                      {idx + 1}.
-                    </span>
-                    <span className="font-medium text-stone-800 group-hover:text-red-700 transition-colors">
-                      {s.title}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h7"
+                    />
+                  </svg>
+                </div>
+                <p className="text-sm uppercase tracking-[0.2em] text-stone-800 font-bold">
+                  Mục lục
+                </p>
+              </div>
+
+              {/* Danh sách */}
+              <ul className="space-y-3 relative">
+                <div className="absolute left-[15px] top-4 bottom-4 w-[1px] bg-stone-200 -z-10"></div>
+                {sections.map((s, idx) => (
+                  <li key={s.id}>
+                    <button
+                      onClick={() => scrollToSection(s.id)}
+                      className="text-left group flex items-start gap-4 w-full p-2 rounded-lg hover:bg-stone-50 transition-all duration-200"
+                    >
+                      <span className="flex-shrink-0 w-8 h-8 rounded-full border-2 border-white bg-stone-100 text-stone-500 font-bold text-xs flex items-center justify-center shadow-sm group-hover:bg-red-600 group-hover:text-white group-hover:scale-110 transition-all z-10">
+                        {idx + 1}
+                      </span>
+                      <span className="text-sm font-medium text-stone-600 group-hover:text-red-700 leading-snug pt-1 transition-colors line-clamp-2">
+                        {s.title}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-red-50 rounded-full opacity-50 blur-xl pointer-events-none"></div>
+            </div>
+          </RevealOnScroll>
         </aside>
 
-        <div className="flex flex-col lg:flex-row gap-10">
-          {/* Mobile TOC - Thiết kế dạng Tags/Chips hiện đại */}
-          <div className="lg:hidden">
-            <div className="rounded-xl border border-stone-200 bg-white shadow-lg p-4">
-              <p className="text-xs uppercase tracking-[0.14em] text-red-600 font-semibold mb-3">
-                Mục lục
-              </p>
-              <div className="flex flex-wrap gap-2 text-sm">
-                {sections.map((s, idx) => (
-                  <button
-                    key={s.id}
-                    onClick={() => scrollToSection(s.id)}
-                    // Thiết kế chip: nền trắng, viền nhẹ, hover nổi bật
-                    className="px-3 py-1 rounded-full bg-stone-50 border border-stone-300 text-stone-700 hover:bg-red-50 hover:border-red-500 hover:text-red-700 transition-colors shadow-sm"
-                  >
-                    <span className="font-medium">{idx + 1}.</span>{" "}
-                    {s.title.split(" (")[0]}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Content */}
-          <main className="flex-1 space-y-12 lg:pl-72">
-            {sections.map((s) => (
+        {/* --- MAIN CONTENT --- 
+            THAY ĐỔI QUAN TRỌNG:
+            - Đổi lg:pl-72 thành lg:pl-[22rem]
+            - Giải thích: Sidebar rộng 72 + cách lề 6 = 19.5rem. 
+            - 22rem sẽ tạo ra khoảng hở 2.5rem giữa Sidebar và Content.
+        */}
+        <main className="flex-1 space-y-12 lg:pl-[22rem] w-full">
+          {sections.map((s) => (
+            <RevealOnScroll key={s.id} className="w-full">
               <section
-                key={s.id}
                 id={s.id}
-                // Tăng bo góc, đổ bóng sâu hơn, viền nhẹ hơn
-                className="rounded-[2rem] overflow-hidden shadow-2xl shadow-stone-200/50 border border-stone-100 bg-white scroll-mt-28 transition-all duration-300 hover:shadow-2xl hover:shadow-stone-300/60"
+                className="rounded-l-[2rem] rounded-r-[2rem] lg:rounded-r-none overflow-hidden shadow-2xl shadow-stone-200/50 border-y border-l border-stone-100 border-r lg:border-r-0 bg-white scroll-mt-28 transition-all duration-300 hover:shadow-stone-300/60 mr-4 md:mr-6 lg:mr-0"
               >
-                {/* Title Bar - Hiện đại hóa Gradient */}
+                {/* Title Bar */}
                 <div
                   className={`bg-gradient-to-r ${s.accent} text-white px-8 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4`}
                 >
@@ -235,95 +363,90 @@ export default function Introduction() {
                   </span>
                 </div>
 
-                <div className="p-8 md:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                  <div className="space-y-6 w-full">
-                    {s.description && (
-                      <blockquote className="w-full border-l-4 border-red-500 pl-4 text-base md:text-lg italic text-stone-700 leading-relaxed bg-red-50/50 p-3 rounded-md">
-                        {s.description}
-                      </blockquote>
-                    )}
-                    {/* List Points - Dùng icon (dấu check) để sinh động hơn */}
-                    <ul className="w-full space-y-3 pt-2">
-                      {s.points.map((pt, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-3 text-base leading-relaxed text-stone-800 w-full"
-                        >
-                          {/* Icon mô phỏng dấu check hoặc ngôi sao */}
-                          <svg
-                            className="w-5 h-5 text-red-500 flex-shrink-0 mt-1"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M10 12.58l-1.94 1.94-2.83-2.83-1.41 1.41L10 15.4l5.18-5.18-1.41-1.41-2.83 2.83zM10 2a8 8 0 100 16 8 8 0 000-16z" />
-                          </svg>
-                          <span className="font-medium flex-1">{pt}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    {/* Tìm đến đoạn s.bulletGroups && (...) và thay thế toàn bộ bằng đoạn này: */}
-
-                    {s.bulletGroups && (
-                      // 1. Container: Sử dụng flex-col để xếp chồng lên nhau, w-full để full bề ngang
-                      <div className="flex flex-col gap-5 pt-4 w-full">
-                        {s.bulletGroups.map((group, i) => (
-                          <div
-                            key={i}
-                            className="w-full rounded-xl border border-stone-200 bg-stone-50/70 p-5 shadow-inner hover:bg-white hover:shadow-md transition-all duration-200"
-                          >
-                            {/* Tiêu đề Card */}
-                            <div className="border-b border-red-100 pb-2 mb-3">
-                              <p className="text-sm font-bold text-red-600 uppercase tracking-wide">
-                                {group.title}
-                              </p>
-                            </div>
-
-                            {/* Nội dung List */}
-                            <ul className="space-y-3 text-sm text-stone-700">
-                              {group.items.map((it, idx2) => (
-                                <li
-                                  key={idx2}
-                                  className="flex gap-3 items-start"
-                                >
-                                  {/* Bullet point chỉnh lại cho đẹp */}
-                                  <span className="text-red-500 font-bold text-lg leading-none mt-[-1px] select-none">
-                                    •
-                                  </span>
-                                  <span className="leading-relaxed text-stone-800">
-                                    {it}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                <div className="flex flex-col">
+                  {/* Ảnh ở trên cùng - Full width */}
+                  <div className="w-full relative h-[400px] md:h-[500px] bg-stone-100">
+                    <div
+                      className="absolute inset-0 w-full h-full bg-center bg-cover bg-no-repeat"
+                      style={{
+                        backgroundImage: s.image,
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/30"></div>
                   </div>
 
-                  {/* Image Card - Thiết kế hiện đại hơn */}
-                  <div className="rounded-2xl overflow-hidden border border-stone-200 shadow-xl self-start sticky top-28">
-                    <div
-                      className="h-56 md:h-72 lg:h-full min-h-[300px] bg-cover bg-center"
-                      style={{ backgroundImage: s.image }}
-                    />
-                    {/* Caption/Chú thích ảnh */}
-                    {/* <div className="p-5 bg-gradient-to-br from-stone-50 to-red-50/50 text-sm text-stone-700">
-                      <p className="font-semibold text-stone-900">
-                        Minh họa: {s.title}
-                      </p>
-                      <p className="text-xs text-stone-500 mt-1 italic">
-                        (Bạn có thể thay bằng ảnh tư liệu lịch sử thực tế để
-                        tăng tính trực quan và giá trị thông tin.)
-                      </p>
-                    </div> */}
+                  {/* Nội dung ở dưới - Chia cột để không quá dài */}
+                  <div className="p-8 md:p-10 lg:p-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      {/* Cột trái: Description và Points */}
+                      <div className="space-y-6">
+                        {s.description && (
+                          <blockquote className="border-l-4 border-red-500 pl-4 text-base md:text-lg italic text-stone-700 leading-relaxed bg-red-50/50 p-3 rounded-md">
+                            {s.description}
+                          </blockquote>
+                        )}
+
+                        <ul className="space-y-3">
+                          {s.points.map((pt, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-3 text-base leading-relaxed text-stone-800"
+                            >
+                              <svg
+                                className="w-5 h-5 text-red-500 flex-shrink-0 mt-1"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M10 12.58l-1.94 1.94-2.83-2.83-1.41 1.41L10 15.4l5.18-5.18-1.41-1.41-2.83 2.83zM10 2a8 8 0 100 16 8 8 0 000-16z" />
+                              </svg>
+                              <span className="font-medium">{pt}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Cột phải: Bullet Groups */}
+                      {s.bulletGroups && (
+                        <div className="flex flex-col gap-5">
+                          {s.bulletGroups.map((group, i) => (
+                            <RevealOnScroll
+                              key={i}
+                              delay={i * 100}
+                              className="w-full"
+                            >
+                              <div className="rounded-xl border border-stone-200 bg-stone-50/70 p-5 shadow-inner hover:bg-white hover:shadow-md transition-all duration-200">
+                                <div className="border-b border-red-100 pb-2 mb-3">
+                                  <p className="text-sm font-bold text-red-600 uppercase tracking-wide">
+                                    {group.title}
+                                  </p>
+                                </div>
+                                <ul className="space-y-3 text-sm text-stone-700">
+                                  {group.items.map((it, idx2) => (
+                                    <li
+                                      key={idx2}
+                                      className="flex gap-3 items-start"
+                                    >
+                                      <span className="text-red-500 font-bold text-lg leading-none mt-[-1px] select-none">
+                                        •
+                                      </span>
+                                      <span className="leading-relaxed text-stone-800">
+                                        {it}
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </RevealOnScroll>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </section>
-            ))}
-          </main>
-        </div>
+            </RevealOnScroll>
+          ))}
+        </main>
       </div>
     </div>
   );
