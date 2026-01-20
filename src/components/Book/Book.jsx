@@ -385,15 +385,15 @@ const Page = ({
       }}
     >
       {/* Elastic band (front segment) — only render on front cover when closed to front */}
-      {isCover && number === 0 && (
+      {/* {isCover && number === 0 && (
         <mesh position={[bandX, bandY, bandZFront]} visible={page === 0}>
           <boxGeometry args={bandSize} />
           <primitive object={bandMaterial} attach="material" />
         </mesh>
-      )}
+      )} */}
 
       {/* Elastic band (back segment) — only render on back cover when closed to back */}
-      {isCover && number === pagesLength - 1 && (
+      {/* {isCover && number === pagesLength - 1 && (
         <mesh
           position={[bandX, bandY, bandZBack]}
           visible={page >= pagesLength - 1}
@@ -402,7 +402,7 @@ const Page = ({
           <boxGeometry args={bandSize} />
           <primitive object={bandMaterial} attach="material" />
         </mesh>
-      )}
+      )} */}
 
       {/* Page/Cover geometry */}
       <primitive
