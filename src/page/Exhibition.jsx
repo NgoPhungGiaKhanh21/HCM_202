@@ -7,29 +7,29 @@ const leaders = [
         name: "Chủ tịch Hồ Chí Minh",
         role: "Người sáng lập Đảng và Nhà nước Việt Nam Dân chủ Cộng hòa",
         theme: "Đặt đạo đức cách mạng làm gốc, chống 'giặc nội xâm'",
-        quote: '“Muốn hướng dẫn nhân dân, mình phải làm mực thước cho người ta bắt chước.”',
+        quote: "“Muốn hướng dẫn nhân dân, mình phải làm mực thước cho người ta bắt chước.”",
         contribution:
-            "Khởi xướng chuẩn mực đạo đức, nêu khái niệm tham ô - lãng phí - quan liêu là giặc nội xâm, coi liêm chính là nền tảng xây dựng Đảng.",
+            "Khởi xướng chuẩn mực đạo đức cách mạng; chỉ rõ tham ô, lãng phí, quan liêu là 'giặc nội xâm', coi liêm chính là nền tảng xây dựng Đảng trong sạch, vững mạnh.",
         focus: "Nêu gương liêm chính",
         image: "/textures/nv1.jpg",
     },
     {
         name: "V.I. Lênin",
         role: "Lãnh tụ của giai cấp vô sản thế giới",
-        theme: "Cảnh báo quan liêu hóa, yêu cầu thanh lọc Đảng",
-        quote: "“Không có kỷ luật sắt, Đảng cầm quyền sẽ tự đánh mất mình.”",
+        theme: "Cảnh báo quan liêu hóa, yêu cầu chỉnh đốn và thanh lọc Đảng",
+        quote: "“Không có kỷ luật nghiêm minh thì Đảng không thể giữ được vai trò lãnh đạo.”",
         contribution:
-            "Phê phán quan liêu, cơ hội chủ nghĩa; nhấn mạnh thanh lọc đảng viên biến chất để giữ vai trò tiên phong của Đảng.",
+            "Phê phán quan liêu, cơ hội chủ nghĩa; nhấn mạnh kỷ luật đảng và việc thanh lọc những phần tử biến chất để giữ vững bản chất tiên phong của Đảng.",
         focus: "Chỉnh đốn kỷ luật",
         image: "/textures/nv2.jpg",
     },
     {
         name: "Tổng Bí thư Nguyễn Phú Trọng",
-        role: "Lãnh đạo công cuộc phòng chống tham nhũng, 'đốt lò'",
+        role: "Lãnh đạo công cuộc phòng, chống tham nhũng và tiêu cực",
         theme: "“Nhốt quyền lực vào lồng cơ chế”, không có vùng cấm",
         quote: "“Quyền lực phải được kiểm soát bằng cơ chế, bằng pháp luật.”",
         contribution:
-            "Dẫn dắt cuộc chiến chống tham nhũng với quyết tâm cao, củng cố niềm tin nhân dân qua kỷ luật nghiêm minh, xử lý cả cán bộ cấp cao.",
+            "Dẫn dắt công cuộc phòng, chống tham nhũng với quyết tâm cao; xử lý nghiêm minh cả cán bộ cấp cao, qua đó củng cố niềm tin của nhân dân đối với Đảng và Nhà nước.",
         focus: "Kiểm soát quyền lực",
         image: "/textures/nv3.jpg",
     },
@@ -37,29 +37,29 @@ const leaders = [
         name: "Tổng Bí thư Nguyễn Văn Linh",
         role: "Tổng Bí thư thời kỳ Đổi Mới",
         theme: "“Những việc cần làm ngay” – công khai tiêu cực để dân giám sát",
-        quote: "“Hãy tự cứu mình trước khi trời cứu.”",
+        quote: "“Phải nhìn thẳng vào sự thật, nói rõ sự thật để dân tin và dân cứu.”",
         contribution:
-            "Mở chuyên mục chống tiêu cực trên báo Nhân Dân, huy động báo chí và nhân dân giám sát cán bộ, đặt nền tảng công khai - minh bạch.",
+            "Khởi xướng chuyên mục 'Những việc cần làm ngay' trên báo Nhân Dân; phát huy vai trò của báo chí và nhân dân trong đấu tranh chống tiêu cực, trì trệ.",
         focus: "Dân giám sát",
         image: "/textures/nv4.jpg",
     },
     {
         name: "Tổng Bí thư Trường Chinh",
-        role: "Kiến trúc sư Đổi Mới",
+        role: "Người khởi xướng tư duy Đổi Mới",
         theme: "Nhìn thẳng sự thật, tự soi tự sửa",
-        quote: "“Nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.”",
+        quote: "“Đổi mới là yêu cầu bức thiết của cuộc sống, là vấn đề sống còn.”",
         contribution:
-            "Dũng cảm thừa nhận hạn chế, thúc đẩy đổi mới tư duy; coi tự phê bình và phê bình là động lực chỉnh đốn Đảng.",
+            "Dũng cảm thừa nhận những sai lầm trong chỉ đạo trước đây; đề xuất đổi mới tư duy lý luận tại Đại hội VI, đặt nền móng cho công cuộc Đổi Mới toàn diện.",
         focus: "Tự soi tự sửa",
         image: "/textures/nv5.jpg",
     },
     {
         name: "Cụ Huỳnh Thúc Kháng",
-        role: "Quyền Chủ tịch nước, Bộ trưởng Bộ Nội vụ",
-        theme: "Liêm khiết, đại đoàn kết, trọng dụng hiền tài",
-        quote: "“Dân biết, dân bàn, dân làm, dân kiểm soát.”",
+        role: "Quyền Chủ tịch nước (1946), Bộ trưởng Bộ Nội vụ",
+        theme: "Liêm khiết, đại đoàn kết, đặt Tổ quốc lên trên hết",
+        quote: "“Giàu sang không quyến rũ, nghèo khó không chuyển lay, uy vũ không khuất phục.”",
         contribution:
-            "Nhân sĩ không đảng tịch nhưng được Bác Hồ tin cậy; tượng trưng Nhà nước vì dân, chọn người tài đức, ghét tham quan.",
+            "Nhân sĩ yêu nước được Chủ tịch Hồ Chí Minh tin cậy giao trọng trách; biểu tượng của khí tiết sĩ phu, sự liêm chính và tinh thần đại đoàn kết dân tộc.",
         focus: "Đại đoàn kết - liêm chính",
         image: "/textures/nv6.jpg",
     },
@@ -67,32 +67,35 @@ const leaders = [
         name: "Chu Văn An",
         role: "“Vạn thế sư biểu” – Người thầy của muôn đời",
         theme: "Thất trảm sớ, dám can gián và giữ khí tiết",
-        quote: "“Chính khí không khuất phục quyền uy.”",
+        quote: "“Đạo học suy thì đạo trị cũng suy.”",
         contribution:
-            "Dâng Thất trảm sớ xin trị nịnh thần; từ quan khi lời can bị bỏ qua, nêu gương cương trực kiểm soát quyền lực tối cao.",
+            "Dâng 'Thất trảm sớ' xin trừng trị nịnh thần; từ quan để giữ trọn khí tiết, nêu gương cương trực, không khuất phục trước quyền uy.",
         focus: "Can gián thẳng thắn",
         image: "/textures/nv7.jpg",
     },
     {
         name: "Tô Hiến Thành",
         role: "Thái phó thời Lý",
-        theme: "Chí công vô tư, chọn người tài thay vì hối lộ",
-        quote: "“Vì nước, không vì vàng.”",
+        theme: "Chí công vô tư, đặt lợi ích quốc gia lên trên",
+        quote: "“Nếu chọn người hầu hạ thì dùng Vũ Tán Đường, còn chọn người giúp nước thì dùng Trần Trung Tá.”",
         contribution:
-            "Từ chối vàng bạc để tiến cử người xứng đáng; đặt lợi ích quốc gia lên trên tình riêng, biểu tượng dùng người liêm chính.",
+            "Từ chối hối lộ, không vì tình riêng; kiên quyết tiến cử người hiền tài giúp nước, trở thành biểu tượng của chí công vô tư trong lịch sử.",
         focus: "Chí công vô tư",
         image: "/textures/nv8.jpg",
     },
 ];
 
+
 function Flashcard({ leader, onSelect, accent }) {
     return (
         <button
             onClick={() => onSelect(leader)}
-            className={`group relative overflow-hidden rounded-xl border border-white/20 bg-gradient-to-br ${accent.from} ${accent.to} p-6 text-left shadow-lg shadow-red-900/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C5A065]`}
+            // SỬA 1: Thêm 'h-full' và 'flex flex-col'
+            className={`h-full flex flex-col group relative overflow-hidden rounded-xl border border-white/20 bg-gradient-to-br ${accent.from} ${accent.to} p-6 text-left shadow-lg shadow-red-900/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C5A065]`}
         >
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay transition duration-500 group-hover:opacity-20" />
 
+            {/* Header: Avatar + Tên */}
             <div className="flex items-start gap-5 relative z-10">
                 <div className="h-20 w-20 rounded-full overflow-hidden border-2 border-[#C5A065]/50 shadow-md flex-shrink-0 group-hover:scale-105 transition-transform duration-300 bg-[#8B1E1E]">
                     <img
@@ -109,7 +112,6 @@ function Flashcard({ leader, onSelect, accent }) {
                     <div className="inline-block px-2 py-0.5 rounded bg-black/20 backdrop-blur-sm text-[10px] uppercase tracking-widest text-[#FCEEB5] font-bold mb-1 border border-white/10 font-sans">
                         {leader.focus}
                     </div>
-                    {/* Áp dụng font Playfair cho tên */}
                     <div className="text-xl font-bold text-white leading-tight font-playfair tracking-wide group-hover:text-[#FCEEB5] transition-colors">
                         {leader.name}
                     </div>
@@ -117,13 +119,15 @@ function Flashcard({ leader, onSelect, accent }) {
                 </div>
             </div>
 
-            <div className="mt-5 relative z-10">
-                <p className="text-sm text-white/95 line-clamp-2 italic font-merriweather leading-relaxed opacity-90 border-l-2 border-[#C5A065]/50 pl-3">
+            {/* SỬA 2: Thêm 'flex-1' để đẩy phần footer xuống đáy */}
+            <div className="mt-5 relative z-10 flex-1">
+                <p className="text-sm text-white/95 italic font-merriweather leading-relaxed opacity-90 border-l-2 border-[#C5A065]/50 pl-3">
                     "{leader.theme}"
                 </p>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/10 flex gap-3 items-center relative z-10 font-sans">
+            {/* Footer: Kỷ cương / Giám sát (Luôn nằm đáy) */}
+            <div className="mt-5 pt-4 border-t border-white/10 flex gap-3 items-center relative z-10 font-sans w-full">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[10px] font-semibold text-white/90 ring-1 ring-inset ring-white/20">
                     <ShieldCheckIcon className="h-3.5 w-3.5 text-[#FCEEB5]" />
                     Kỷ cương

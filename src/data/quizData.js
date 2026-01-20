@@ -2,144 +2,141 @@ export const quizQuestions = [
   {
     id: 1,
     question:
-      "Theo tư tưởng Hồ Chí Minh, bản chất của tham nhũng được ví như điều gì?",
+      "Trong tư tưởng Hồ Chí Minh, mối quan hệ nhân quả giữa 'bệnh quan liêu' và nạn 'tham ô, lãng phí' được xác định như thế nào?",
     options: [
-      { id: "A", text: "Giặc ngoại xâm" },
-      { id: "B", text: "Giặc nội xâm" },
-      { id: "C", text: "Bạn đồng minh của nhân dân" },
-      { id: "D", text: "Công cụ phát triển kinh tế" },
+      { id: "A", text: "Tham ô, lãng phí là nguyên nhân dẫn đến bệnh quan liêu" },
+      { id: "B", text: "Quan liêu là nguồn gốc, là nơi ấp ủ và dung túng cho tham ô, lãng phí" },
+      { id: "C", text: "Ba căn bệnh này tồn tại độc lập và không có mối liên hệ nhân quả" },
+      { id: "D", text: "Lãng phí là nguyên nhân sâu xa sinh ra quan liêu và tham ô" },
     ],
     answer: "B",
     explanation:
-      'Hồ Chí Minh gọi tham nhũng, tham ô, lãng phí, quan liêu là "giặc nội xâm" hay "giặc ở trong lòng" vì nó phá hoại tổ chức từ bên trong, nguy hiểm không kém giặc ngoại xâm.',
+      "Hồ Chí Minh chỉ rõ: Vì cán bộ quan liêu, xa rời thực tế, không sát sao quản lý nên mới tạo kẽ hở cho kẻ xấu đục khoét. Do đó, bệnh quan liêu là môi trường dung dưỡng cho tham ô, lãng phí phát triển.",
   },
   {
     id: 2,
     question:
-      "Hồ Chí Minh xác định vị trí của cán bộ nhà nước đối với nhân dân là gì?",
+      "Khi bàn về đạo đức cách mạng, Hồ Chí Minh phân biệt sự khác nhau căn bản giữa 'chủ nghĩa cá nhân' và 'lợi ích cá nhân' như thế nào?",
     options: [
-      { id: "A", text: "Quan cách mạng" },
-      { id: "B", text: "Cha mẹ của dân" },
-      { id: "C", text: "Công bộc, đầy tớ của dân" },
-      { id: "D", text: "Lãnh đạo tối cao" },
+      { id: "A", text: "Người phủ nhận hoàn toàn lợi ích cá nhân, cho rằng mọi thứ phải thuộc về tập thể" },
+      { id: "B", text: "Chủ nghĩa cá nhân và lợi ích cá nhân là một, đều cần phải loại bỏ triệt để" },
+      { id: "C", text: "Chủ nghĩa cá nhân là việc đặt lợi ích riêng lên trên lợi ích chung, còn lợi ích cá nhân chính đáng luôn được tôn trọng" },
+      { id: "D", text: "Lợi ích cá nhân chỉ được chấp nhận khi đất nước đã hoàn toàn thống nhất và giàu mạnh" },
     ],
     answer: "C",
     explanation:
-      'Người khẳng định cán bộ từ trên xuống dưới phải là "công bộc", là người phục vụ nhân dân, tuyệt đối không được mang thái độ "quan cách mạng" xa dân, hách dịch.',
+      "Hồ Chí Minh đấu tranh quyết liệt chống 'chủ nghĩa cá nhân' (vun vén, ích kỷ, hại đến cái chung) nhưng Người luôn thừa nhận và tôn trọng 'lợi ích cá nhân' hài hòa với lợi ích tập thể, coi đó là động lực phát triển.",
   },
   {
     id: 3,
     question:
-      '"Bệnh mẹ" sinh ra mọi thói hư tật xấu dẫn đến tham nhũng theo Hồ Chí Minh là gì?',
+      "Trong 4 đức tính 'Cần, Kiệm, Liêm, Chính', Hồ Chí Minh lý giải mối quan hệ nhân quả giữa 'Kiệm' và 'Liêm' như thế nào?",
     options: [
-      { id: "A", text: "Chủ nghĩa cá nhân" },
-      { id: "B", text: "Cơ chế thị trường" },
-      { id: "C", text: "Thiếu hệ thống pháp luật" },
-      { id: "D", text: "Sự nghèo đói" },
+      { id: "A", text: "Có Liêm mới có Kiệm, vì người trong sạch tự khắc sẽ biết tiết kiệm" },
+      { id: "B", text: "Phải Kiệm mới có thể Liêm, vì xa xỉ ắt sinh tham lam, không giữ được sự liêm khiết" },
+      { id: "C", text: "Kiệm và Liêm là hai đức tính tách biệt, không ảnh hưởng lẫn nhau" },
+      { id: "D", text: "Chỉ cần có Chính thì tự khắc sẽ có Kiệm và Liêm" },
     ],
-    answer: "A",
+    answer: "B",
     explanation:
-      "Hồ Chí Minh coi chủ nghĩa cá nhân là gốc rễ của mọi thói hư tật xấu, làm cán bộ quên lợi ích chung, chỉ lo vun vén cho bản thân, từ đó dẫn tới tham nhũng, thoái hóa.",
+      "Hồ Chí Minh dạy: Nếu hoang phí, xa xỉ thì ắt phải tìm cách xoay tiền (tham lam), do đó không thể giữ được sự trong sạch. Vì vậy, 'Kiệm' là nền tảng điều kiện để giữ chữ 'Liêm'.",
   },
   {
     id: 4,
     question:
-      "Theo quan điểm của Hồ Chí Minh, công tác chỉnh đốn Đảng cần được thực hiện với tần suất như thế nào?",
+      "Vì sao Hồ Chí Minh coi tham ô, lãng phí là tội lỗi 'đê tiện' nhất trong xã hội?",
     options: [
-      { id: "A", text: "Chỉ khi có sai phạm nghiêm trọng" },
-      { id: "B", text: "Định kỳ 5 năm một lần" },
-      { id: "C", text: "Thường xuyên như rửa mặt hằng ngày" },
-      { id: "D", text: "Khi nhân dân có ý kiến phản ánh" },
+      { id: "A", text: "Vì nó lấy của công làm của tư, đánh cắp mồ hôi nước mắt và xương máu của nhân dân" },
+      { id: "B", text: "Vì nó làm thất thoát tài sản lớn của quốc gia" },
+      { id: "C", text: "Vì nó vi phạm nghiêm trọng điều lệ của Đảng" },
+      { id: "D", text: "Vì nó gây mất đoàn kết nội bộ nghiêm trọng" },
     ],
-    answer: "C",
+    answer: "A",
     explanation:
-      "Hồ Chí Minh ví việc chỉnh đốn Đảng, tự phê bình và phê bình như rửa mặt hằng ngày, phải làm thường xuyên, liên tục để giữ gìn sự trong sạch của Đảng.",
+      "Bác giải thích: Lính ở ngoài mặt trận đổ máu, dân ở hậu phương đổ mồ hôi để xây dựng đất nước, mà kẻ tham ô lại ăn cắp công sức đó để vun vén cho riêng mình, nên đó là hành vi đê tiện nhất.",
   },
   {
     id: 5,
     question:
-      'Hành vi "lấy của công dùng vào việc tư" trong tư tưởng Hồ Chí Minh là biểu hiện của khái niệm nào?',
+      "Theo Hồ Chí Minh, biện pháp căn cơ và lâu dài nhất để phòng chống tiêu cực trong Đảng và Nhà nước là gì?",
     options: [
-      { id: "A", text: "Lãng phí" },
-      { id: "B", text: "Quan liêu" },
-      { id: "C", text: "Tham ô" },
-      { id: "D", text: "Tiết kiệm" },
+      { id: "A", text: "Tăng cường hình phạt thật nặng đối với người vi phạm" },
+      { id: "B", text: "Tu dưỡng đạo đức cách mạng suốt đời kết hợp với thực hành dân chủ rộng rãi" },
+      { id: "C", text: "Nâng cao trình độ chuyên môn, nghiệp vụ cho cán bộ" },
+      { id: "D", text: "Thay đổi nhân sự lãnh đạo thường xuyên theo nhiệm kỳ" },
     ],
-    answer: "C",
+    answer: "B",
     explanation:
-      "Tham ô là hành vi lợi dụng chức vụ, quyền hạn để chiếm đoạt tài sản công làm tài sản riêng, là biểu hiện điển hình của suy thoái đạo đức cách mạng.",
+      "Giáo dục đạo đức để cán bộ 'không dám/không muốn' tham nhũng, và thực hành dân chủ để nhân dân giám sát là biện pháp gốc rễ, bền vững nhất thay vì chỉ dùng mệnh lệnh hành chính.",
   },
   {
     id: 6,
     question:
-      "Theo Hồ Chí Minh, yếu tố nào quyết định trực tiếp đến bản chất và hiệu quả hoạt động của Nhà nước?",
+      "Luận điểm 'Dễ mười lần không dân cũng chịu, khó trăm lần dân liệu cũng xong' phản ánh tư tưởng cốt lõi nào trong công tác xây dựng Đảng?",
     options: [
-      { id: "A", text: "Sự giàu có về tài nguyên" },
-      { id: "B", text: "Sự trong sạch, vững mạnh của Đảng" },
-      { id: "C", text: "Sự ủng hộ của quốc tế" },
-      { id: "D", text: "Số lượng đảng viên" },
+      { id: "A", text: "Sự cần thiết của công tác tuyên truyền, vận động quần chúng" },
+      { id: "B", text: "Trách nhiệm của cán bộ là phải làm thay cho nhân dân những việc khó" },
+      { id: "C", text: "Vai trò quyết định của nhân dân trong việc thực hiện và giám sát đường lối cách mạng" },
+      { id: "D", text: "Sự phụ thuộc hoàn toàn của Đảng vào ý muốn chủ quan của nhân dân" },
     ],
-    answer: "B",
+    answer: "C",
     explanation:
-      "Vì Đảng là lực lượng lãnh đạo Nhà nước và xã hội, nên nếu Đảng trong sạch, vững mạnh thì Nhà nước mới hoạt động hiệu quả, thực sự là Nhà nước của dân, do dân, vì dân.",
+      "Câu nói khẳng định sức mạnh vô địch của nhân dân: khi dân ủng hộ và tham gia thì việc khó mấy cũng thành công, ngược lại nếu không dựa vào dân thì sẽ thất bại.",
   },
   {
     id: 7,
     question:
-      "Tại sao tham nhũng được Hồ Chí Minh và Đảng ta đánh giá là nguy hiểm hơn cả giặc ngoại xâm trong một số phương diện?",
+      "Hồ Chí Minh ví 'tự phê bình và phê bình' như 'thang thuốc' hay nhất. Điều kiện tiên quyết để thang thuốc này hiệu quả là gì?",
     options: [
-      { id: "A", text: "Vì nó phá hoại từ bên trong tổ chức" },
-      { id: "B", text: "Vì nó có vũ khí hiện đại" },
-      { id: "C", text: "Vì nó đến từ các thế lực thù địch bên ngoài" },
-      { id: "D", text: "Vì nó luôn công khai phá hoại" },
+      { id: "A", text: "Phải thực hiện trong các cuộc họp kín để giữ uy tín" },
+      { id: "B", text: "Phải trung thực, kiên quyết, không nể nang, nhưng phải có tình đồng chí thương yêu lẫn nhau" },
+      { id: "C", text: "Phải có sự chỉ đạo trực tiếp từ cấp trên xuống cấp dưới" },
+      { id: "D", text: "Phải tập trung phê bình khuyết điểm của lãnh đạo chủ chốt" },
     ],
-    answer: "A",
+    answer: "B",
     explanation:
-      "Tham nhũng, suy thoái diễn ra ngay trong nội bộ, làm mục ruỗng tổ chức, làm mất niềm tin của nhân dân, nên mức độ nguy hiểm rất lớn và khó nhận diện hơn kẻ thù bên ngoài.",
+      "Phê bình phải 'ráo riết' để trị bệnh nhưng mục đích là 'cứu người', giúp nhau tiến bộ chứ không phải để đả kích, vùi dập, nên cần phải có tình đồng chí.",
   },
   {
     id: 8,
     question:
-      "Để xây dựng Đảng trong sạch, vững mạnh, Hồ Chí Minh luôn nhắc nhở cán bộ, đảng viên phải thấm nhuần những phẩm chất đạo đức nào?",
+      "Trong quan điểm về xây dựng Nhà nước pháp quyền, Hồ Chí Minh yêu cầu 'Thần linh pháp quyền' phải đi đôi với yếu tố nào?",
     options: [
-      { id: "A", text: "Cần, Kiệm, Liêm, Chính" },
-      { id: "B", text: "Nhân, Nghĩa, Lễ, Trí" },
-      { id: "C", text: "Tự do, Bình đẳng, Bác ái" },
-      { id: "D", text: "Thông minh, Sáng tạo" },
+      { id: "A", text: "Sức mạnh quân sự để răn đe" },
+      { id: "B", text: "Hệ thống nhà tù và trại giam rộng lớn" },
+      { id: "C", text: "Đạo đức nhân văn và sự gương mẫu của người thực thi pháp luật" },
+      { id: "D", text: "Sự viện trợ kinh tế từ bên ngoài" },
     ],
-    answer: "A",
+    answer: "C",
     explanation:
-      '"Cần, Kiệm, Liêm, Chính, Chí công vô tư" là hệ chuẩn đạo đức cách mạng mà Hồ Chí Minh coi là nền tảng để chống chủ nghĩa cá nhân và tham nhũng.',
+      "Hồ Chí Minh kết hợp nhuần nhuyễn giữa 'Đức trị' và 'Pháp trị'. Pháp luật phải nghiêm, nhưng người thi hành phải có đạo đức, gương mẫu thì xã hội mới ổn định và người dân mới nể phục.",
   },
   {
     id: 9,
     question:
-      "Một trong những giải pháp dựa vào dân để phòng, chống tham nhũng theo tư tưởng Hồ Chí Minh là gì?",
+      "Tại sao Hồ Chí Minh lại xem xét việc chống tham ô, lãng phí, quan liêu là một cuộc 'cách mạng'?",
     options: [
-      { id: "A", text: "Chỉ yêu cầu dân đóng thuế" },
-      {
-        id: "B",
-        text: "Huy động nhân dân giám sát, phê bình, kiến nghị bãi miễn cán bộ hư hỏng",
-      },
-      { id: "C", text: "Cấm nhân dân bàn luận chính trị" },
-      { id: "D", text: "Để nhân dân tự xử lý cán bộ vi phạm" },
+      { id: "A", text: "Vì nó cần huy động lực lượng vũ trang tham gia trấn áp" },
+      { id: "B", text: "Vì nó diễn ra trong thời gian ngắn với quy mô lớn" },
+      { id: "C", text: "Vì nó làm thay đổi thể chế chính trị của đất nước" },
+      { id: "D", text: "Vì nó phá bỏ cái cũ lỗi thời, hư hỏng để xây dựng cái mới tốt đẹp, trong sạch hơn" },
     ],
-    answer: "B",
+    answer: "D",
     explanation:
-      "Hồ Chí Minh khẳng định nhân dân có quyền giám sát, phê bình và bầu hoặc bãi miễn đại biểu của mình; muốn chống tham nhũng hiệu quả phải dựa vào sức mạnh và tiếng nói của nhân dân.",
+      "Bác coi đây là cuộc cách mạng nội bộ để loại bỏ những cái xấu xa (di tích của xã hội cũ) để xây dựng con người mới, văn hóa mới tiến bộ hơn.",
   },
   {
     id: 10,
     question:
-      "Nguyên tắc xử lý kỷ luật đối với hành vi tham nhũng và cán bộ thoái hóa theo tinh thần tư tưởng Hồ Chí Minh và đường lối hiện nay là gì?",
+      "Theo Hồ Chí Minh, biểu hiện cụ thể của 'giặc nội xâm' trong tư duy và phong cách làm việc của cán bộ là gì?",
     options: [
-      { id: "A", text: "Xử lý nội bộ, đóng cửa bảo nhau" },
-      { id: "B", text: "Có vùng cấm cho lãnh đạo cấp cao" },
-      { id: "C", text: "Nghiêm minh, công bằng, không có vùng cấm" },
-      { id: "D", text: "Khoan hồng cho người có chức vụ" },
+      { id: "A", text: "Óc địa phương, cục bộ, bè phái, ham danh vị" },
+      { id: "B", text: "Làm việc theo kinh nghiệm, thiếu lý luận thực tiễn" },
+      { id: "C", text: "Thiếu kiến thức về khoa học kỹ thuật hiện đại" },
+      { id: "D", text: "Thường xuyên đi công tác xa, ít ngồi văn phòng" },
     ],
-    answer: "C",
+    answer: "A",
     explanation:
-      "Việc xử lý sai phạm phải dựa trên nguyên tắc pháp luật, kỷ luật Đảng nghiêm minh, bất kể chức vụ, không có ngoại lệ, qua đó giữ vững kỷ cương và củng cố niềm tin của nhân dân.",
+      "Óc bè phái, cục bộ là những biểu hiện điển hình của chủ nghĩa cá nhân - cốt lõi của 'giặc nội xâm', nó chia rẽ sự đoàn kết và đặt lợi ích nhóm nhỏ lên trên lợi ích chung của tập thể.",
   },
 ];

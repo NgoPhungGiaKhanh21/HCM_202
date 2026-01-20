@@ -78,38 +78,38 @@ const sections = [
   },
   {
     id: "ii-tham-nhung-concept",
-    title: "II. Khái niệm tham nhũng theo tư tưởng Hồ Chí Minh",
+    title: "II. Quan điểm về 'Tham ô' – Cội nguồn của tham nhũng",
     accent: "from-orange-700/90 via-amber-600/90 to-red-700/90",
     description:
-      "Tham ô thực chất là hành động 'lấy của công dùng vào việc tư'. Cán bộ, đảng viên quên mất đức tính thanh liêm để chiếm đoạt tài sản Nhà nước hay nhân dân vì lợi ích cá nhân.",
+      "Hồ Chí Minh dùng thuật ngữ 'Tham ô' để chỉ hành vi 'lấy của công làm của tư'. Dù tên gọi khác với 'Tham nhũng' ngày nay, nhưng bản chất cốt lõi vẫn là sự tha hóa quyền lực: Chỉ người có chức, có quyền trong bộ máy mới có điều kiện để xâm phạm tài sản công.",
     points: [
-      "Tham nhũng là 'giặc nội xâm', nguy hiểm hơn cả giặc ngoại xâm vì phá hoại từ bên trong",
-      "Là 'bạn đồng minh của thực dân và phong kiến', cản trở con đường tiến lên chủ nghĩa xã hội",
-      "Tham nhũng trái ngược hoàn toàn với đức tính 'Liêm' - trong sạch, không tham lam",
+      "Định nghĩa: Tham ô là hành vi cán bộ, đảng viên đục khoét nhân dân, ăn bớt của bộ đội, tiêu phạm tiền của Nhà nước.",
+      "Bản chất: Là 'Giặc nội xâm' - kẻ địch bên trong, nguy hiểm hơn giặc ngoại xâm vì nó phá hoại từ gốc rễ.",
+      "Tính giai cấp: Bác coi đây là hành động phản lại Đảng, là 'bạn đồng minh của thực dân và phong kiến'.",
     ],
     bulletGroups: [
       {
-        title: "Định nghĩa hành vi",
+        title: "Từ 'Tham ô' đến 'Tham nhũng'",
         items: [
-          "Cán bộ, đảng viên chiếm đoạt tài sản Nhà nước hoặc nhân dân",
-          "Quên mất đức tính thanh liêm và đạo đức cách mạng",
-          "'Lấy của công dùng vào việc tư' - tư lợi cá nhân thay vì lợi ích chung",
+          "Bác gọi là 'Tham ô': Lấy của công dùng vào việc tư.",
+          "Luật nay gọi là 'Tham nhũng': Lợi dụng chức vụ, quyền hạn vì vụ lợi.",
+          "Điểm gặp gỡ: Đều xuất phát từ người có quyền lực -> 'Từ trong Đảng mà ra'.",
         ],
       },
       {
-        title: "Bản chất và mức độ nguy hiểm",
+        title: "Mức độ nguy hiểm (Giặc nội xâm)",
         items: [
-          "Hồ Chí Minh gọi là 'giặc nội xâm' hay 'giặc ở trong lòng'",
-          "Phá hoại tổ chức từ bên trong, làm hỏng tinh thần cán bộ",
-          "Đe dọa sự nghiệp cách mạng và phát triển đất nước",
+          "Là kẻ thù giấu mặt, ở ngay trong tổ chức, trong máu thịt.",
+          "Làm mục ruỗng bộ máy, hỏng tinh thần trong sạch của cán bộ.",
+          "Phá hoại sự nghiệp xây dựng chủ nghĩa xã hội nghiêm trọng hơn kẻ thù ngoài.",
         ],
       },
       {
-        title: "Mối liên hệ với đạo đức",
+        title: "Đối lập với đạo đức Cách mạng",
         items: [
-          "'Liêm' có nghĩa là trong sạch, không tham lam, giữ gìn của công, của dân",
-          "Người tham nhũng mất lòng tự trọng và 'Chí công vô tư'",
-          "Sự ích kỷ lấn át trách nhiệm công bộc",
+          "Trái ngược hoàn toàn với đức 'Liêm' (trong sạch, không tham lam).",
+          "Kẻ tham ô đã đánh mất tư cách 'công bộc', trở thành 'quan cách mạng'.",
+          "Biến quyền lực phục vụ nhân dân thành công cụ vơ vét cá nhân.",
         ],
       },
     ],
