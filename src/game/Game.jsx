@@ -5,45 +5,45 @@ import { useNavigate } from "react-router";
 import Header from "../components/Header";
 // import { toast } from "react-toastify";
 const whispers = [
-  "“Nước Việt Nam là một, dân tộc Việt Nam là một… Sông có thể cạn, núi có thể mòn, nhưng chân lý ấy không bao giờ thay đổi.” – Hồ Chí Minh",
+  "“Cán bộ là cái gốc của mọi công việc. Muôn việc thành công hay thất bại đều do cán bộ tốt hay kém.” – Hồ Chí Minh",
 
-  "“Không có gì quý hơn độc lập, tự do.” – Hồ Chí Minh",
+  "“Đảng ta là đạo đức, là văn minh.” – Hồ Chí Minh",
 
-  "“Đảng ta là người tổ chức, lãnh đạo toàn bộ cuộc đấu tranh của nhân dân Việt Nam.” – Lê Duẩn",
+  "“Phải giữ gìn Đảng ta thật trong sạch, phải xứng đáng là người lãnh đạo, là người đầy tớ thật trung thành của nhân dân.” – Hồ Chí Minh",
 
-  "“Chiến thắng 30/4 là chiến thắng của toàn dân tộc Việt Nam.” – Lê Duẩn",
+  "“Tham ô, lãng phí, quan liêu là giặc nội xâm.” – Hồ Chí Minh",
 
-  "“Tổ quốc Việt Nam không chỉ của riêng một ai, mà của mọi người dân Việt Nam.” – Võ Văn Kiệt",
+  "“Một Đảng mà giấu giếm khuyết điểm của mình là một Đảng hỏng.” – Hồ Chí Minh",
 
-  "“Không để một người dân nào chết đói.” – Võ Văn Kiệt",
+  "“Phải thường xuyên tự phê bình và phê bình như rửa mặt hằng ngày.” – Hồ Chí Minh",
 
-  "“Chỉ có làm và làm thật nhanh.” – Võ Văn Kiệt",
+  "“Quyền lực nếu không được kiểm soát thì rất dễ dẫn đến tha hóa.” – Nguyễn Phú Trọng",
 
-  "“Sức mạnh của dân tộc là đoàn kết, đoàn kết, đại đoàn kết.” – Hồ Chí Minh",
+  "“Chống tham nhũng là cuộc đấu tranh lâu dài, không có vùng cấm, không có ngoại lệ.” – Nguyễn Phú Trọng",
 
-  "“Phải dám nghĩ, dám nói, dám làm vì lợi ích chung.” – Nguyễn Văn Linh",
+  "“Kỷ luật của Đảng phải được đặt lên hàng đầu.” – Nguyễn Phú Trọng",
 
-  "“Muốn đổi mới, phải chống cái cũ, cái trì trệ, cái giáo điều.” – Nguyễn Văn Linh",
+  "“Dân giám sát thì quyền lực mới trong sạch.” – Nguyễn Văn Linh",
 
-  "“Đổi mới trước hết là đổi mới tư duy.” – Nguyễn Văn Linh",
+  "“Những việc cần làm ngay là công khai để dân biết, dân bàn, dân kiểm tra.” – Nguyễn Văn Linh",
 
-  "“Dân biết, dân bàn, dân làm, dân kiểm tra.” – Tư tưởng Hồ Chí Minh, được nhấn mạnh sau 1975",
+  "“Đổi mới mà không chống tiêu cực thì đổi mới không trọn vẹn.” – Nguyễn Văn Linh",
 
-  "“Lấy dân làm gốc — việc gì lợi cho dân phải hết sức làm.” – Hồ Chí Minh",
+  "“Chí công vô tư thì mới chọn được người tài.” – Tô Hiến Thành",
 
-  "“Không có khoa học kỹ thuật thì không có CNXH.” – Đại hội IV",
+  "“Dùng người phải công tâm, không vì thân thích hay lợi ích riêng.” – Tô Hiến Thành",
 
-  "“Cải cách kinh tế phải lấy lợi ích của người lao động làm trung tâm.” – Quan điểm lãnh đạo sau 1980",
+  "“Muốn đoàn kết lâu dài thì phải lấy liêm chính làm nền.” – Huỳnh Thúc Kháng",
 
-  "“Sản xuất phải bung ra, tạo động lực cho kinh tế phát triển.” – Hội nghị TW6 (1979)",
+  "“Một dân tộc mạnh là dân tộc có kỷ cương và liêm sỉ.” – Huỳnh Thúc Kháng",
 
-  "“Khoán là chìa khóa để giải phóng sức sản xuất.” – Tinh thần Chỉ thị 100 (1981)",
+  "“Giữ kỷ cương là giữ sinh mệnh của chế độ.” – V.I. Lênin",
 
-  "“Mỗi chủ trương đúng sẽ tạo ra sức mạnh lớn lao trong nhân dân.” – Tổng kết sau 1975",
+  "“Kỷ luật nghiêm minh là điều kiện để Đảng tồn tại và phát triển.” – V.I. Lênin",
 
-  "“Bảo vệ Tổ quốc là nhiệm vụ thiêng liêng của toàn dân.” – Quan điểm thời chiến biên giới 1979",
+  "“Dân biết, dân bàn, dân làm, dân kiểm tra.” – Tư tưởng Hồ Chí Minh",
 
-  "“Ổn định để phát triển, phát triển để vững mạnh.” – Tư tưởng chỉ đạo sau 1975",
+  "“Lấy dân làm gốc, việc gì có lợi cho dân thì hết sức làm.” – Hồ Chí Minh",
 ];
 
 function Game() {
@@ -462,7 +462,7 @@ function Game() {
                   <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></div>
                 </div>
                 <p className="text-center text-amber-800/60 text-sm font-light mt-2 tracking-widest">
-                  Học Bài Đi
+                  Gương sáng soi mình
                 </p>
               </div>
 
@@ -514,7 +514,7 @@ function Game() {
             <div className="text-center space-y-6 px-6">
               <div className="text-8xl mb-4 animate-pulse">🌙</div>
               <h1 className="text-5xl md:text-6xl font-light text-white tracking-wide">
-                VNR202
+                HCM202
               </h1>
               <p className="text-xl text-white/70 font-light max-w-md mx-auto">
                 Chạm để thắp sáng hy vọng trong đêm tối
