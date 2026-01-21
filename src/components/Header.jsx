@@ -15,15 +15,16 @@ export default function Header() {
 
   return (
     <header className="bg-[#f5efe2] dark:bg-slate-900 shadow-md border-b border-black/10 dark:border-slate-700 transition-colors duration-300 relative z-50">
-      <div className="max-w-7xl mx-auto flex flex-nowrap items-center gap-6 p-3 md:p-4">
+      {/* Thêm w-full để đảm bảo container rộng hết cỡ */}
+      <div className="max-w-7xl mx-auto flex flex-nowrap items-center gap-6 p-3 md:p-4 w-full">
         {/* --- LOGO + TITLE --- */}
         <Link
           to="/"
-          className="flex items-center gap-3 no-underline text-black dark:text-white group shrink-0"
+          className="flex items-center gap-4 no-underline text-black dark:text-white group shrink-0 max-w-[300px] md:max-w-md"
           aria-label="Trang chủ"
         >
           <svg
-            className="w-14 h-14 shrink-0 transform transition-transform duration-200 group-hover:scale-105"
+            className="w-12 h-12 md:w-16 md:h-16 shrink-0 transform transition-transform duration-200 ease-out group-hover:scale-105 group-hover:-rotate-3"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
@@ -65,8 +66,9 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* --- NAV --- */}
-        <nav aria-label="Chính" className="ml-6 hidden lg:block shrink-0">
+        {/* --- NAV (ĐÃ SỬA) --- */}
+        {/* Thay đổi: 'ml-6' thành 'mx-auto' để căn giữa */}
+        <nav aria-label="Chính" className="mx-auto hidden lg:block shrink-0">
           <ul className="flex gap-4 font-semibold">
             {navLinks.map((link) => (
               <li key={link.to}>
@@ -91,8 +93,9 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* --- NOTEBOOK --- */}
-        <div className="ml-auto">
+        {/* --- NOTEBOOK (ĐÃ SỬA) --- */}
+        {/* Thay đổi: Xóa 'ml-auto' ở đây */}
+        <div>
           <NavLink
             to="/book"
             className={({ isActive }) =>

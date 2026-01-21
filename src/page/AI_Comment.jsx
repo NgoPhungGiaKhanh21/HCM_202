@@ -101,19 +101,7 @@ export default function AIAppendix() {
         "Thiết kế đồ họa, banner, infographic",
         "Tối ưu hóa visual cho nền tảng web",
       ],
-    },
-    {
-      name: "Blender",
-      icon: <Layers className="w-6 h-6 text-white" />,
-      // Ảnh minh họa 3D Modeling/Mesh
-      image: "https://cdn-media.sforum.vn/storage/app/media/Van%20Pham/2/2d/tai-blender-thumbnail.jpg",
-      description: "Dựng mô hình 3D chuyên nghiệp",
-      details: [
-        "Dựng model cuốn sách 3D chi tiết",
-        "Xử lý ánh sáng (Lighting) và vật liệu (Texture)",
-        "Render assets tích hợp vào WebGL",
-      ],
-    },
+    },   
   ];
 
   // Công cụ soạn thảo nội dung

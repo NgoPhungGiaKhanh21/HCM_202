@@ -118,7 +118,7 @@ const levenshtein = (a, b) => {
       matrix[i][j] = Math.min(
         matrix[i - 1][j] + 1,
         matrix[i][j - 1] + 1,
-        matrix[i - 1][j - 1] + cost
+        matrix[i - 1][j - 1] + cost,
       );
     }
   }
@@ -127,66 +127,56 @@ const levenshtein = (a, b) => {
 };
 
 const topicKeywords = [
-  "1975",
-  "1976",
-  "1977",
-  "1978",
-  "1979",
-  "1980",
-  "1981",
-  "thống nhất",
-  "đất nước",
+  "Hồ Chí Minh",
+  "Nguyễn Ái Quốc",
+  "tư tưởng",
+  "độc lập",
+  "tự do",
+  "hạnh phúc",
+  "dân tộc",
+  "chủ nghĩa xã hội",
+  "quá độ",
+  "Mác-Lênin",
+  "Đảng cộng sản",
   "nhà nước",
-  "đại hội",
-  "iv",
-  "4",
-  "cộng hòa",
-  "xã hội",
-  "chủ nghĩa",
-  "việt nam",
-  "khoán",
-  "100",
-  "sản phẩm",
-  "quyết định",
-  "25",
-  "tự chủ",
-  "doanh nghiệp",
-  "chiến tranh",
-  "biên giới",
-  "tây nam",
-  "phía bắc",
-  "campuchia",
-  "pol pot",
-  "trung quốc",
-  "fulro",
-  "tây nguyên",
+  "nhân dân",
+  "dân chủ",
+  "đại đoàn kết",
+  "quốc tế",
+  "văn hóa",
+  "đạo đức",
+  "con người",
+  "cần",
+  "kiệm",
+  "liêm",
+  "chính",
+  "chí công vô tư",
   "cách mạng",
-  "khoa học",
-  "kỹ thuật",
-  "kinh tế",
-  "khó khăn",
-  "lạm phát",
-  "hội nghị",
-  "trung ương",
-  "bung ra",
-  "nông nghiệp",
-  "công nghiệp",
-  "đảng",
-  "cộng sản",
+  "giải phóng",
+  "thống nhất",
+  "đầy tớ",
+  "công bộc",
+  "tự phê bình",
+  "phê bình",
+  "kỷ luật",
+  "UNESCO",
+  "chủ nghĩa cá nhân",
+  "giặc nội xâm",
 ];
 
 const defaultKeywords = [
-  "Giai đoạn 1975-1981",
-  "Thống nhất đất nước 1976",
-  "Đại hội IV năm 1976",
-  "Ba cuộc cách mạng",
-  "Khoán 100 (1981)",
-  "Quyết định 25-CP",
-  "Khó khăn kinh tế 1976-1979",
-  "Hội nghị TW 6 (1979)",
-  "Chiến tranh Tây Nam",
-  "Chiến tranh biên giới Bắc",
-  "FULRO ở Tây Nguyên",
+  "Tư tưởng Hồ Chí Minh",
+  "Độc lập dân tộc gắn liền với CNXH",
+  "Nhà nước của dân, do dân, vì dân",
+  "Đảng là đạo đức, là văn minh",
+  "Liên minh công - nông - trí thức",
+  "Cần, Kiệm, Liêm, Chính, Chí công vô tư",
+  "Di chúc Hồ Chí Minh",
+  "Quét sạch chủ nghĩa cá nhân",
+  "Xây đi đôi với chống",
+  "UNESCO vinh danh Anh hùng giải phóng dân tộc",
+  "Thời kỳ quá độ đặc thù",
+  "Lấy dân làm gốc",
 ];
 
 const isTopicRelated = (text) => {
@@ -263,7 +253,7 @@ export default function ChatBoxAI() {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Xin chào! ⭐ Tôi có thể giúp bạn tìm hiểu về giai đoạn 1975-1981:",
+      text: "Xin chào! ⭐ Tôi có thể giúp bạn tìm hiểu về bài học",
       keywords: defaultKeywords,
     },
   ]);
@@ -324,7 +314,7 @@ export default function ChatBoxAI() {
           {/* 1. Bong bóng thoại chào mời (Nằm trên đầu con bot) */}
           <div className="mb-2 mr-2 bg-white px-4 py-2 rounded-2xl rounded-br-none shadow-xl border border-red-100 animate-bounce origin-bottom-right">
             <p className="text-xs text-gray-800 font-bold whitespace-nowrap">
-              Hỏi tớ về 1975-1981 nhé! 👇
+              Hỏi tớ về bài học nhé! 👇
             </p>
           </div>
 
@@ -373,7 +363,7 @@ export default function ChatBoxAI() {
                 </div>
                 <div>
                   <h3 className="font-bold text-white text-lg leading-tight">
-                    Sử Việt 1975-1981
+                    AI
                   </h3>
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
