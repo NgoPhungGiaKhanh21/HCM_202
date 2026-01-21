@@ -55,6 +55,15 @@ export default function Header() {
               <path d="M30 80 Q50 90 70 80 L50 85 Z" fill="#d69e2e" />
             </g>
           </svg>
+
+          <div className="leading-tight whitespace-nowrap">
+            <div className="text-sm md:text-lg font-extrabold uppercase tracking-wide group-hover:text-[#a40000] dark:group-hover:text-[#ff4d4d]">
+              Xây dựng Đảng &amp; Nhà nước
+            </div>
+            <div className="text-xs text-gray-700 dark:text-gray-400 italic font-medium">
+              Liêm chính – Kiến tạo – Vì dân
+            </div>
+          </div>
         </Link>
 
         {/* --- NAV (ĐÃ SỬA) --- */}
