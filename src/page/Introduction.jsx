@@ -7,7 +7,6 @@ import intro3 from "../../public/image/phan3.png";
 import intro4 from "../../public/timeline_img/intro4.png";
 import intro5 from "../../public/image/phan5.png";
 
-
 const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -21,7 +20,7 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
     );
     if (currentRef) observer.observe(currentRef);
     return () => {
@@ -32,10 +31,11 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out transform ${isVisible
-        ? "opacity-100 translate-y-0 scale-100"
-        : "opacity-0 translate-y-12 scale-95"
-        } ${className}`}
+      className={`transition-all duration-1000 ease-out transform ${
+        isVisible
+          ? "opacity-100 translate-y-0 scale-100"
+          : "opacity-0 translate-y-12 scale-95"
+      } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -43,7 +43,7 @@ const RevealOnScroll = ({ children, className = "", delay = 0 }) => {
   );
 };
 
-// --- DỮ LIỆU SECTIONS (5 Phần I - V) ---
+// --- DỮ LIỆU ĐẦY ĐỦ (KHÔNG ĐƯỢC XÓA CÁC TRƯỜNG BÊN TRONG) ---
 const sections = [
   {
     id: "i-hochiminh-overview",
@@ -74,7 +74,7 @@ const sections = [
         ],
       },
     ],
-    image: `url(${intro1})`,
+    image: intro1,
   },
   {
     id: "ii-tham-nhung-concept",
@@ -113,7 +113,7 @@ const sections = [
         ],
       },
     ],
-    image: `url(${intro2})`,
+    image: intro2,
   },
   {
     id: "iii-dan-by-dan-for-dan",
@@ -160,7 +160,7 @@ const sections = [
         ],
       },
     ],
-    image: `url(${intro3})`,
+    image: intro3,
   },
   {
     id: "iv-tham-nhung-threat",
@@ -208,7 +208,7 @@ const sections = [
         ],
       },
     ],
-    image: `url(${intro4})`,
+    image: intro4,
   },
   {
     id: "v-requestion",
@@ -257,7 +257,7 @@ const sections = [
         ],
       },
     ],
-    image: `url(${intro5})`,
+    image: intro5,
   },
 ];
 
@@ -333,12 +333,7 @@ export default function Introduction() {
           </RevealOnScroll>
         </aside>
 
-        {/* --- MAIN CONTENT --- 
-            THAY ĐỔI QUAN TRỌNG:
-            - Đổi lg:pl-72 thành lg:pl-[22rem]
-            - Giải thích: Sidebar rộng 72 + cách lề 6 = 19.5rem. 
-            - 22rem sẽ tạo ra khoảng hở 2.5rem giữa Sidebar và Content.
-        */}
+        {/* --- MAIN CONTENT --- */}
         <main className="flex-1 space-y-12 lg:pl-[22rem] w-full">
           {sections.map((s) => (
             <RevealOnScroll key={s.id} className="w-full">
@@ -364,21 +359,20 @@ export default function Introduction() {
                 </div>
 
                 <div className="flex flex-col">
-                  {/* Ảnh ở trên cùng - Full width */}
-                  <div className="w-full relative h-[400px] md:h-[500px] bg-stone-100">
-                    <div
-                      className="absolute inset-0 w-full h-full bg-center bg-cover bg-no-repeat"
-                      style={{
-                        backgroundImage: s.image,
-                      }}
+                  {/* --- SỬA ẢNH FULL WIDTH (ĐÃ UPDATE) --- */}
+                  <div className="w-full bg-stone-100 relative">
+                    <img
+                      src={s.image}
+                      alt={s.title}
+                      className="w-full h-auto object-contain block"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/30"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20 pointer-events-none"></div>
                   </div>
 
-                  {/* Nội dung ở dưới - Chia cột để không quá dài */}
+                  {/* Nội dung */}
                   <div className="p-8 md:p-10 lg:p-12">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                      {/* Cột trái: Description và Points */}
+                      {/* Cột trái */}
                       <div className="space-y-6">
                         {s.description && (
                           <blockquote className="border-l-4 border-red-500 pl-4 text-base md:text-lg italic text-stone-700 leading-relaxed bg-red-50/50 p-3 rounded-md">
@@ -387,25 +381,27 @@ export default function Introduction() {
                         )}
 
                         <ul className="space-y-3">
-                          {s.points.map((pt, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start gap-3 text-base leading-relaxed text-stone-800"
-                            >
-                              <svg
-                                className="w-5 h-5 text-red-500 flex-shrink-0 mt-1"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
+                          {/* Dòng này gây lỗi nếu thiếu s.points */}
+                          {s.points &&
+                            s.points.map((pt, idx) => (
+                              <li
+                                key={idx}
+                                className="flex items-start gap-3 text-base leading-relaxed text-stone-800"
                               >
-                                <path d="M10 12.58l-1.94 1.94-2.83-2.83-1.41 1.41L10 15.4l5.18-5.18-1.41-1.41-2.83 2.83zM10 2a8 8 0 100 16 8 8 0 000-16z" />
-                              </svg>
-                              <span className="font-medium">{pt}</span>
-                            </li>
-                          ))}
+                                <svg
+                                  className="w-5 h-5 text-red-500 flex-shrink-0 mt-1"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M10 12.58l-1.94 1.94-2.83-2.83-1.41 1.41L10 15.4l5.18-5.18-1.41-1.41-2.83 2.83zM10 2a8 8 0 100 16 8 8 0 000-16z" />
+                                </svg>
+                                <span className="font-medium">{pt}</span>
+                              </li>
+                            ))}
                         </ul>
                       </div>
 
-                      {/* Cột phải: Bullet Groups */}
+                      {/* Cột phải */}
                       {s.bulletGroups && (
                         <div className="flex flex-col gap-5">
                           {s.bulletGroups.map((group, i) => (
