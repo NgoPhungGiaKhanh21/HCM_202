@@ -70,8 +70,8 @@ const createdVideos = [
         note: "Video dự án: tái hiện bối cảnh xây dựng Đảng và kiểm soát quyền lực sau thống nhất.",
         duration: "10:21",
         description:
-            "Tư liệu dựng bởi nhóm, kết hợp đồ họa và hình ảnh gốc, khắc họa tiến trình xây dựng Đảng trong sạch, vững mạnh và Nhà nước của dân, do dân, vì dân; đồng thời nhấn mạnh chỉnh đốn Đảng, kiểm soát quyền lực và huy động nhân dân giám sát để củng cố niềm tin.",
-        tags: ["Video dự án", "Chống tham nhũng", "Kiểm soát quyền lực"],
+            "Video tóm tắt lại các nội dung chính thực hiện thông qua notebook AI",
+        tags: ["Video tóm tắt ", "Chống tham nhũng", "Kiểm soát quyền lực"],
     },
 
 ];
@@ -128,7 +128,7 @@ export default function Document() {
                             : "bg-white text-[#8B1E1E] border-[#C5A065]/50 hover:bg-[#fdf5e6]"
                             }`}
                     >
-                        Video do nhóm thực hiện (mp4)
+                        Video tóm tắt nội dung (mp4)
                     </button>
                 </div>
 
