@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 // Import ảnh của bạn...
 import intro1 from "../../public/image/tutuonghcm.png";
-import intro2 from "../../public/image/thamnhung.png";
+import intro2 from "../../public/image/phan2.jpg";
 import intro3 from "../../public/image/phan3.png";
 import intro4 from "../../public/timeline_img/intro4.png";
 import intro5 from "../../public/image/phan5.png";
@@ -78,38 +78,40 @@ const sections = [
   },
   {
     id: "ii-tham-nhung-concept",
-    title: "II. Quan điểm về 'Tham ô' – Cội nguồn của tham nhũng",
+
+    title:
+      "II. Giai cấp công nhân và sứ mệnh lịch sử của giai cấp công nhân hiện nay",
     accent: "from-orange-700/90 via-amber-600/90 to-red-700/90",
     description:
-      "Hồ Chí Minh dùng thuật ngữ 'Tham ô' để chỉ hành vi 'lấy của công làm của tư'. Dù tên gọi khác với 'Tham nhũng' ngày nay, nhưng bản chất cốt lõi vẫn là sự tha hóa quyền lực: Chỉ người có chức, có quyền trong bộ máy mới có điều kiện để xâm phạm tài sản công.",
+      "Giai cấp công nhân hiện nay vừa giữ nguyên bản chất là lực lượng sản xuất hàng đầu, vừa có những biến đổi mới do tác động của Cách mạng công nghiệp lần thứ tư, phấn đấu thực hiện sứ mệnh lịch sử trên ba nội dung: kinh tế, chính trị-xã hội và văn hóa-tư tưởng.",
     points: [
-      "Định nghĩa: Tham ô là hành vi cán bộ, đảng viên đục khoét nhân dân, ăn bớt của bộ đội, tiêu phạm tiền của Nhà nước.",
-      "Bản chất: Là 'Giặc nội xâm' - kẻ địch bên trong, nguy hiểm hơn giặc ngoại xâm vì nó phá hoại từ gốc rễ.",
-      "Tính giai cấp: Bác coi đây là hành động phản lại Đảng, là 'bạn đồng minh của thực dân và phong kiến'.",
+      "Giai cấp công nhân vẫn là lực lượng sản xuất hàng đầu nhưng có xu hướng trí tuệ hóa và trung lưu hóa",
+      "Tại các nước tư bản: đấu tranh chống bất công, bất bình đẳng, giành quyền dân sinh và dân chủ",
+      "Tại các nước xã hội chủ nghĩa: lãnh đạo sự nghiệp đổi mới, công nghiệp hóa, hiện đại hóa",
+      "Đấu tranh ý thức hệ bảo vệ chủ nghĩa Mác-Lênin và phấn đấu cho các giá trị nhân văn: lao động, công bằng, dân chủ, bình đẳng",
     ],
     bulletGroups: [
       {
-        title: "Từ 'Tham ô' đến 'Tham nhũng'",
+        title: "Điểm tương đồng với giai cấp công nhân truyền thống",
         items: [
-          "Bác gọi là 'Tham ô': Lấy của công dùng vào việc tư.",
-          "Luật nay gọi là 'Tham nhũng': Lợi dụng chức vụ, quyền hạn vì vụ lợi.",
-          "Điểm gặp gỡ: Đều xuất phát từ người có quyền lực -> 'Từ trong Đảng mà ra'.",
+          "Là lực lượng sản xuất hàng đầu của xã hội hiện đại, chủ thể sản xuất công nghiệp xã hội hóa",
+          "Ở các nước tư bản, vẫn bị bóc lột giá trị thặng dư, xung đột lợi ích cơ bản với tư bản",
         ],
       },
       {
-        title: "Mức độ nguy hiểm (Giặc nội xâm)",
+        title: "Những biến đổi mới của giai cấp công nhân hiện đại",
         items: [
-          "Là kẻ thù giấu mặt, ở ngay trong tổ chức, trong máu thịt.",
-          "Làm mục ruỗng bộ máy, hỏng tinh thần trong sạch của cán bộ.",
-          "Phá hoại sự nghiệp xây dựng chủ nghĩa xã hội nghiêm trọng hơn kẻ thù ngoài.",
+          "Xu hướng trí tuệ hóa: công nhân tri thức, công nhân áo trắng, đòi hỏi kỹ năng chuyên môn cao",
+          "Xu hướng trung lưu hóa: tham gia sở hữu tư liệu sản xuất thông qua cổ phần hóa, nhưng vẫn phụ thuộc vào các cổ đông lớn",
+          "Tại các nước xã hội chủ nghĩa: trở thành giai cấp lãnh đạo, cầm quyền qua Đảng Cộng sản",
         ],
       },
       {
-        title: "Đối lập với đạo đức Cách mạng",
+        title: "Sứ mệnh lịch sử trên ba nội dung cơ bản",
         items: [
-          "Trái ngược hoàn toàn với đức 'Liêm' (trong sạch, không tham lam).",
-          "Kẻ tham ô đã đánh mất tư cách 'công bộc', trở thành 'quan cách mạng'.",
-          "Biến quyền lực phục vụ nhân dân thành công cụ vơ vét cá nhân.",
+          "Kinh tế: thúc đẩy lực lượng sản xuất, tạo tiền đề cho xã hội chủ nghĩa, đấu tranh chống bóc lột",
+          "Chính trị-xã hội: chống bất công, giành quyền dân sinh; lãnh đạo sự nghiệp đổi mới; bảo vệ chế độ xã hội chủ nghĩa",
+          "Văn hóa-tư tưởng: đấu tranh ý thức hệ, bảo vệ chủ nghĩa Mác-Lênin, phấn đấu cho giá trị nhân văn, giáo dục và quốc tế hóa",
         ],
       },
     ],
